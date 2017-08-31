@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-const Logo = () => (
+const Logo = ({}) => (
   <div className='brand'>
-    <a id='brand' 
-       className='brand__refer' 
-       href="#">
+    <Link to='/'
+       className='brand__refer'>
       <h1 className='brand__name'>  
-        強く、なりたい
+        Pest Control
       </h1>
-    </a>
+    </Link>
   </div>
 );
 

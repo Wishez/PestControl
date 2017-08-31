@@ -1,5 +1,5 @@
 .brand {
-	@include center-block;
+	@extend %center-block;
 }
 
 @import '__name.scss';

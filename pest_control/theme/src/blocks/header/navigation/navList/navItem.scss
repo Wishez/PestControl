@@ -1,13 +1,15 @@
 @import '__refer.scss';
 
 .navItem {
-  width: 20%;
-  @include breakpoint($xs) {
-    width: 100%;
-    text-align: center;
-  }
+  width: 115px;
+  height: 115px;
+  @extend %inline-block;
+  margin-right: (16% / 645 * 100);
+  // @include breakpoint($xs) {
+  //   width: 100%;
+  //   text-align: center;
+  // }
   &.active .navItem__refer {
-    // background-color: $yellow;
-    // color: $red !important;
+    box-shadow: inset 0 0 15px $shadow;
   }
 } 

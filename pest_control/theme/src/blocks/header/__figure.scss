@@ -1,0 +1,23 @@
+.header__figure {
+	position: absolute $i;
+}
+.header__figure--name {
+	&_man {
+		top: (50% / 614 * 100);
+		//145
+		right: (85% / 1400 * 100);
+		max-width: 415px $i;
+		@include breakpoint($lg) {
+			right: (145% / 1400 * 100);
+		}
+	}
+	&_button {
+		@extend %pointIt;
+		bottom: (50% / 614 * 100);
+		right: (130% / 1400 * 100);
+		max-width: 367px;
+		@include breakpoint($lg) {
+			right: (175% / 1400 * 100);
+		}
+	}
+}

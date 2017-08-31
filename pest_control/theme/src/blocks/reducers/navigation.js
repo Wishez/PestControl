@@ -1,4 +1,4 @@
-import { SELECT_NAVIGATION_ITEM, navigationItems } from './../constants/actionTypes.js';
+import { SELECT_NAVIGATION_ITEM, navigationItems } from './../constants/navigationTypes.js';
 
 
 // Объект описывающий состояние навигации.
@@ -10,7 +10,7 @@ export const initNavigationState = {
 	},
 	secondNavItem: {
 		active: false,
-		name: navigationItems.registration
+		name: navigationItems.services
 	},
 	thirdNavItem: {
 		active: false,
@@ -18,11 +18,11 @@ export const initNavigationState = {
 	},
 	fourthNavItem: {
 		active: false,
-		name: navigationItems.rules
+		name: navigationItems.isistutions
 	},
 	fifthNavItem: {
 		active: false,
-		name: navigationItems.forum
+		name: navigationItems.advice
 	}
 };
 

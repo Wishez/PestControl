@@ -1,5 +1,24 @@
 .header {
+	background-color: $purple;
+	height: 641px;
+	padding: (50% / 641 * 100) 0 (109% / 641 * 100) 0; 
+  @extend %relative;
 }
 
+.navigation, .brand, .header__paragraph {
+  width: span(8);
+  @extend %floatLeft;
+  @include breakpoint($md) {
+  	width: span(10);
+  }
+  @include breakpoint($sm) {
+  	width: span(12);
+  }
+  @include breakpoint($xs) {
+  	width: span(12);
+  }
+}
+@import '__figure.scss';
+@import '__paragraph.scss';
 @import 'brand/brand.scss';
 @import 'navigation/navigation.scss';

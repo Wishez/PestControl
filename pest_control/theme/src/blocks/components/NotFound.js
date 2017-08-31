@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const NotFound = () => (	
+const NotFound = ({ site }) => (	
 	<div className='notFound'>
-		<h3 className='text-center notFound'>
-			Страницы не существует. 
-		</h3>
-		<a href='/'>На главную.</a>
+		<h1 className='text-center notFound'>
+			В разработке&hellip;
+		</h1>
+		<Link to='/'>На главную</Link>
 	</div>
 );
 

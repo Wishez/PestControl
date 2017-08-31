@@ -1,4 +1,17 @@
 .navItem__refer {
+  @extend %fullWidth;
+  @extend %fullHeight;
+  @extend %text-right;
+  @extend %block;
+  border: 4px solid $black;
+  color: $lightGray $i;
+  background-color: $green;
+  box-shadow: 0 0 15px $shadow;
+  padding: 6px 10px 0 6px;
+
+  &:hover {
+    background-color: lighten($green, 5%);
+  }
   @include breakpoint($sm) {
      
   }
@@ -11,8 +24,20 @@
   @include breakpoint($xxs) {
     
   }
-  &:hover {
-    
-   
-  }
+
+}
+
+.navItem__refer--number {
+  @extend %floatRight;
+
+}
+.navItem__refer--icon {
+  @extend %floatLeft;
+}
+.navItem__refer--name {
+  display: inherit;
+  word-break: initial;
+  margin-top: 50px;
+  @extend %fs-18;
+
 }

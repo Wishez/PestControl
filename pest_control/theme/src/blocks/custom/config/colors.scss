@@ -1,36 +1,29 @@
-
-$blue: #5e64ff;
-$yellow: #ffe276;
-$red: #bf4b49;
-$nightBlack: #3f3c39;
-$shadow: rgba(0, 0, 0, .6);
-$black:  #464646;
-$green: #468b4b;
-$darkBlue: #49628b;
-$yellow: #fedd00;
-$whiteYellow: #fff8c9;
-$orange: #f1a81c;
-$whiteOrange: #fad17a;
-$limon: #f5ff9a;
-$purple: #5f4575;
-$nightBlack: #3f3c39;
-$lightRed: #7e2843;
-$brown: #66320a;
-$lightBrown: #af6f00;
-$shadow: rgba(0, 0, 0, .6);
-$lightGray: #c7c2c6;
-$gray: #878787;
-$darkGray:  #2c2c2c;
+$lightGray: #ececec;
+$darkenLightGray: #e0e0e0;
+$darkGray:  #2e2e2e;
 $white: #fefeff;
+$black: #080808;
+$gray: #9c9c9c;
+
+$shadow: rgba(0, 0, 0, .8);
+
+
+$darkRed: #6c4040;
+$green: #17521f;
+$purple: #9d2eb5;
+$darkPurple: #5a1a68;
+$skyBlue: #7be9ea;
+
 
 // Links 
-$baseColorFont: $darkGray;
-$baseLinkColor: $darkGray;
-$baseHoverLinkColor: $darkGray;
-$baseVisitedLinkColor: $darkGray;
-$baseActiveLinkColor: $darkGray;
-$baseFocusLinkColor: $darkGray;
-$baseColor: $darkGray;
+$baseColorFont: $lightGray;
+$baseLinkColor: $skyBlue $i;
+$baseHoverLinkColor: $gray;
+$baseHoverLinkBackgroundColor:  transparent;
+$baseVisitedLinkColor: $skyBlue;
+$baseActiveLinkColor: $skyBlue;
+$baseFocusLinkColor: $skyBlue;
+
 
 // Base Body Background
-$bodyColorBg: $white;
+$bodyColorBg: $lightGray;

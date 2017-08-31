@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Main from './Main';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
-export default class App extends Component {
+import Header from './../components/Header';
+import Footer from './../components/Footer';
+import Main from './../components/Main';
+
+
+class App extends Component {
 	componentDidMount() {
 		
 	}
@@ -18,3 +23,7 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({});
+
+export default withRouter(connect(mapStateToProps)(App));

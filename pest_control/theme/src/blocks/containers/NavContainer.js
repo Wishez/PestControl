@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Navigation from './../components/Navigation';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import Navigation from './../components/Navigation';
 import { selectNavigationItem } from './../actions/navigationActions.js';
 
 class NavContainer extends Component {
   static PropTypes = { 
-      site: PropTypes.string.isRequired,
       firstNavItem: PropTypes.object.isRequired,
       secondNavItem: PropTypes.object.isRequired,
       thirdNavItem: PropTypes.object.isRequired,
@@ -43,11 +43,10 @@ class NavContainer extends Component {
           this.closeMenu();
   };
 
-  getActiveClasses = (state, site) => ( 
+  getActiveClasses = state => ( 
     classNames({
       'navItem': true,
-      [`navItem--${site}`]: true,
-      'active': state
+      'navItem--active': state
     })
   );
    
@@ -70,7 +69,7 @@ class NavContainer extends Component {
 
 
 const mapStateToProps = state => {
-  const { selectedSite, navigation } = state;
+  const { navigation } = state;
 
   const {
     firstNavItem,
@@ -81,7 +80,6 @@ const mapStateToProps = state => {
   } = navigation;
 
   return {
-    site: selectedSite,
     firstNavItem,
     secondNavItem,
     thirdNavItem,

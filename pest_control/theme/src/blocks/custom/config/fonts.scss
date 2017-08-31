@@ -1,13 +1,36 @@
 // Fonts
-$mainFont: 'inglobal', serif;
+$mainFont: 'Roboto', serif;
+
 // $additionalFont: '', cursive;
+$nameFont: 'Roboto';
+$normalFont: '../fonts/Roboto/roboto-regular';
+$italicFont: '../fonts/Roboto/roboto-italic';
+$boldFont: '../fonts/Roboto/roboto-bold';
+$boldItalicFont: '../fonts/Roboto/roboto-bolditalic';
+$lightFont: '../fonts/Roboto/roboto-thin';
+$lightItalicFont: '../fonts/Roboto/roboto-thinitalic';
 
-$nameFont: 'inglobal';
-$normalFont: '../fonts/inglobal/inglobal';
-$italicFont: '../fonts/inglobal/inglobali';
-$boldFont: '../fonts/inglobal/inglobalb';
-$boldItalicFont: '../fonts/inglobal/inglobalbi';
 
+@font-face {
+  font-family: $nameFont;
+  font-weight: normal;
+  font-style: normal;
+  src: url('#{$normalFont}.eot');
+  src: local('#{$nameFont}'),
+    url('#{$normalFont}.woff') format('woff'),
+    url('#{$normalFont}.ttf') format('truetype'),
+    url('#{$normalFont}.svg') format('svg');
+}
+@font-face {
+  font-family: $nameFont;
+  font-weight: normal;
+  font-style: italic;
+  src: url('#{$italicFont}.eot');
+  src: local('#{$nameFont}'), 
+    url('#{$italicFont}.woff') format('woff'),
+    url('#{$italicFont}.ttf') format('truetype'),
+    url('#{$italicFont}.svg') format('svg');
+}
 @font-face {
   font-family: $nameFont;
   font-weight: bold;
@@ -30,24 +53,42 @@ $boldItalicFont: '../fonts/inglobal/inglobalbi';
 }
 @font-face {
   font-family: $nameFont;
-  font-weight: normal;
+  font-weight: bold;
   font-style: italic;
-  src: url('#{$italicFont}.eot');
-  src: local('#{$nameFont}'), 
-    url('#{$italicFont}.woff') format('woff'),
-    url('#{$italicFont}.ttf') format('truetype'),
-    url('#{$italicFont}.svg') format('svg');
+  src: url('#{$lightFont}.eot');
+  src: local('#{$nameFont}'),
+    url('#{$lightFont}.woff') format('woff'),
+    url('#{$lightFont}.ttf') format('truetype'),
+    url('#{$lightFont}.svg') format('svg');
 }
+
 @font-face {
   font-family: $nameFont;
+  font-weight: 300;
+  font-style: italic;
+  src: url('#{$lightItalicFont}.eot');
+  src: local('#{$nameFont}'), 
+    url('#{$lightItalicFont}.woff') format('woff'),
+    url('#{$lightItalicFont}.ttf') format('truetype'),
+    url('#{$lightItalicFont}.svg') format('svg');
+}
+
+
+
+
+
+@font-face {
+  font-family: 'octicons';
   font-weight: normal;
   font-style: normal;
-  src: url('#{$normalFont}.eot');
-  src: local('#{$nameFont}'),
-    url('#{$normalFont}.woff') format('woff'),
-    url('#{$normalFont}.ttf') format('truetype'),
-    url('#{$normalFont}.svg') format('svg');
+  src: url('octicons.eot');
+  src: local('../fonts/octicons-local.ttf'),
+    url('../fonts/octicons.woff') format('woff'),
+    url('../fonts/octicons.ttf') format('truetype'),
+    url('../fonts/octicons.svg') format('svg');
 }
+
+
 
 
 

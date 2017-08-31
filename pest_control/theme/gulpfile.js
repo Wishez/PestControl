@@ -42,7 +42,7 @@ const settings = {
   src: './src',
   build: './../static/pest_control'
 }, 
-templates_path = './../app/templates/', // for html
+templatesPath = './../app/templates/',
 scssPathes = ['node_modules/susy/sass', 
               'node_modules/breakpoint-sass/stylesheets',
              'node_modules/bootstrap-sass/assets/stylesheets',
@@ -68,6 +68,17 @@ gulp.task('lintsource', () => {
 /* ----------------- */
 /* SCRIPTS
 /* ----------------- */
+const vendors = [
+  'moment',
+  'cropit',
+  'react', 
+  'react-dom', 
+  'react-router-dom', 
+  'redux', 
+  'redux-thunk', 
+  'react-redux', 
+  'redux-form'
+];
 gulp.task('fastjs', () => {
   process.env.NODE_ENV = 'development';
 
@@ -76,13 +87,7 @@ gulp.task('fastjs', () => {
       entries: settings.src + '/js/main.js',
       debug: true
     })
-    .external('moment')
-    .external('cropit')
-    .external('react')
-    .external('react-dom')
-    .external('react-router-dom')
-    .external('redux')
-    .external('react-redux')
+    // .external(vendors)
     .transform("babelify", {
       plugins: ['react-html-attrs',
        'transform-class-properties',
@@ -107,13 +112,7 @@ gulp.task('source', ['lintsource'], () => {
       entries: settings.src + '/js/main.js',
       debug: false
     })
-    .external('moment')
-    .external('cropit')
-    .external('react')
-    .external('react-dom')
-    .external('react-router-dom')
-    .external('redux')
-    .external('react-redux')
+    // .external(vendors)
     .transform("babelify", {
       plugins: ['react-html-attrs',
        'transform-class-properties',
@@ -171,7 +170,7 @@ gulp.task('styles', () => {
 gulp.task('html', () => {
   return gulp.src(settings.src + '/*.pug')
     .pipe(pug())
-    .pipe(gulp.dest(templates_path));
+    .pipe(gulp.dest(templatesPath));
 });
 
 
@@ -242,11 +241,11 @@ gulp.task('manifest', () => {
 // });
 
 gulp.task('watch', () => {
-  gulp.watch(settings.src + '**/*.scss', ['faststyles']);
-  gulp.watch(settings.src + 'img/**/*.*', ['fastimages']);
-  gulp.watch(settings.src + 'fonts/**/*.*', ['fonts']);
-  gulp.watch(settings.src + '**/*.pug', ['html']);
-  gulp.watch(settings.src + '**/*.js', ['fastjs']);
+  gulp.watch(settings.src + '/**/*.scss', ['faststyles']);
+  gulp.watch(settings.src + '/img/**/*.*', ['fastimages']);
+  gulp.watch(settings.src + '/fonts/**/*.*', ['fonts']);
+  gulp.watch(settings.src + '/**/*.pug', ['html']);
+  gulp.watch(settings.src + '/**/*.js', ['fastjs']);
 });
 
 gulp.task('lintfastjs', ['lintsource', 'fastjs']);
