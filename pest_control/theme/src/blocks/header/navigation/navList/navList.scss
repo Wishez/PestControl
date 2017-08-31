@@ -2,21 +2,22 @@
   
   width: span(12);
   @include breakpoint($sm) {
-    font-size: (20em / 16);
+    font-size: (21em / 16);
   }
   @include breakpoint($xs) {
     display: none;
     position: fixed;
-    top: 44px;
+    top: 0;
     left: 0;
     height: 100%;
-    height: calc(100% - 44px);
-    background-color: $darkGray;
+    // height: calc(100% - 44px);
+    background-color: rgba($lightGray, .8);
     width: 100%;
-    flex-direction: column;
-    align-items: space-between;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
     z-index: 100;
-    padding-top: 50%;
+    padding-top: 10%;
     
   }
 }

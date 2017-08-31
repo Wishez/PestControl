@@ -1,8 +1,20 @@
 .header {
 	background-color: $purple;
-	height: 641px;
-	padding: (50% / 641 * 100) 0 (109% / 641 * 100) 0; 
+  @include susy-clearfix;
+  padding: (50% / 641 * 100) 0 (109% / 641 * 100); 
+  height: auto;
   @extend %relative;
+  @include breakpoint($md) {
+    padding-bottom: (50% / 641 * 100);
+  }
+  @include breakpoint($lg) {
+	   height: 641px;
+     padding-top: (25% / 641 * 100)
+  }
+  @include breakpoint($xs) {
+    // padding-top: (110% / 641 * 100);
+    padding: (50% / 641 * 100) 5% (109% / 641 * 100);
+  }
 }
 
 .navigation, .brand, .header__paragraph {

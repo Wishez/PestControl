@@ -1,3 +1,6 @@
 .header__paragraph {
-	margin-top: (50% / 641 * 100);
+	@extend %largeTopMargin;
+	@include breakpoint($xs) {
+		margin-top: 0;
+	}
 }

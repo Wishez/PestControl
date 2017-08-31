@@ -1,15 +1,21 @@
 .navigation__closeMenuButton, .navigation__openMenuButton {
-	position: absolute;
   	color: $white;
+	z-index: -1;
+	@include breakpoint($xs) {
+		z-index: 4;
+	}
 }
 
 .navigation__openMenuButton {
-  top: 6px;
-  left: 19px;
-  background-color: transparent;
+	@extend %relative;
+	@extend %floatRight;
+	bottom: 35px;
+  	right: 10%;
+ 	 background-color: transparent;
 }
 
 .navigation__closeMenuButton {
+	@extend %absolute;
 	display: none;
 	top: 15px;
 	right: 15px;

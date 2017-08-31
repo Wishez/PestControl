@@ -4,9 +4,8 @@ import ReactHtmlParser from 'react-html-parser';
 const Paragraph = ({ 
 	text,
 	 block 
-}) => (
-		
-	<p className={block + '__paragraph paragraph'}>
+}) => (	
+	<p className={block + '__paragraph'}>
 		{ ReactHtmlParser(text) }
 	</p>
 );

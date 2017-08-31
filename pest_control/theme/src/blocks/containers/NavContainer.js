@@ -26,7 +26,8 @@ class NavContainer extends Component {
     if (!this.state.isOpen) {
       this.setState({isOpen: true});
       $closeButton.show();
-      $navList.show('fast');
+      $navList.show('fast')
+      $navList[0].style.display = 'flex';
     } else {
       this.setState({isOpen: false});
       $navList.hide('fast');

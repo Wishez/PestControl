@@ -1,14 +1,35 @@
 .header__figure {
 	position: absolute $i;
+	@include breakpoint($md) {
+		position: relative $i;
+	}
+	@include breakpoint($sm-less) {
+		position: relative $i;
+		right: 0;
+		left: 0;
+		margin: 0 $i;
+	}
 }
 .header__figure--name {
+	
 	&_man {
 		top: (50% / 614 * 100);
 		//145
 		right: (85% / 1400 * 100);
 		max-width: 415px $i;
+		float: right;
+		@include breakpoint($md) { 
+			left: 5%;
+			margin-top: 3em;
+		}
 		@include breakpoint($lg) {
-			right: (145% / 1400 * 100);
+			right: (65% / 1400 * 100);
+		}
+		@include breakpoint($xs) {
+			max-width: 450px $i;
+		}
+		@include breakpoint($xxs) {
+			max-width: 285px $i;
 		}
 	}
 	&_button {
@@ -16,8 +37,22 @@
 		bottom: (50% / 614 * 100);
 		right: (130% / 1400 * 100);
 		max-width: 367px;
+		@include breakpoint($md) { 
+			bottom: -200px;
+			float: right;
+		}
 		@include breakpoint($lg) {
-			right: (175% / 1400 * 100);
+			bottom: (80% / 614 * 100);
+			right: (250% / 1400 * 100);
+		}
+		@include breakpoint($xs) {
+			top: 30px;
+		}
+	}
+
+	&_button, &_man {
+		@include breakpoint($xs) {
+			margin-top: 2em;
 		}
 	}
 }

@@ -87,6 +87,10 @@ p {
  @extend %defaultTopMargin;
  max-width: 500px;
  @extend %fs-21;
+ @include breakpoint($xs) {
+    width: span(12);
+    max-width: none;
+  }
 }
 a {
   

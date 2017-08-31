@@ -9,6 +9,9 @@
   //   width: 100%;
   //   text-align: center;
   // }
+  @include breakpoint($xs) {
+    margin: 1em;
+  }
   &.active .navItem__refer {
     box-shadow: inset 0 0 15px $shadow;
   }

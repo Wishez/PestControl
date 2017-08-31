@@ -51,7 +51,7 @@ const Navigation = ({
               changeActiveNavigationItem('secondNavItem');
             }}>
             <Icon className='navItem__refer--icon'
-              name='book'
+              name='suitcase'
               size='large'
             />
             <span className='navItem__refer--number'>2</span>
@@ -66,7 +66,7 @@ const Navigation = ({
               changeActiveNavigationItem('thirdNavItem');
             }}>
             <Icon className='navItem__refer--icon'
-              name='book address'
+              name='book'
               size='large'
             />
             <span className='navItem__refer--number'>3</span>

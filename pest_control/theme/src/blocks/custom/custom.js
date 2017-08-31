@@ -1,8 +1,9 @@
 $(window).resize(() => {
 
     let $navList = $('#navList');
+
     if (window.innerWidth > 799) {
-      $navList.show('fast');
+      $closeButton.hide();
     } else  {
       $navList.hide('fast');
     }
