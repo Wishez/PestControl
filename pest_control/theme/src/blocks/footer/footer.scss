@@ -1,7 +1,27 @@
 .footer {
-  
-  
+  background-color: $darkGreen;
+  @extend %clearfix;
+  @extend %relative;
+  // padding-bottom: (36% / 511 * 100);
+  height: 511px;
+  @include breakpoint($md) {
+  	height: 488px;
+  }
+  @include breakpoint($sm) {
+  	height: 390px;
+  }
+  @include breakpoint($xs) {
+  	height: 320px;
+  	padding: 0 5%;
+  }
+  @include breakpoint($xxs) {
+  	height: 285px;
+  	padding: 0 5%;
+  }
 }
 
+
+@import '__figure.scss';
+@import '__title.scss';
 @import 'footerContacts/footerContacts.scss';
 @import 'copyright/copyright.scss';

@@ -1,8 +1,11 @@
 .footerContacts {
+	@extend %floatLeft;
+	@extend %eight;
+	@extend %largeTopMargin;
  }
 
 .footerContactsItem {
-
+	@extend %defaultTopMargin;
 }
 
 .footerContactsItem__refer {

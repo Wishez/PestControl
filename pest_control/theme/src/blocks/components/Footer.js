@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Container, Image } from 'semantic-ui-react';
+import Title from './Title';
 
-const Footer = () => (
+const Footer = ({
+  tel,
+  email
+}) => (
   <footer className='footer'> 
-    <div className='ui container'> 
+    <Container> 
+      <Title block='footer'
+        text='Ждём вас круглосуточно' />
       <ul className='footerContacts'>
         <li className='footerContactsItem'>
-          <a href='mailto:renome@intrenalmail.ru'
-            className='footerContactsItem__refer'>
-            <Icon name='envelope'
-              size='tiny'
+          <a href={`tel:${tel}`}
+             className='footerContactsItem__refer'>
+            <Icon name='phone sign'
+              size='large'
               className='footerContacts__icon' />
-            <span>shiningfinger@list.ru</span>
+            <span>&nbsp;{tel}</span>
           </a>
         </li>
         <li className='footerContactsItem'>
-          <a href='skype:shiningfinger?chat'
-             className='not-follow footerContactsItem__refer'>
-            <Icon name='skype'
-              size='tiny'
+          <a href={`mailto:${email}`}
+            className='footerContactsItem__refer'>
+            <Icon name='envelope'
+              size='large'
               className='footerContacts__icon' />
-            <span>shiningfinger</span>
+            &nbsp;<span>{email}</span>
           </a>
         </li>
       </ul>
       <p className='copyright'>
-          &copy;&nbsp;Filipp Zhuravlev &mdash; my template for quickly starting new project
+          &copy;&nbsp;2017&nbsp;&mdash;&nbsp;"Pest Control"
       </p>
-    </div>
+      <Image className='footer__figure' 
+        src='/static/pest_control/img/operator.png' />
+    </Container>
   </footer>
 );
 

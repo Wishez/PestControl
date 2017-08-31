@@ -1,6 +1,6 @@
 .header {
 	background-color: $purple;
-  @include susy-clearfix;
+  @extend %clearfix;
   padding: (50% / 641 * 100) 0 (109% / 641 * 100); 
   height: auto;
   @extend %relative;
@@ -12,7 +12,6 @@
      padding-top: (25% / 641 * 100)
   }
   @include breakpoint($xs) {
-    // padding-top: (110% / 641 * 100);
     padding: (50% / 641 * 100) 5% (109% / 641 * 100);
   }
 }

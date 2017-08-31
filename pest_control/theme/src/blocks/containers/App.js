@@ -18,7 +18,8 @@ class App extends Component {
     	<div>
       	<Header />
       	<Main />	
-      	<Footer />
+      	<Footer email='support@pest_control.ru'
+          tel='+7 (926) 370-78-12' />
       </div>
     );
   }

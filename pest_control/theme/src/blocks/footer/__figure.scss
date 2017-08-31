@@ -1,0 +1,9 @@
+.footer__figure {
+	@extend %floatRight;
+	width: span(4);
+	max-width: 300px $i;
+	top: -153px;
+	@include breakpoint($xs) {
+		top: -128px;
+	}
+}

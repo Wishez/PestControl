@@ -10,3 +10,9 @@
 %fs-28 {
 	font-size: $thirdSizeHeading;
 }
+%fs-16 {
+	font-size: (16em / $baseSizeFont);	
+}
+%fs-13 {
+	font-size: (13em / $baseSizeFont);	
+}

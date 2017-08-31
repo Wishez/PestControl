@@ -1,0 +1,9 @@
+.footer__title {
+	@extend %fs-21;
+	@extend %floatLeft;
+	@extend %eight;
+	margin-top: (60% / 511 * 100) $i;
+	@include breakpoint($xs) {
+		width: span(12);
+	}
+}
