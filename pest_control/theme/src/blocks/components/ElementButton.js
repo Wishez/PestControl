@@ -12,25 +12,42 @@ const ElementButton = ({
 	name,
 	id,
 	modifier,
-	getClasses
+	getClasses,
+  type
 }) => (
-	<button type='button'
+	<button type={type ? type : 'button'}
         className={getClasses(block, modifier)}
         id={id ? id : ''}>
-        <a className={`${block}Refer`} 
-          	href={href ? href : '#'}
-        	onClick={onClick}>
-        	{isImage ?
-       	   		<Image src={`/static/pest_control/img/${iconName}`}
-            		className={getClasses(`${block}Refer__icon`, modifier)} /> :
-            	<Icon name={iconName} 
-            		size='large'
-            		className={getClasses(`${block}Refer__icon`, modifier)} />
-        	}
+      {href ?
+          <a className={`${block}Refer`} 
+          href={href}
+          onClick={onClick ? onClick : () => {}}>
+          {isImage ?
+              <Image src={`/static/pest_control/img/${iconName}`}
+                className={getClasses(`${block}Refer__icon`, modifier)} /> :
+              <Icon name={iconName} 
+                size='large'
+                className={getClasses(`${block}Refer__icon`, modifier)} />
+          }
            <span className={getClasses(`${block}Refer__number`, modifier)}>{number}</span>
            <br/>
            <span className={getClasses(`${block}Refer__name`, modifier)}>{name}</span>
-      </a>
+        </a> :
+        <div className={`${block}Container`} 
+          onClick={onClick}>
+          {isImage ?
+              <Image src={`/static/pest_control/img/${iconName}`}
+                className={getClasses(`${block}Container__icon`, modifier)} /> :
+              <Icon name={iconName} 
+                size='large'
+                className={getClasses(`${block}Container__icon`, modifier)} />
+          }
+           <span className={getClasses(`${block}Container__number`, modifier)}>{number}</span>
+           <br/>
+           <span className={getClasses(`${block}Container__name`, modifier)}>{name}</span>
+        </div>
+      }
+
     </button>
 );
 

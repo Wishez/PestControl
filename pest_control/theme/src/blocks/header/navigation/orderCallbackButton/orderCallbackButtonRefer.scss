@@ -1,17 +1,17 @@
 
-.orderCallbackButtonRefer {
+.orderCallbackButtonContainer {
 	@extend %elementButton;
 }
 
-.orderCallbackButtonRefer__name {
+.orderCallbackButtonContainer__name {
 	@extend %elementButton__name;
 	margin-top: 14px;
 }
 
-.orderCallbackButtonRefer__number {
+.orderCallbackButtonContainer__number {
 	@extend %elementButton__number;
 }
-.orderCallbackButtonRefer__icon {
+.orderCallbackButtonContainer__icon {
 	@extend %elementButton__icon;
 	max-width: 30px $i;
 }

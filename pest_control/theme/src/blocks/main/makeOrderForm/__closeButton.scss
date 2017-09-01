@@ -1,4 +1,10 @@
 .makeOrderFormWrapper__closeButton {
-	@extend %absolute;
+	// @extend %absolute;
 	max-width: 25px $i;
+	@extend %floatRight;
+	@extend %pointIt;
+	transition: box-shadow 0.5s;
+	&:hover {
+		@extend %buttonShadow;
+	}
 }

@@ -1,24 +1,30 @@
 %formInput {
 	@extend %fullWidth;
-	background-color: $darkGray;
 	@extend %fs-16;
-	color: $lightGray;
-	height: 45px;
+	height: 45px $i;
 	padding-left: 15px;
 	max-width: 345px;
-	// @extend %navItemShadow--active;
-	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
+	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s $i;
+	border-radius: 5px;
+	@extend %innerShadow;
 	@include placehodler-color-focus($gray);
 	&:focus {
-		color: $darkGray;
+		color: $lightGray;
 		@extend %buttonShadow;
 		background-color: $darkenLightGray;
 	}
 }
 
+
+%formInputDark {
+	@extend %formInput;
+	background-color: $darkGray $i;
+	color: $lightGray $i;
+	
+}
 %formError {
-	color: $darkRed;
-	font-size: (13em / 16);
+	color: $skyBlue;
+	@extend %fs-14;
 }
 
 %controller {

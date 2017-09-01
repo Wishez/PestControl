@@ -1,0 +1,7 @@
+.makeOrderFormController__error {
+	@extend %formError;
+}
+.errorContainer {
+	@extend %floatLeft;
+	padding-left: 27%;
+}

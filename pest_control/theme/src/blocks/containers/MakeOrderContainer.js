@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MakeOrderForm from './../components/MakeOrderForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import classNames from 'classnames';
 
 class MakeOrderContainer extends Component  {
 
@@ -40,10 +40,15 @@ class MakeOrderContainer extends Component  {
 
 		// });
 	}
-
+	getClasses = (name, modifier) => (
+    	classNames({
+	      	[name]: true,
+	      	[`${name}--${modifier}`]: !!modifier
+    	})
+  	)
 	render() {	
 		return (
-			<MakeOrderForm />
+			<MakeOrderForm getClasses={this.getClasses} />
 		);
 	}
 }

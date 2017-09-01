@@ -14,11 +14,13 @@ import {
 	spaceOptions
 } from './../constants/options.js';
 
+import ElementButton from './ElementButton';
 
 
 const MakeOrderForm = ({ 
 	handleSubmit,
-	submit
+	submit,
+	getClasses
 }) => (
 	<div className='makeOrderFormWrapper'>
 		<Image className='makeOrderFormWrapper__closeButton' 
@@ -37,8 +39,8 @@ const MakeOrderForm = ({
 				type='text'
 				block='makeOrderFormController'
 				component={RenderController}
-				label='Ф.И.О.'
-				placeholder='Ф.И.О.'
+				label='Ф.И.О:'
+				placeholder='Альбус Персиваль Вульфрик Брайан Дамболдор'
 				maxLength='150'
 				validate={[ required ]}
 
@@ -46,8 +48,9 @@ const MakeOrderForm = ({
 			<Field 
 				component={RenderController}
 				name='phone'
-				label='Телефон'
+				label='Телефон:'
 				block='makeOrderFormController'
+				placeholder='8 (926) 370-78-12'
 				maxLength='24'
 				validate={[ required ]}
 				icon='fa-phone'
@@ -57,9 +60,9 @@ const MakeOrderForm = ({
 				type='email'
 				block='makeOrderFormController'
 				component={RenderController}
-				label='E-mail'
+				label='E-mail:'
 				maxLength='70'
-				placeholder='bloody@comandos.com'
+				placeholder='bloody@commandos.com'
 				validate={[ required, email ]}
 				icon='fa-envelope'
 			/>
@@ -67,7 +70,8 @@ const MakeOrderForm = ({
 				name='service'
 				block='makeOrderFormController'
 				component={DropdownController}
-				label='Услуга'
+				label='Услуга:'
+				placeholder='Выбирите услугу'
 				options={serviceOptions}
 				validate={[ required ]}
 			/>
@@ -75,15 +79,21 @@ const MakeOrderForm = ({
 				name='space'
 				block='makeOrderFormController'
 				component={DropdownController}
-				label='Помещение'
+				label='Помещение:'
+				placeholder='Выбирите помещение'
 				options={spaceOptions}
 				validate={[ required ]}
 			/>
-			<button 
-				type='submit' 
-				className='makeOrderForm__button submit'>
-				Заказать
-			</button> 
+			<ElementButton 
+				type='submit'
+				block='makeOrderForm' 
+				iconName='setting'
+				name='Заказать' 
+				number='8'
+				getClasses={getClasses}
+			/>
+				
+			
 		</form>
 	</div>
 );
