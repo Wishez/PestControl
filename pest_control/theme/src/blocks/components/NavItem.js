@@ -1,10 +1,11 @@
 import React from 'react';
 import { Icon, Image } from 'semantic-ui-react';
 import classNames from 'classnames'
+import { Link } from 'react-router-dom';
 
 const NavItem = ({
 	onClick,
-	block,
+	block, 
 	href,
 	iconName,
 	isImage,
@@ -12,12 +13,10 @@ const NavItem = ({
 	name,
 	id,
 	modifier,
-	getClasses,
-	to,
-	onClick
+	getClasses
 }) => (
 
-  <Link to={to}
+  <Link to={href}
     className={`${block}Refer`}
     onClick={onClick}>
     {isImage ?

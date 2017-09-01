@@ -30,6 +30,7 @@
   @extend %text-right;
   @extend %block;
   border: 4px solid $black;
+  border-radius: 3px;
   color: $lightGray $i;
   background-color: $green;
   box-shadow: 0 0 15px $shadow;

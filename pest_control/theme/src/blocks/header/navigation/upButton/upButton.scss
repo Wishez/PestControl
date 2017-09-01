@@ -1,6 +1,6 @@
 .upButton {
 	@extend %elementButtonContainer;
-	
+	@extend %defaultTopMargin;
 }
 
 .upButton--aside {

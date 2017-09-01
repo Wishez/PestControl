@@ -1,0 +1,18 @@
+.navItemRefer {
+  @extend %elementButton;
+}
+
+.navItemRefer__number {
+  @extend %elementButton__number;
+
+}
+.navItemRefer__icon {
+  @extend %elementButton__icon;
+}
+.navItemRefer__name {
+  @extend %elementButton__name;
+}
+
+.navItem:nth-child(5) .navItemRefer__name {
+	font-size: (14em / $baseSizeFont);
+}

@@ -1,6 +1,6 @@
 .navList {
   
-  width: span(12);
+  @extend %fullWidth;
   @include breakpoint($sm) {
     font-size: (21em / 16);
   }
@@ -10,7 +10,6 @@
     top: 0;
     left: 0;
     height: 100%;
-    // height: calc(100% - 44px);
     background-color: rgba($lightGray, .8);
     width: 100%;
     flex-flow: row wrap;
@@ -23,4 +22,3 @@
 }
 
 @import 'navItem.scss';
-@import '__refer.scss';

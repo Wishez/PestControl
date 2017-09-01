@@ -1,15 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import { Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ElementButton from './ElementButton';
+import NavItem from './NavItem';
 
 const Navigation = ({
-    firstNavItem,
-    secondNavItem,
-    thirdNavItem,
-    fourthNavItem,
-    fifthNavItem,
+    navigationItems,
     openMenu,
     changeActiveNavigationItem,
     closeMenu,
@@ -33,6 +30,7 @@ const Navigation = ({
           modifier='aside'
           {...rest}
         />
+        <br />
         <ElementButton 
           href='#header'
           id='upButton'
@@ -54,82 +52,23 @@ const Navigation = ({
           name='close'
           size='big'
           onClick={closeMenu} />
-        
-        <li className={getActiveClasses(firstNavItem.active)}>
-          <Link to='/'
-            className='navItem__refer'
-            onClick={() => {
-              changeActiveNavigationItem('firstNavItem');
-            }}>
-            <Icon className='navItem__refer--icon'
-              name='home'
-              size='large'
-            />
-            <span className='navItem__refer--number'>1</span>
-            <br/>
-            <span className='navItem__refer--name'>{firstNavItem.name}</span>
-          </Link>
-        </li>
-        <li className={getActiveClasses(secondNavItem.active)}>
-          <Link to='/services'
-            className='navItem__refer'
-            onClick={() => {
-              changeActiveNavigationItem('secondNavItem');
-            }}>
-            <Icon className='navItem__refer--icon'
-              name='suitcase'
-              size='large'
-            />
-            <span className='navItem__refer--number'>2</span>
-            <br/>
-            <span className='navItem__refer--name'>{secondNavItem.name}</span>
-          </Link>
-        </li>
-        <li className={getActiveClasses(thirdNavItem.active)}>
-          <Link to='/contacts' 
-            className='navItem__refer'
-            onClick={() => {
-              changeActiveNavigationItem('thirdNavItem');
-            }}>
-            <Icon className='navItem__refer--icon'
-              name='book'
-              size='large'
-            />
-            <span className='navItem__refer--number'>3</span>
-            <br/>
-            <span className='navItem__refer--name'>{thirdNavItem.name}</span>
-          </Link>
-        </li>
-        <li className={getActiveClasses(fourthNavItem.active)}>
-          <Link to='/institutions'
-            className='navItem__refer'
-            onClick={() => {
-              changeActiveNavigationItem('fourthNavItem');
-            }}>
-            <Icon className='navItem__refer--icon'
-              name='users'
-              size='large'
-            />
-            <span className='navItem__refer--number'>4</span>
-            <br/>
-            <span className='navItem__refer--name'>{fourthNavItem.name}</span>
-          </Link>
-        </li>
-        <li className={getActiveClasses(fifthNavItem.active)}>
-          <Link to='/advice'
-            className='navItem__refer'
-            onClick={() => {
-              changeActiveNavigationItem('fifthNavItem');
-            }}>
-            <Icon className='navItem__refer--icon'
-              name='hand peace'
-              size='large'
-            />
-            <span className='navItem__refer--number'>5</span>
-            <br/>
-            <span className='navItem__refer--name'>{fifthNavItem.name}</span>
-          </Link>
-        </li>
+         { navigationItems.map((item, index) => (
+            <li key={index}
+              className={getActiveClasses(item.active)}>    
+              <NavItem
+                block='navItem'
+                onClick={() => {
+                  changeActiveNavigationItem(item.index);
+                }} 
+                iconName={item.icon}
+                number={index + 1}
+                href={item.pathTo}
+                name={item.name}
+                {...rest}
+              />
+
+            </li>
+          ))}
       </ul>
     </nav>
 );

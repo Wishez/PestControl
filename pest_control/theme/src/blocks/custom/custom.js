@@ -11,7 +11,7 @@ $(window).resize(() => {
 $(window).scroll(function() {
   let $asideButtons = $('#asideButtons'); 
   const scrollTop = $(this).scrollTop();
-  
+
   if (scrollTop > 150)
     $asideButtons
       .stop()
@@ -20,6 +20,12 @@ $(window).scroll(function() {
     $asideButtons
       .stop()
       .fadeOut(500)
+
+    const fadeInTimer = setTimeout(() => {
+      $asideButtons
+      .stop()
+      .fadeOut(500)
+    }, 2000);
 
 });
 $(function() {

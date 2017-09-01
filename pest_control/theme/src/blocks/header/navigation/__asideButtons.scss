@@ -13,7 +13,7 @@
 
 .orderCallbackButtonRefer, .upButtonRefer {
 	&__name--aside {
-		margin-top: 35px;
+		@extend %fs-16;
 	}
 	&__icon--aside {
 		max-width: 30px $i;

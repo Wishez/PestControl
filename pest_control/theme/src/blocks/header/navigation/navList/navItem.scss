@@ -1,4 +1,4 @@
-@import '__refer.scss';
+@import 'navItemRefer.scss';
 
 .navItem {
   @extend %elementButtonContainer;
@@ -6,7 +6,8 @@
   @include breakpoint($xs) {
     margin: 1em;
   }
-  &.active .navItem__refer {
+  &.active .navItemRefer {
     box-shadow: inset 0 0 15px $shadow;
   }
 } 
+

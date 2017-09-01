@@ -8,11 +8,12 @@ import { selectNavigationItem } from './../actions/navigationActions.js';
 
 class NavContainer extends Component {
   static PropTypes = { 
-      firstNavItem: PropTypes.object.isRequired,
-      secondNavItem: PropTypes.object.isRequired,
-      thirdNavItem: PropTypes.object.isRequired,
-      fourthNavItem: PropTypes.object.isRequired,
-      fifthNavItem: PropTypes.object.isRequired,
+      navigationItems: PropTypes.array.isRequired,
+      // firstNavItem: PropTypes.object.isRequired,
+      // secondNavItem: PropTypes.object.isRequired,
+      // thirdNavItem: PropTypes.object.isRequired,
+      // fourthNavItem: PropTypes.object.isRequired,
+      // fifthNavItem: PropTypes.object.isRequired,
       dispatch: PropTypes.func.isRequired
   }
 
@@ -79,6 +80,7 @@ class NavContainer extends Component {
   }
 
   render() {
+
     return (
         <Navigation {...this.props}
             getActiveClasses={this.getActiveClasses}
@@ -95,21 +97,14 @@ class NavContainer extends Component {
 
 const mapStateToProps = state => {
   const { navigation } = state;
+  let navigationItems = [];
 
-  const {
-    firstNavItem,
-    secondNavItem,
-    thirdNavItem,
-    fourthNavItem,
-    fifthNavItem
-  } = navigation;
-
+  for (const prop in navigation) {
+    navigationItems.push(navigation[prop]);
+  }
+  
   return {
-    firstNavItem,
-    secondNavItem,
-    thirdNavItem,
-    fourthNavItem,
-    fifthNavItem
+    navigationItems
   }
 }
 

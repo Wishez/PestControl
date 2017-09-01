@@ -6,7 +6,8 @@ const Footer = ({
   tel,
   email
 }) => (
-  <footer className='footer'> 
+  <footer className='footer'
+    id='footer'> 
     <Container> 
       <Title block='footer'
         text='Ждём вас круглосуточно' />
