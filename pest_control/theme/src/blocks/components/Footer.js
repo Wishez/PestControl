@@ -14,7 +14,7 @@ const Footer = ({
         <li className='footerContactsItem'>
           <a href={`tel:${tel}`}
              className='footerContactsItem__refer'>
-            <Icon name='phone sign'
+            <Icon name='phone'
               size='large'
               className='footerContacts__icon' />
             <span>&nbsp;{tel}</span>

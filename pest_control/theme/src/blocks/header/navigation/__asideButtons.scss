@@ -1,0 +1,23 @@
+.navigation__asideButtons {
+	@extend %fixed;
+	@extend %index4;
+	bottom: 26px;
+	left: (45% / 1400 * 100);
+	display: none;
+}
+
+%asideButtonsProportions {
+	width: 100px;
+	height: 100px;
+}
+
+.orderCallbackButtonRefer, .upButtonRefer {
+	&__name--aside {
+		margin-top: 35px;
+	}
+	&__icon--aside {
+		max-width: 30px $i;
+	}
+}
+@import 'orderCallbackButton/orderCallbackButton.scss';
+@import 'upButton/upButton.scss';

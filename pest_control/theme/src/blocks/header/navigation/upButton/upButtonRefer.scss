@@ -1,0 +1,14 @@
+.upButtonRefer {
+	@extend %elementButton;
+}
+
+.upButtonRefer__name {
+	@extend %elementButton__name;
+}
+
+.upButtonRefer__number {
+	@extend %elementButton__number;
+}
+.upButtonRefer__icon {
+	@extend %elementButton__icon;
+}

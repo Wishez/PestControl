@@ -1,6 +1,13 @@
 .header__paragraph {
 	@extend %largeTopMargin;
+	@include breakpoint($md-up) {
+		margin-top: 5em;
+	}
 	@include breakpoint($xs) {
 		margin-top: 0;
 	}
+}
+
+.header__paragraph--color_skyBlue {
+	color: $skyBlue;
 }

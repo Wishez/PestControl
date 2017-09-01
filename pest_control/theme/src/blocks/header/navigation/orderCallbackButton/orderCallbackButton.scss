@@ -1,0 +1,10 @@
+.orderCallbackButton {
+	@extend %elementButtonContainer;
+	
+}
+
+.orderCallbackButton--aside {
+	@extend %asideButtonsProportions;	
+}
+
+@import 'orderCallbackButtonRefer.scss';

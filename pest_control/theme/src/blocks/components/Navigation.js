@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import ElementButton from './ElementButton';
 
 const Navigation = ({
     firstNavItem,
@@ -12,15 +13,40 @@ const Navigation = ({
     openMenu,
     changeActiveNavigationItem,
     closeMenu,
-    getActiveClasses
+    getActiveClasses,
+    smoothRise,
+    ...rest
 }) => (
     <nav className={`navigation`}>
       <button id='openMenuButton'
         className='navigation__openMenuButton visible-xs'
         onClick={openMenu}>
         <Icon name='bars' size='big' />
-
       </button>
+      <aside className='navigation__asideButtons' id='asideButtons'>
+        <ElementButton 
+          block='orderCallbackButton'
+          isImage={true}
+          iconName='phone.png'
+          number='7'
+          name='Обратный звонок'
+          modifier='aside'
+          {...rest}
+        />
+        <ElementButton 
+          href='#header'
+          id='upButton'
+          block='upButton'
+          isImage={true}
+          onClick={smoothRise}
+          iconName='rocket.png'
+          number='6'
+          name='Наверх' 
+          modifier='aside'
+          {...rest}
+        />
+        
+      </aside>
       <ul className='navList'
           id='navList'>
         <Icon id='closeMenuButton'

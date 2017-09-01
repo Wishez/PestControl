@@ -1,0 +1,16 @@
+
+.orderCallbackButtonRefer {
+	@extend %elementButton;
+}
+
+.orderCallbackButtonRefer__name {
+	@extend %elementButton__name;
+}
+
+.orderCallbackButtonRefer__number {
+	@extend %elementButton__number;
+}
+.orderCallbackButtonRefer__icon {
+	@extend %elementButton__icon;
+	max-width: 30px $i;
+}

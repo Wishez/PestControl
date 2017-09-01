@@ -4,7 +4,8 @@ import NavContainer from './../containers/NavContainer.js';
 import { Container, Image } from 'semantic-ui-react';
 import Paragraph from './Paragraph';
 const Header = ({}) => (
-  <header className='header'>
+  <header className='header'
+    id='header'>
       <Container>
         <Logo />
         <NavContainer />

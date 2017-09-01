@@ -20,6 +20,13 @@ class NavContainer extends Component {
       isOpen: false
   };
 
+  getClasses = (name, modifier) => (
+    classNames({
+      [name]: true,
+      [`${name}--${modifier}`]: !!modifier
+    })
+  )
+
   openMenu = () => {
     let $navList = $('#navList');
     let $closeButton = $('#closeMenuButton');
@@ -34,6 +41,21 @@ class NavContainer extends Component {
       $closeButton.hide();
     }
   };
+
+  smoothRise = e => {
+    let element = $(e.target).attr('href');
+    if (!element)
+      element = $(e.target).parent().attr('href');
+
+    const pathTo = $(element).offset().top;
+    
+    $('body, html')
+      .stop()
+      .animate({
+        scrollTop: pathTo
+      }, 800);
+
+  }
 
   changeActiveNavigationItem = navigationItem => {
       const { dispatch } = this.props;
@@ -63,6 +85,8 @@ class NavContainer extends Component {
             openMenu={this.openMenu}
             closeMenu={this.closeMenu}
             changeActiveNavigationItem={this.changeActiveNavigationItem}
+            smoothRise={this.smoothRise}
+            getClasses={this.getClasses}
         />
     );
   }

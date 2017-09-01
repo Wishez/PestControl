@@ -38,7 +38,7 @@
 		right: (130% / 1400 * 100);
 		max-width: 367px;
 		@include breakpoint($md) { 
-			bottom: -200px;
+			bottom: -175px;
 			float: right;
 		}
 		@include breakpoint($lg) {
@@ -52,7 +52,7 @@
 
 	&_button, &_man {
 		@include breakpoint($xs) {
-			margin-top: 2em;
+			margin-top: 2em $i;
 		}
 	}
 }

@@ -1,0 +1,10 @@
+.upButton {
+	@extend %elementButtonContainer;
+	
+}
+
+.upButton--aside {
+	@extend %asideButtonsProportions;	
+}
+
+@import 'upButtonRefer.scss';

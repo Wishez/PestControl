@@ -1,14 +1,8 @@
 @import '__refer.scss';
 
 .navItem {
-  width: 115px;
-  height: 115px;
-  @extend %inline-block;
+  @extend %elementButtonContainer;
   margin-right: (16% / 645 * 100);
-  // @include breakpoint($xs) {
-  //   width: 100%;
-  //   text-align: center;
-  // }
   @include breakpoint($xs) {
     margin: 1em;
   }

@@ -3,12 +3,25 @@ $(window).resize(() => {
     let $navList = $('#navList');
 
     if (window.innerWidth > 799) {
-      $closeButton.hide();
+      $navList.show('fast');
     } else  {
       $navList.hide('fast');
     }
 });
+$(window).scroll(function() {
+  let $asideButtons = $('#asideButtons'); 
+  const scrollTop = $(this).scrollTop();
+  
+  if (scrollTop > 150)
+    $asideButtons
+      .stop()
+      .fadeIn(500);
+  else
+    $asideButtons
+      .stop()
+      .fadeOut(500)
 
+});
 $(function() {
   $(document).on('click', '.not-follow', openUrlInNewWindow);
 
