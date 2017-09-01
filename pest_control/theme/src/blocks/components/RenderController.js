@@ -8,9 +8,13 @@ const RenderController = ({
 		warning
 	},
 	block,
+	label,
 	...rest
 }) => (
 	<div className={block}>
+		<label className={`${block}__label`}>
+			{label}
+		</label>
 		<input {...input}
 			{...rest}
 			className={block + '__input'} />

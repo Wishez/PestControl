@@ -15,17 +15,17 @@ $(window).scroll(function() {
   if (scrollTop > 150)
     $asideButtons
       .stop()
-      .fadeIn(500);
+      .fadeIn(500)
+      .stop()
+      .delay(2000)
+      .stop()
+      .fadeOut(500);
   else
     $asideButtons
       .stop()
       .fadeOut(500)
 
-    const fadeInTimer = setTimeout(() => {
-      $asideButtons
-      .stop()
-      .fadeOut(500)
-    }, 2000);
+    
 
 });
 $(function() {

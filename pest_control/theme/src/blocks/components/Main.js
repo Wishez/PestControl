@@ -4,10 +4,18 @@ import { RouteTransition } from 'react-router-transition';
 
 import NotFound from './../components/NotFound';
 import MyRoute from './../components/MyRoute';
+import PresentContainer from './../containers/PresentContainer';
+import IsistutionsContainer from './../containers/IsistutionsContainer';
+import AdviceContainer from './../containers/AdviceContainer';
+import ContactsContainer from './../containers/ContactsContainer';
+import ServicesContainer from './../containers/ServicesContainer';
+import SingleAdviceContainer from './../containers/SingleAdviceContainer';
 
 const Main = ({
+
 }) => (
-    <main className='main'>
+    <main id='main'
+        className='main'>
     <Route render={({ location }) => (
         <RouteTransition 
             pathname={location.pathname}
@@ -18,17 +26,11 @@ const Main = ({
             <Switch style={{opacity: 0}}
              key={location.key} 
              location={location}>
-                <Route exact path='/' render={props => (
-                       <section>Hello world!</section>                 
-                )} />   
-                <MyRoute path='/services'
-                    component={({}) => ( <section>It is second section!</section> )} />
-                <MyRoute path='/contacts'
-                    component={({}) => ( <section>It is third section!</section> )} />
-                <MyRoute path='/institutions'
-                    component={({}) => ( <section>It is fourth section!</section> )} />   
-                <MyRoute path='/advice'
-                    component={({}) => ( <section>It is fifth section!</section> )} /> 
+                <MyRoute exact path='/' component={PresentContainer} />   
+                <MyRoute path='/services' component={ServicesContainer} />
+                <MyRoute path='/contacts' component={ContactsContainer} />
+                <MyRoute path='/institutions' component={IsistutionsContainer} />   
+                <MyRoute path='/advice' component={AdviceContainer} /> 
                 <Route render={() => (
 
                     <Redirect to="/not_found" />

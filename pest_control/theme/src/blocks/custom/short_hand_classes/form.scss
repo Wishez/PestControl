@@ -1,11 +1,12 @@
 %formInput {
-	width: 100%;
-	background-color: $gray;
-	font-size: (12em / 16);
+	@extend %fullWidth;
+	background-color: $darkGray;
+	@extend %fs-16;
 	color: $lightGray;
-	height: 40px;
+	height: 45px;
 	padding-left: 15px;
-	@extend %navItemShadow--active;
+	max-width: 345px;
+	// @extend %navItemShadow--active;
 	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 	@include placehodler-color-focus($gray);
 	&:focus {

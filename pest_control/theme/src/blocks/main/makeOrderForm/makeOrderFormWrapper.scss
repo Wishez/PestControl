@@ -1,0 +1,10 @@
+.makeOrderFormWrapper {
+	@extend %absolute;
+	width: 601px;
+	padding: 33px 80px 44px 0;
+	border: 3px solid $yellow;
+	background-color: $purple;
+
+}
+@import '__closeButton.scss';
+@import 'makeOrderForm.scss';
