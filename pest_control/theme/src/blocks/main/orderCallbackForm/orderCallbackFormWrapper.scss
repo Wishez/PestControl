@@ -1,0 +1,21 @@
+.orderCallbackFormWrapper {
+	@extend %darkGrayBg;
+	@extend %beneathShadow;
+	@extend %solidBorder;
+	@extend %roundBorder4;
+	@extend %widthBorder4;
+	@extend %fixed;
+	@extend %index4;
+	top: 10%;
+	left: calc(50% - (486px / 2));
+	color: $lightGray;
+	border-color: $green;
+	width: 486px;
+	padding: 25px 75px 35px;
+	@include breakpoint($xxs) {
+		width: 100%;
+	}
+}
+
+@import '__closeButton.scss';
+@import 'orderCallbackForm.scss';

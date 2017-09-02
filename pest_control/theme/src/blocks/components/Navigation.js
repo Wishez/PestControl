@@ -12,6 +12,7 @@ const Navigation = ({
     closeMenu,
     smoothRise,
     getActiveClasses,
+    openOrderCallbackForm,
     ...rest
 }) => (
    <nav className={`navigation`}>
@@ -24,6 +25,7 @@ const Navigation = ({
       <ElementButton 
         block='orderCallbackButton'
         isImage={true}
+        onClick={openOrderCallbackForm}
         iconName='phone.png'
         number='7'
         name='Обратный звонок'

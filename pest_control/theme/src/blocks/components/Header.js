@@ -3,11 +3,11 @@ import Logo from './Logo';
 import NavContainer from './../containers/NavContainer.js'; 
 import { Container, Image } from 'semantic-ui-react';
 import Paragraph from './Paragraph';
+
 const Header = ({
   getVisibilitySwitchButtonClasses,
-  isOpenMakeOrderForm: isOpen,
-  openMakeOrderForm,
-  closeMakeOrderForm
+  isMakeOrderFormOpened: isOpen,
+  openMakeOrderForm
 }) => (
   <header className='header'
     id='header'>

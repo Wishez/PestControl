@@ -19,7 +19,7 @@ import ElementButton from './ElementButton';
 
 const MakeOrderForm = ({ 
 	handleSubmit,
-	submit,
+	onSubmitMakeOrderForm,
 	getClasses,
 	message,
 	isOrdered,
@@ -35,7 +35,7 @@ const MakeOrderForm = ({
 			id='makeOrderForm' 
 			className='makeOrderForm'
 			method='post'
-			onSubmit={handleSubmit(submit.bind(this))}>
+			onSubmit={handleSubmit(onSubmitMakeOrderForm.bind(this))}>
 					<Title block='makeOrderForm'
 						text='Заказ' />
 					<Field 

@@ -1,14 +1,15 @@
 %buttonShadow {
 	box-shadow: 0 5px 10px $shadow $i;
 }
-%navItemShadow {
+%beneathShadow {
 	box-shadow: 0 10px 15px $shadow;
 }
-%importantNavItemShadow {
+%importantbeneathShadow {
 	box-shadow: 0 10px 15px $shadow $i;
 }
-%navItemShadow--active {
-	box-shadow: 0 0 10px $shadow;
+
+%spreadShadow {
+		box-shadow: 0 0 15px $shadow;	
 }
 
 %innerShadow {

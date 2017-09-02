@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Navigation from './../components/Navigation';
-import { selectNavigationItem } from './../actions/navigationActions.js';
+import { closeFormsAndSelectNavigationItem } from './../actions/navigationActions.js';
+import { 
+  openOrderCallbackForm
+} from './../actions/appActions.js';
 
 class NavContainer extends Component {
   static PropTypes = { 
@@ -56,9 +59,7 @@ class NavContainer extends Component {
 
   changeActiveNavigationItem = navigationItem => {
       return () => {
-        const { dispatch } = this.props;
-       
-        dispatch(selectNavigationItem(navigationItem));
+        this.props.dispatch(closeFormsAndSelectNavigationItem(navigationItem));
       }
 
 
@@ -76,6 +77,26 @@ class NavContainer extends Component {
     if (window.innerWidth < 767) $navList.hide('fast');
   }
 
+
+  closeCallbackForm = () => {
+    const { dispatch } = this.props;
+
+    dispatch(closeOrderCallbackForm());
+  }
+
+  closeOrderForm = () => {
+    const { dispatch } = this.props;
+
+    dispatch(closeMakeOrderForm());
+  }
+
+  openCallbackForm = () => {
+    const { dispatch } = this.props;
+
+    dispatch(openOrderCallbackForm());
+  }
+
+
   render() {
 
     return (
@@ -86,6 +107,7 @@ class NavContainer extends Component {
             changeActiveNavigationItem={this.changeActiveNavigationItem}
             smoothRise={this.smoothRise}
             getClasses={this.getClasses}
+            openOrderCallbackForm={this.openCallbackForm}
         />
     );
   }

@@ -7,12 +7,14 @@ import classNames from 'classnames';
 import Header from './../components/Header';
 import Footer from './../components/Footer';
 import Main from './../components/Main';
-import { openMakeOrderForm } from './../actions/appActions.js';
+import { 
+  openMakeOrderForm
+} from './../actions/appActions.js';
 
 class App extends Component {
   static PropTypes = {
     dispatch: PropTypes.func.isRequired,
-    isOpenMakeOrderForm: PropTypes.bool.isRequired
+    isMakeOrderFormOpened: PropTypes.bool.isRequired
   }
 
 	
@@ -36,7 +38,6 @@ class App extends Component {
       	<Header 
           getVisibilitySwitchButtonClasses={this.getVisibilitySwitchButtonClasses} 
           openMakeOrderForm={this.openOrderForm}
-          closeMakeOrderForm={this.closeOrderForm}
           {...this.props} 
         />
       	<Main />	
@@ -51,11 +52,11 @@ const mapStateToProps = state => {
   const { app } = state;
 
   const {
-    isOpenMakeOrderForm
+    isMakeOrderFormOpened
   } = app;
 
   return {
-    isOpenMakeOrderForm
+    isMakeOrderFormOpened
   };
 };
 

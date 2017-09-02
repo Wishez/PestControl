@@ -18,7 +18,7 @@ class MakeOrderContainer extends Component  {
 		dispatch: PropTypes.func.isRequired
 	}
 
-	submit(values, dispatch) {
+	onSubmitMakeOrderForm(values, dispatch) {
 		dispatch(tryMakeOrder(values));
 	}
 
@@ -40,6 +40,7 @@ class MakeOrderContainer extends Component  {
 			<Container className='main__makeOrderFormContainer'>
 				{isOpen ?
 					<MakeOrderForm {...this.props}
+						onSubmitMakeOrderForm={this.onSubmitMakeOrderForm}
 						getClasses={this.getClasses}
 						closeMakeOrderForm={this.closeOrderForm} /> :
 					''
@@ -55,15 +56,15 @@ const mapStateToProps = state => {
 	} = state;
 	
 	const {
-		isOpenMakeOrderForm,
+		isMakeOrderFormOpened,
 		makeOrderFormMessage,
-		isOrdered
+		isOrderOrdered
 	} = app;
 
 	return {
 		message: makeOrderFormMessage,
-		isOpen: isOpenMakeOrderForm,
-		isOrdered
+		isOpen: isMakeOrderFormOpened,
+		isOrdered: isOrderOrdered
 	};
 };
 

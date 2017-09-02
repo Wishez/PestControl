@@ -1,13 +1,19 @@
 import {
 	OPEN_MAKE_ORDER_FORM,
 	CLOSE_MAKE_ORDER_FORM,
-	MAKE_ORDER
+	MAKE_ORDER,
+	ORDER_CALLBACK,
+	OPEN_ORDER_CALLBACK_FORM,
+	CLOSE_ORDER_CALLBACK_FORM
 }  from './../constants/actionTypes.js';
 
 const initState = {
-	isOpenMakeOrderForm: false,
+	isMakeOrderFormOpened: false,
 	makeOrderFormMessage: '',
-	isOrdered: false
+	isOrderOrdered: false,
+	isOrderCallbackFormOpened: false,
+	isCallbackOrdered: false,
+	orderCallbackFormMessage: ''	
 }
 
 const app = (
@@ -18,18 +24,34 @@ const app = (
 		case OPEN_MAKE_ORDER_FORM:
 			return {
 				...state,
-				isOpenMakeOrderForm: true
+				isMakeOrderFormOpened: true
 			};
 		case CLOSE_MAKE_ORDER_FORM:
 			return {
 				...state,
-				isOpenMakeOrderForm: false
+				isMakeOrderFormOpened: false
 			};
 		case MAKE_ORDER:
 			return {
 				...state,
 				makeOrderFormMessage: action.message,
-				isOrdered: action.isOrdered
+				isOrderOrdered: action.isOrdered
+			};
+		case ORDER_CALLBACK:
+			return {
+				...state,
+				orderCallbackFormMessage: action.message,
+				isCallbackOrdered: action.isOrdered
+			};
+		case OPEN_ORDER_CALLBACK_FORM:
+			return {
+				...state,
+				isOrderCallbackFormOpened: true
+			};
+		case OPEN_ORDER_CALLBACK_FORM:
+			return {
+				...state,
+				isOrderCallbackFormOpened: false
 			};
 		default:
 			return state;

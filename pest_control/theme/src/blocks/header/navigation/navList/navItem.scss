@@ -6,7 +6,7 @@
   @include breakpoint($xs) {
     margin: 1em;
   }
-  &.active .navItemRefer {
+  &--active .navItemRefer {
     @extend %innerShadow;
   }
 } 

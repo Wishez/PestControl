@@ -1,0 +1,23 @@
+.orderCallbackFormButton {
+	@extend %elementButtonContainer;
+	@extend %asideButtonsProportions;
+	width: 150px;
+	@extend %largeTopMargin;
+}
+
+.orderCallbackFormButtonContainer {
+	@extend %elementButton;
+}
+
+.orderCallbackFormButtonContainer__icon {
+	@extend %elementButton__icon;
+}
+.orderCallbackFormButtonContainer__name {
+	@extend %elementButton__name;
+	@extend %largeTopMargin;
+	font-size: (15em / 16);
+}
+
+.orderCallbackFormButtonContainer__number {
+	@extend %elementButton__number;
+}

@@ -4,6 +4,6 @@
 
 .makeOrderForm__title, .errorContainer, .makeOrderFormButton {
 	@include breakpoint($xs) {
-			margin-left: 0;
+		margin-left: 0;
 	}
 }

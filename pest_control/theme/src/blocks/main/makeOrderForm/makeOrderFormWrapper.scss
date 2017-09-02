@@ -1,12 +1,13 @@
 
 .makeOrderFormWrapper {
-	// @extend %absolute;
-	// @extend %center-block;
-	
+	@extend %roundBorder4;
+	@extend %beneathShadow;
+	@extend %widthBorder4;
+	@extend %solidBorder;
 	margin: 2em auto 1em;
 	width: 601px;
+	border-color: $yellow;
 	padding: 33px 80px 44px 40px;
-	border: 3px solid $yellow;
 	background-color: $purple;
 	@include breakpoint($xs) {
 		width: span(12);
