@@ -1,58 +1,70 @@
 import React, { Component } from 'react';
-import MakeOrderForm from './../components/MakeOrderForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
+
+import MakeOrderForm from './../components/MakeOrderForm';
+import { tryMakeOrder, closeMakeOrderForm } from './../actions/appActions.js';
+
 
 class MakeOrderContainer extends Component  {
 
-	submit(values, dispatch) {
-		
-		// values.service = $(':input[name="service"]').val();
-
-		// const data = {
-		// 	"name": values.name,
-		// 	"phone": $(':input[name="phone"]').val(),
-		// 	"email": values.email,
-		// 	"service": $(':input[name="service"]').val(),
-		// 	"comment": values.comment
-		// };
-
-		// $.ajaxSetup({
-		// 	url: '/order/',
-		// 	type: 'POST',
-		// 	data: data,
-		// 	beforeSend(xhr, settings) {
-		// 		crossDomainRequest(xhr, settings, this);
-		// 	}
-		// });
-
-		// $.ajax({
-		// 	success: (respond) => {
-		// 		$('#orderForm').hide();
-		// 		$('.orderFormWrapper').append(respond);
-		// 		$('.connect').css('max-height', '1280px')
-		// 	},
-		// 	error: (xhr, errmsg, err) => {
-		// 		console.log('fail\n',errmsg,  err);
-
-		// 	}
-
-		// });
+	static PropTypes = {
+		isOpen: PropTypes.bool.isRequired,
+		isOrdered: PropTypes.bool.isRequired,
+		message: PropTypes.string.isRequired,
+		dispatch: PropTypes.func.isRequired
 	}
+
+	submit(values, dispatch) {
+		dispatch(tryMakeOrder(values));
+	}
+
 	getClasses = (name, modifier) => (
     	classNames({
 	      	[name]: true,
 	      	[`${name}--${modifier}`]: !!modifier
     	})
   	)
+  	closeOrderForm = () => {
+    	const { dispatch } = this.props;
+
+    	dispatch(closeMakeOrderForm());
+  	}
+
 	render() {	
+		const { isOpen } = this.props;
 		return (
-			<MakeOrderForm getClasses={this.getClasses} />
+			<Container className='main__makeOrderFormContainer'>
+				{isOpen ?
+					<MakeOrderForm {...this.props}
+						getClasses={this.getClasses}
+						closeMakeOrderForm={this.closeOrderForm} /> :
+					''
+				}	
+			</Container>
 		);
 	}
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => {
+	const {
+		app
+	} = state;
+	
+	const {
+		isOpenMakeOrderForm,
+		makeOrderFormMessage,
+		isOrdered
+	} = app;
+
+	return {
+		message: makeOrderFormMessage,
+		isOpen: isOpenMakeOrderForm,
+		isOrdered
+	};
+};
 
 export default withRouter(connect(mapStateToProps)(MakeOrderContainer));

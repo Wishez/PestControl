@@ -55,14 +55,13 @@ class NavContainer extends Component {
   }
 
   changeActiveNavigationItem = navigationItem => {
-      const { dispatch } = this.props;
+      return () => {
+        const { dispatch } = this.props;
+       
+        dispatch(selectNavigationItem(navigationItem));
+      }
 
-      dispatch(selectNavigationItem(navigationItem));
-      // Меню закрывается.
-      if (this.state.isOpen)
-          this.closeMenu();
 
-      
   };
 
   getActiveClasses = state => ( 

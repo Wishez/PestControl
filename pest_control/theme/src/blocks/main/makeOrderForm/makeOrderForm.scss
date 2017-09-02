@@ -1,3 +1,9 @@
 @import '__title.scss';
 @import 'makeOrderFormController/makeOrderFormController.scss';
 @import 'makeOrderFormButton/makeOrderFormButton.scss';
+
+.makeOrderForm__title, .errorContainer, .makeOrderFormButton {
+	@include breakpoint($xs) {
+			margin-left: 0;
+	}
+}

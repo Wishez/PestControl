@@ -1,4 +1,4 @@
-import { SELECT_NAVIGATION_ITEM, CLEAN_ACTIVE_STATE } from './../constants/actionTypes.js';
+import { SELECT_NAVIGATION_ITEM, CLEAN_ACTIVE_STATE } from './../constants/navigationTypes.js';
 
 
 export const selectNavigationItem = (

@@ -10,7 +10,7 @@ import AdviceContainer from './../containers/AdviceContainer';
 import ContactsContainer from './../containers/ContactsContainer';
 import ServicesContainer from './../containers/ServicesContainer';
 import SingleAdviceContainer from './../containers/SingleAdviceContainer';
-// style={{opacity: 0}}
+
 const Main = ({
 
 }) => (
@@ -29,7 +29,7 @@ const Main = ({
                 )} />
                 <MyRoute path='/services' component={ServicesContainer} />
                 <MyRoute path='/contacts' component={ContactsContainer} />
-                <MyRoute path='/institutions' component={IsistutionsContainer} />   
+                <MyRoute path='/isistutions' component={IsistutionsContainer} />   
                 <MyRoute path='/advice' component={AdviceContainer} /> 
                 <Route render={() => (
 

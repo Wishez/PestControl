@@ -8,9 +8,7 @@ const MainContentContainer = ({
 }) => (
 	<main id='main'
         className='main'>
-		<Container className='main__makeOrderFormContainer' id='makeOrderFormContainer'>
-			<MakeOrderContainer />
-		</Container>
+		<MakeOrderContainer />
 		{children}
 	</main>
 );

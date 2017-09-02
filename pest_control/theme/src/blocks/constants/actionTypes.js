@@ -5,3 +5,7 @@ export const VisibilityFilters = {
 	SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
 
+
+export const OPEN_MAKE_ORDER_FORM = 'OPEN_MAKE_ORDER_FORM';
+export const CLOSE_MAKE_ORDER_FORM = 'CLOSE_MAKE_ORDER_FORM';
+export const MAKE_ORDER = 'MAKE_ORDER';

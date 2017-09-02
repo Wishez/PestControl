@@ -14,7 +14,6 @@
 	
 	&_man {
 		top: (50% / 614 * 100);
-		//145
 		right: (85% / 1400 * 100);
 		max-width: 415px $i;
 		float: right;
@@ -31,12 +30,17 @@
 		@include breakpoint($xxs) {
 			max-width: 285px $i;
 		}
+		
 	}
 	&_button {
+		transition: transform 1s;
 		@extend %pointIt;
 		bottom: (50% / 614 * 100);
 		right: (130% / 1400 * 100);
 		max-width: 367px;
+		&:hover {
+			transform: translateX(4px);
+		}
 		@include breakpoint($md) { 
 			bottom: -175px;
 			float: right;
@@ -55,4 +59,8 @@
 			margin-top: 2em $i;
 		}
 	}
+}
+
+.header__figure--state_active {
+	transform: translateX(-1000%);
 }
