@@ -6,12 +6,14 @@ import MakeOrderContainer from './../containers/MakeOrderContainer.js';
 const MainContentContainer = ({
 	children
 }) => (
-	<Container className='main__container'>
-		<MakeOrderContainer />
+	<main id='main'
+        className='main'>
+		<Container className='main__makeOrderFormContainer' id='makeOrderFormContainer'>
+			<MakeOrderContainer />
+		</Container>
 		{children}
-	</Container>
+	</main>
 );
 
-const mapStateToProps = state => ({});
 
 export default MainContentContainer;

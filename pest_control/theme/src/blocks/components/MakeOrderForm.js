@@ -40,7 +40,7 @@ const MakeOrderForm = ({
 				block='makeOrderFormController'
 				component={RenderController}
 				label='Ф.И.О:'
-				placeholder='Альбус Персиваль Вульфрик Брайан Дамболдор'
+				placeholder='Реарден Хэнк Васильевич'
 				maxLength='150'
 				validate={[ required ]}
 

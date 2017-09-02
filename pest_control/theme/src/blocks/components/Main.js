@@ -10,12 +10,10 @@ import AdviceContainer from './../containers/AdviceContainer';
 import ContactsContainer from './../containers/ContactsContainer';
 import ServicesContainer from './../containers/ServicesContainer';
 import SingleAdviceContainer from './../containers/SingleAdviceContainer';
-
+// style={{opacity: 0}}
 const Main = ({
 
 }) => (
-    <main id='main'
-        className='main'>
     <Route render={({ location }) => (
         <RouteTransition 
             pathname={location.pathname}
@@ -23,10 +21,12 @@ const Main = ({
             atLeave={{ opacity: 0 }}
             atActive={{ opacity: 1 }}
         >
-            <Switch style={{opacity: 0}}
+            <Switch 
              key={location.key} 
              location={location}>
-                <MyRoute exact path='/' component={PresentContainer} />   
+                <Route exact path='/' render={props => (
+                    <PresentContainer {...props} />  
+                )} />
                 <MyRoute path='/services' component={ServicesContainer} />
                 <MyRoute path='/contacts' component={ContactsContainer} />
                 <MyRoute path='/institutions' component={IsistutionsContainer} />   
@@ -40,7 +40,6 @@ const Main = ({
             </Switch>
       </RouteTransition>
     )} />
-    </main>
 );
 
 export default Main;

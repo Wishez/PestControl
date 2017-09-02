@@ -3,5 +3,5 @@
 }
 .errorContainer {
 	@extend %floatLeft;
-	padding-left: 27%;
+	@extend %leftMargin27;
 }

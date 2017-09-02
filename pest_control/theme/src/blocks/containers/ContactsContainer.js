@@ -8,7 +8,8 @@ import MainContentContainer from './../components/MainContentContainer';
 class ContactsContainer extends Component {
 
   static PropTypes = {
-
+    match: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
   
 	componentDidMount() {

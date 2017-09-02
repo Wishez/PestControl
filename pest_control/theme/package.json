@@ -106,7 +106,7 @@
     "react-html-parser": "^1.0.3",
     "react-recaptcha": "^2.3.3",
     "react-redux": "^5.0.4",
-    "react-router-dom": "^4.1.1",
+    "react-router-dom": "^4.2.2",
     "react-router-transition": "^0.1.1",
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",

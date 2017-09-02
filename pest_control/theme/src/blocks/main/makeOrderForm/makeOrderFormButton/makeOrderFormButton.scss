@@ -1,6 +1,8 @@
 .makeOrderFormButton {
 	@extend %elementButtonContainer;
 	@extend %asideButtonsProportions;
+	@extend %leftMargin27;
+	@extend %largeTopMargin;
 }
 
 .makeOrderFormButtonContainer {

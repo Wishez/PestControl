@@ -2,6 +2,10 @@
 	@extend %clearfix;
 	@extend %defaultTopMargin;
 }
+
+.makeOrderFormController:first-of-type {
+	@extend %increasedTopMargin;
+}
 @import '__dropdown.scss';
 @import '__error.scss';
 @import '__input.scss';

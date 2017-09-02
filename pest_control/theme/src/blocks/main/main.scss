@@ -1,8 +1,9 @@
 .main  {
-	height: 100vh;
+	// height: 100vh;
+	color: $darkGray;
 	@include breakpoint($xs) {
 		padding: 15% 0;
 	}
 } 
-
+@import '__makeOrderFormContainer.scss';
 @import 'makeOrderForm/makeOrderFormWrapper.scss';

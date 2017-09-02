@@ -10,7 +10,8 @@ import MainContentContainer from './../components/MainContentContainer';
 class IsistutionsContainer extends Component {
 
   static PropTypes = {
-
+    match: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
   
 	componentDidMount() {

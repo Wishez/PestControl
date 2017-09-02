@@ -5,12 +5,11 @@ import { withRouter } from 'react-router-dom'
 
 import MainContentContainer from './../components/MainContentContainer'; 
 
-
-
 class PresentContainer extends Component {
 
   static PropTypes = {
-
+    match: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
   
 	componentDidMount() {
@@ -28,4 +27,4 @@ class PresentContainer extends Component {
 
 const mapStateToProps = state => ({});
 
-export default withRouter(connect(mapStateToProps)(PresentContainer));
+export default connect(mapStateToProps)(PresentContainer);

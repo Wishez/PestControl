@@ -1,5 +1,9 @@
+
 .makeOrderFormWrapper {
-	@extend %absolute;
+	// @extend %absolute;
+	// @extend %center-block;
+	
+	margin: 2em auto 1em;
 	width: 601px;
 	padding: 33px 80px 44px 40px;
 	border: 3px solid $yellow;

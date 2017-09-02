@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Navigation from './../components/Navigation';
 import { selectNavigationItem } from './../actions/navigationActions.js';
@@ -9,11 +10,6 @@ import { selectNavigationItem } from './../actions/navigationActions.js';
 class NavContainer extends Component {
   static PropTypes = { 
       navigationItems: PropTypes.array.isRequired,
-      // firstNavItem: PropTypes.object.isRequired,
-      // secondNavItem: PropTypes.object.isRequired,
-      // thirdNavItem: PropTypes.object.isRequired,
-      // fourthNavItem: PropTypes.object.isRequired,
-      // fifthNavItem: PropTypes.object.isRequired,
       dispatch: PropTypes.func.isRequired
   }
 
@@ -65,6 +61,8 @@ class NavContainer extends Component {
       // Меню закрывается.
       if (this.state.isOpen)
           this.closeMenu();
+
+      
   };
 
   getActiveClasses = state => ( 
@@ -108,4 +106,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(NavContainer);
+export default withRouter(connect(mapStateToProps)(NavContainer));

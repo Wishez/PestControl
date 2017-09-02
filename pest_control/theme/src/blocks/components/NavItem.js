@@ -2,9 +2,8 @@ import React from 'react';
 import { Icon, Image } from 'semantic-ui-react';
 import classNames from 'classnames'
 import { Link } from 'react-router-dom';
-
+	    // onClick={onClick}
 const NavItem = ({
-	onClick,
 	block, 
 	href,
 	iconName,
@@ -14,11 +13,9 @@ const NavItem = ({
 	id,
 	modifier,
 	getClasses
-}) => (
-
+}) => (  
   <Link to={href}
-    className={`${block}Refer`}
-    onClick={onClick}>
+    className={`${block}Refer`}>
     {isImage ?
 	   		<Image src={`/static/pest_control/img/${iconName}`}
     		className={getClasses(`${block}Refer__icon`, modifier)} /> :
@@ -29,7 +26,7 @@ const NavItem = ({
     <span className={getClasses(`${block}Refer__number`, modifier)}>{number}</span>
    <br/>
    <span className={getClasses(`${block}Refer__name`, modifier)}>{name}</span>
-  </Link>
+	</Link>
 )
 
 export default NavItem;

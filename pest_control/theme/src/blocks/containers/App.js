@@ -9,9 +9,11 @@ import Main from './../components/Main';
 
 
 class App extends Component {
-	componentDidMount() {
-		
-	}
+  static PropTypes = {
+    dispatch: PropTypes.func.isRequired
+  }
+
+	
 
   render() {
     return (
