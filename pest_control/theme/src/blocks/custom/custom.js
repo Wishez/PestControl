@@ -11,14 +11,12 @@ $(window).resize(() => {
 $(window).scroll(function() {
   let $asideButtons = $('#asideButtons'); 
   const scrollTop = $(this).scrollTop();
-
+  // console.log()
   if (scrollTop > 150)
     $asideButtons
-      .stop()
-      .fadeIn(500)
-      .stop()
+      .stop(true, true)
+      .fadeIn(700)
       .delay(2000)
-      .stop()
       .fadeOut(500);
   else
     $asideButtons
@@ -31,6 +29,8 @@ $(window).scroll(function() {
 $(function() {
   $(document).on('click', '.not-follow', openUrlInNewWindow);
 
+  $(':input[type="tel"]').mask('+7 (000) 000-00-00');
+  
   function openUrlInNewWindow(e) {
     e.preventDefault();
     

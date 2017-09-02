@@ -49,6 +49,7 @@ const MakeOrderForm = ({
 				component={RenderController}
 				name='phone'
 				label='Телефон:'
+				type='tel'
 				block='makeOrderFormController'
 				placeholder='8 (926) 370-78-12'
 				maxLength='24'
@@ -86,7 +87,7 @@ const MakeOrderForm = ({
 			/>
 			<ElementButton 
 				type='submit'
-				block='makeOrderForm' 
+				block='makeOrderFormButton' 
 				iconName='setting'
 				name='Заказать' 
 				number='8'

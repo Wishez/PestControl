@@ -1,0 +1,20 @@
+.makeOrderFormButton {
+	@extend %elementButtonContainer;
+	@extend %asideButtonsProportions;
+}
+
+.makeOrderFormButtonContainer {
+	@extend %elementButton;
+}
+
+.makeOrderFormButtonContainer__icon {
+	@extend %elementButton__icon;
+}
+.makeOrderFormButtonContainer__name {
+	@extend %elementButton__name;
+	@extend %largeTopMargin;
+}
+
+.makeOrderFormButtonContainer__number {
+	@extend %elementButton__number;
+}

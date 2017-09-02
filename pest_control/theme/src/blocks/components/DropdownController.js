@@ -26,7 +26,7 @@ const DropdownController = ({
 		/>
 		 {touched && 
 		 	((error && 
-		 		<span className={block + '__error'}>{error}</span>) || 
+		 		<div className='errorContainer'><span className={block + '__error'}>{error}</span></div>) || 
 		 		(warning && <span className={block + '__error'}>{warning}</span>))}
 	</div>
 );

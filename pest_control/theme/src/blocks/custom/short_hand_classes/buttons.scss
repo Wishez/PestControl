@@ -1,22 +1,22 @@
-%smallGrayButton {
-	border-radius: 0 $i;
-	width: 100%;
-	max-width: 100px;
-	padding: 6px 0 0 $i;
-	height: 35px;
-	background-color: $gray $i;
-	font-size: (12em / 16) $i;
-	font: {
-		family: $mainFont;
-		size: (12em / 16) $i;
-		weight: bold;
-	}
-	color: $lightGray $i;
-	@extend %text-center;
-	@extend %buttonShadow;
-	$darkenGray: darken($gray, 5%) $i;
-	@include smooth-transition-button($background-color: $darkenGray);
-}	
+// %smallGrayButton {
+// 	border-radius: 0 $i;
+// 	width: 100%;
+// 	max-width: 100px;
+// 	padding: 6px 0 0 $i;
+// 	height: 35px;
+// 	background-color: $gray $i;
+// 	font-size: (12em / 16) $i;
+// 	font: {
+// 		family: $mainFont;
+// 		size: (12em / 16) $i;
+// 		weight: bold;
+// 	}
+// 	color: $lightGray $i;
+// 	@extend %text-center;
+// 	@extend %buttonShadow;
+// 	$darkenGray: darken($gray, 5%) $i;
+// 	@include smooth-transition-button($background-color: $darkenGray);
+// }	
 
 %elementButtonContainer {
 	width: 115px;
@@ -43,7 +43,6 @@
 %elementButton__name {
   display: inherit;
   word-break: initial;
-  margin-top: 50px;
   @extend %fs-18;
 }
 

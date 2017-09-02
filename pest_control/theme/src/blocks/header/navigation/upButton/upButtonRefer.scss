@@ -3,7 +3,7 @@
 }
 
 .upButtonRefer__name {
-	margin-top: 35px;
+	@extend %largeTopMargin;
 	@extend %elementButton__name;
 }
 
