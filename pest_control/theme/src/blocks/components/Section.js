@@ -14,8 +14,10 @@ const Section = ({
 			<Image className={`${block}__figure`} 
 			 src={`/static/pest_control/img/${image}`}
 			 />
-			 <Paragraph block={block}
-		 		text={paragraphText} />
+			{paragraphText ? 
+			 	<Paragraph block={block}
+		 		text={paragraphText} />: 
+		 	""} 
 		 	{children}
 		</Container>
 	</section>

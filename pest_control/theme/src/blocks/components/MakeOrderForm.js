@@ -20,7 +20,6 @@ import ElementButton from './ElementButton';
 const MakeOrderForm = ({ 
 	handleSubmit,
 	onSubmitMakeOrderForm,
-	getClasses,
 	message,
 	isOrdered,
 	closeMakeOrderForm
@@ -103,7 +102,6 @@ const MakeOrderForm = ({
 						iconName='setting'
 						name='Заказать' 
 						number='8'
-						getClasses={getClasses}
 					/>
 				</form> :
 				<p className='makeOrderFormWrapper__successMessage'>

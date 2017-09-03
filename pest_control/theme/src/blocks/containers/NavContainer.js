@@ -20,12 +20,12 @@ class NavContainer extends Component {
       isOpen: false
   };
 
-  getClasses = (name, modifier) => (
-    classNames({
-      [name]: true,
-      [`${name}--${modifier}`]: !!modifier
-    })
-  )
+  // getClasses = (name, modifier) => (
+  //   classNames({
+  //     [name]: true,
+  //     [`${name}--${modifier}`]: !!modifier
+  //   })
+  // )
 
   openMenu = () => {
     let $navList = $('#navList');
@@ -106,7 +106,6 @@ class NavContainer extends Component {
             closeMenu={this.closeMenu}
             changeActiveNavigationItem={this.changeActiveNavigationItem}
             smoothRise={this.smoothRise}
-            getClasses={this.getClasses}
             openOrderCallbackForm={this.openCallbackForm}
         />
     );

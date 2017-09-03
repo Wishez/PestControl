@@ -5,8 +5,7 @@ import { Image } from 'semantic-ui-react';
 import Title  from './Title';
 import RenderController from './RenderController';
 import {
-	required,
-	email
+	required
 } from './../constants/validation.js';
 
 import ElementButton from './ElementButton';
@@ -15,7 +14,6 @@ import ElementButton from './ElementButton';
 const OrderCallbackForm = ({ 
 	handleSubmit,
 	onSubmitOrderCallbackForm,
-	getClasses,
 	message,
 	closeOrderCallbackForm,
 	isOrdered
@@ -70,7 +68,6 @@ const OrderCallbackForm = ({
 					isImage={true}
 					name='Заказать звонок' 
 					number='7'
-					getClasses={getClasses}
 				/>
 			</form> :
 			<p className='orderCallbackForm__successMessage'>
