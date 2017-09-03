@@ -48,7 +48,7 @@ const app = (
 				...state,
 				isOrderCallbackFormOpened: true
 			};
-		case OPEN_ORDER_CALLBACK_FORM:
+		case CLOSE_ORDER_CALLBACK_FORM:
 			return {
 				...state,
 				isOrderCallbackFormOpened: false

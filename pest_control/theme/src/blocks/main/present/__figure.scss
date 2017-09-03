@@ -1,0 +1,10 @@
+.present__figure {
+	@extend %floatLeft;
+	@extend %halfWidth;
+	@extend %inline-block;
+	max-width: 520px $i;
+	@include breakpoint($xs) {
+		// max-width: 100%;
+		width: span(12);
+	}
+}

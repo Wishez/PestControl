@@ -31,6 +31,17 @@ $(function() {
 
   $(':input[type="tel"]').mask('+7 (000) 000-00-00');
   
+  $(document).on('click', '.smoothRise', e => {
+    const element = $(e.target).attr('href');
+    const pathTo = $(element).offset().top;
+    
+    $('body, html')
+      .stop()
+      .animate({
+        scrollTop: pathTo
+      }, 800);
+  });
+
   function openUrlInNewWindow(e) {
     e.preventDefault();
     

@@ -27,6 +27,7 @@ $i: !important;
 @import 'short_hand_classes/cursores.scss';
 @import 'short_hand_classes/backgrounds.scss';
 @import 'short_hand_classes/borders.scss';
+@import 'short_hand_classes/offsets.scss';
 
 
 // Custom styles
@@ -86,15 +87,26 @@ h2 {
 ul {
   list-style: none;
 }
+
+img {
+  display: inline-block $i;
+}
 p {
  @extend %defaultTopMargin;
  max-width: 500px;
- @extend %fs-21;
+ @extend %fs-18;
  @include breakpoint($xs) {
     width: span(12);
     max-width: none;
   }
 }
+section {
+  @include breakpoint($xs) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
 a {
   
   @include smooth-transition-link;

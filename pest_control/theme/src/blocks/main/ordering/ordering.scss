@@ -1,0 +1,8 @@
+.ordering {
+	@extend %relative;
+	@extend %darkPurpleBg;
+	padding-top: 485px;
+}
+
+@import '__figure.scss';
+@import '__paragraph.scss';

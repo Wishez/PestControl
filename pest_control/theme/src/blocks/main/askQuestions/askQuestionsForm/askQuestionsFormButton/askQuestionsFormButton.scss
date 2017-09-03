@@ -1,0 +1,22 @@
+.askQuestionsFormButton {
+	@extend %elementButtonContainer;
+	@extend %asideButtonsProportions;
+	@extend %largeTopMargin;
+}
+
+.askQuestionsFormButtonContainer {
+ 	@extend %elementButton;
+}
+
+.askQuestionsFormButtonContainer__icon {
+	@extend %elementButton__icon;
+}
+
+.askQuestionsFormButtonContainer__name {
+	@extend %elementButton__name;
+	@extend %largeTopMargin;
+}
+
+.askQuestionsFormButtonContainer__number {
+	@extend %elementButton__number;
+}

@@ -1,0 +1,6 @@
+.ordering__figure {
+	max-width: 439px $i;
+	@extend %absoluteImportant;
+	@extend %zeroRight;
+	@extend %zeroBottom;
+}

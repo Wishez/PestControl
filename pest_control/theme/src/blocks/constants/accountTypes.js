@@ -6,4 +6,4 @@ export const REPLANISH_BALANCE = 'REPLANISH_BALANCE';
 export const SUBSCRIBE = 'SUBSCRIBE';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
+export const CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR'; 

@@ -4,6 +4,11 @@
 		padding: 15% 0;
 	}
 } 
+
 @import '__makeOrderFormContainer.scss';
 @import 'makeOrderForm/makeOrderFormWrapper.scss';
 @import 'orderCallbackForm/orderCallbackFormWrapper.scss';
+@import 'present/present.scss';
+@import 'ordering/ordering.scss';
+@import 'callback/callback.scss';
+@import 'askQuestions/askQuestions.scss';

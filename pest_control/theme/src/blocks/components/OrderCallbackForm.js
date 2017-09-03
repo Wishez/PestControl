@@ -32,7 +32,7 @@ const OrderCallbackForm = ({
 			method='post'
 			onSubmit={handleSubmit(onSubmitOrderCallbackForm.bind(this))}>
 				<Title block='orderCallbackForm'
-					text='Заказ' />
+					text='Обратный вызов' />
 				<Field 
 					autoFocus="true"
 					name='name'

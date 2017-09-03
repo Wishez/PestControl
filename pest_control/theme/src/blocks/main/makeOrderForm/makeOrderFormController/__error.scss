@@ -1,7 +1,10 @@
 .makeOrderFormController__error {
 	@extend %formError;
-	@extend %leftMargin27;
 }
 .errorContainer {
 	@extend %floatLeft;
+}
+
+.makeOrderFormController .errorContainer {
+	@extend %leftMargin27;
 }

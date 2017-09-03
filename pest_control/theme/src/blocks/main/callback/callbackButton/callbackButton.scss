@@ -1,0 +1,22 @@
+.callbackButton {
+	@extend %elementButtonContainer;
+	@extend %asideButtonsProportions;
+	@extend %largeTopMargin;
+}
+
+.callbackButtonContainer {
+	@extend %elementButton;
+}
+
+.callbackButtonContainer__icon {
+	@extend %elementButton__icon;
+}
+
+.callbackButtonContainer__number {
+	@extend %elementButton__number;
+}
+
+.callbackButtonContainer__name {
+	@extend %elementButton__name;
+	@extend %largeTopMargin;
+}

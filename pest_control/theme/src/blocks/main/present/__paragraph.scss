@@ -1,0 +1,14 @@
+.present__paragraph {
+	@extend %floatRight;
+	@extend %halfWidth;
+	margin-top: 15%;
+	@include breakpoint($sm) {
+		padding-left: 5%;
+		margin-top: 7%;
+	}
+	@include breakpoint($xs) {
+		width: span(12);
+		margin-top: 1em;
+
+	}
+}

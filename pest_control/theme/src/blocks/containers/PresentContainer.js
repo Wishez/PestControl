@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
 import MainContentContainer from './../components/MainContentContainer'; 
+import Section from './../components/Section';
 
 class PresentContainer extends Component {
 
@@ -19,7 +20,18 @@ class PresentContainer extends Component {
   render() {
     return (
       <MainContentContainer>
-        <section>It is first section!</section>
+        <Section block='present' 
+          image='best_choice.png'
+          paragraphText='В каждом доме есть <strong>паразиты</strong>. 
+          Они регулярно заселяются, поэтому вам может потребоваться <strong>избавится</strong> от них. 
+          В таких ситуациях вы обращаетесь к таким профессиональным ребятам, как мы, <strong>эффективно выполняющие</strong> всю "грязную работу".'
+          />
+        <Section block='ordering' 
+          image='with_resperator.png'
+          paragraphText='Заказать избавление от паразитов просто. 
+            Нажмите на кнопку <a href="#header" class="smoothRise">“Заказать зачистку”</a> в верху страницы и заполните форму. 
+            После этого, наш оператор перезвонит вам и утвердит вашу заявку, 
+            пока мы будем подготавливать оборудование.'/>
       </MainContentContainer>
     );
   }
