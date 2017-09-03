@@ -1,5 +1,18 @@
 .askQuestionsFormWrapper {
-	max-width: 345px;
+	max-width: 385px;
+	@extend %floatLeft;
+	color: $lightGray;
+	@extend %halfWidth;
+	@include breakpoint($lg) {
+		margin-left: 20%;
+	}
+	@include breakpoint($md) {
+		margin-left: 10%;
+	}
+	@include breakpoint($xs) {
+		width: span(12);
+		margin: 1em auto 0;
+	}
 }
 
 @import 'askQuestionsForm.scss';

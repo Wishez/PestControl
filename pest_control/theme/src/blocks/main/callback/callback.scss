@@ -1,3 +1,9 @@
-@import '__image.scss';
+.callback {
+	padding-top: 50px;
+	@extend %clearfix;
+	
+}
+
+@import '__figure.scss';
 @import '__paragraph.scss';
 @import 'callbackButton/callbackButton.scss';

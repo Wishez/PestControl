@@ -28,14 +28,14 @@ const AskQuestionsForm = ({
 			method='post'
 			onSubmit={handleSubmit(onSubmitAskQuestionsForm.bind(this))}>
 				<Title block='askQuestionsForm'
-					text='Обратный вызов' />
+					text='У вас есть вопрос?' />
 				<Field 
 					name='name'
 					type='text'
 					block='askQuestionsFormController'
 					component={RenderController}
 					label='Ф.И.О:'
-					placeholder='Дженкинс Спок Спокович'
+					placeholder='Джон Галт Артурович'
 					maxLength='150'
 					validate={[ required ]}
 				/>
@@ -45,18 +45,18 @@ const AskQuestionsForm = ({
 					label='E-mail:'
 					type='email'
 					block='askQuestionsFormController'
-					placeholder='8 (926) 370-78-12'
-					maxLength='24'
+					placeholder='crowdedDrawer@mail.ru'
+					maxLength='100'
 					validate={[ required, email ]}
 				/>
 				<Field 
 					component={TextareaController}
-					name='phone'
+					name='question'
 					label='Вопрос:'
 					block='askQuestionsFormController'
-					placeholder='8 (926) 370-78-12'
-					maxLength='24'
-					validate={[ required, email ]}
+					placeholder='Кто такой Джон Галт?'
+					maxLength='350'
+					validate={[ required ]}
 				/>
 				{message ? 
 					<div className='errorContainer'>

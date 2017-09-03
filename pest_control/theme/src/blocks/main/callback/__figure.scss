@@ -1,0 +1,8 @@
+.callback__figure {
+	@extend %floatLeft;
+	max-width: 	479px $i;
+	@extend %halfWidth;
+	@include breakpoint($sm) {
+		margin-top: 5%;
+	}
+}

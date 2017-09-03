@@ -1,3 +1,4 @@
-.askQuestionsForm__input {
+.askQuestionsFormController__input {
 	@extend %formInputDark;
+	@extend %refusedTopMargin;
 }

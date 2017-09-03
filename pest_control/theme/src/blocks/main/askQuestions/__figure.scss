@@ -1,0 +1,15 @@
+.askQuestions__figure {
+	max-width: 285px $i;
+	@extend %absoluteImportant;
+	right: 20%;
+	bottom: 0;
+	@include breakpoint($sm) {
+		right: 10%;
+	}
+	@include breakpoint($xs) {
+		position: static $i;
+		margin: 2em auto 0 $i;
+		display: block $i;
+	}
+	
+}

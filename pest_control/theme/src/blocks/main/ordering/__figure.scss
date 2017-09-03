@@ -3,4 +3,12 @@
 	@extend %absoluteImportant;
 	@extend %zeroRight;
 	@extend %zeroBottom;
+	@include breakpoint($xs) {
+		max-width: 350px $i;
+	}
+	@include breakpoint($xxs) {
+		position: static $i;
+		float: right;
+		margin-right: -11%;
+	}
 }

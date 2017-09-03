@@ -1,7 +1,12 @@
 .askQuestionsFormController {
-	
+	@extend %clearfix;
+	@extend %defaultTopMargin;
 }
 
+.askQuestionsFormController:first-of-type {
+	@extend %increasedTopMargin;
+}
 @import '__label.scss';
 @import '__input.scss';
+@import '__textarea.scss';
 @import '__error.scss';

@@ -2,6 +2,7 @@
 	@extend %elementButtonContainer;
 	@extend %asideButtonsProportions;
 	@extend %largeTopMargin;
+	@extend %wideElementButton;
 }
 
 .askQuestionsFormButtonContainer {
@@ -15,6 +16,7 @@
 .askQuestionsFormButtonContainer__name {
 	@extend %elementButton__name;
 	@extend %largeTopMargin;
+	@extend %fs-16;
 }
 
 .askQuestionsFormButtonContainer__number {

@@ -14,6 +14,8 @@
 	padding: 25px 75px 35px;
 	@include breakpoint($xxs) {
 		width: 100%;
+		left: 0;
+		padding: 25px 10%;
 	}
 }
 

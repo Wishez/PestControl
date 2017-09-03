@@ -1,0 +1,5 @@
+.askQuestionsForm__title {
+	@include breakpoint($xs) {
+		text-align: center;
+	}
+}

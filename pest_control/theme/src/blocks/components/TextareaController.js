@@ -17,7 +17,7 @@ const TextareaController = ({
 		</label>
 		<textarea {...input}
 			{...rest}
-			className={block + '__input'} />
+			className={block + '__textarea'} />
 		 {touched && 
 		 	((error && 
 		 		<div className='errorContainer'><span className={block + '__error'}>{error}</span></div>) || 

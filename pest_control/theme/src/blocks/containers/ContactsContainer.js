@@ -9,7 +9,8 @@ import ElementButton from './../components/ElementButton';
 import AskQuestionsForm from './../components/AskQuestionsForm';
 import { 
   tryAskQuestion,
-  askQuestionAgain
+  askQuestionAgain,
+  openOrderCallbackForm
 } from './../actions/appActions.js'
 
 class ContactsContainer extends Component {
@@ -37,8 +38,8 @@ class ContactsContainer extends Component {
           image='call_me.png'
           paragraphText={`Если вас что-то интересует, 
           мы с радостью проконсультируем вас по телефону:<br /><br />
-          <strong>${tel}</strong><br /><br />
-          Или вы можете попросить нас позвонить вам`}>
+          <a class="callback__paragraph--color_darkGray" href="tel:${tel}"><strong>${tel}</strong></a><br /><br />
+          Или вы можете попросить нас перезвонить вам`}>
             <ElementButton 
               iconName='phone.png'
               isImage={true}

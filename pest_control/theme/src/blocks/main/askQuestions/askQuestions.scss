@@ -1,2 +1,9 @@
-@import '__image.scss';
+.askQuestions {
+	@extend %darkPurpleBg;
+	padding: 60px 0 70px;
+	@extend %clearfix;
+	@extend %relative;
+}
+
+@import '__figure.scss';
 @import 'askQuestionsForm/askQuestionsFormWrapper.scss';

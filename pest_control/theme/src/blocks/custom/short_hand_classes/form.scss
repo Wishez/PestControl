@@ -29,6 +29,21 @@
 	color: $darkGray $i;
 }
 
+%formTextarea {
+	min-height: 115px;
+	@extend %refusedTopPadding;
+}
+
+%formTextareaDark {
+	@extend %formInputDark;
+	@extend %formTextarea;
+}
+
+%formTextareaLight {
+	@extend %formInputLight;
+	@extend %formTextarea;
+}
+
 %formError {
 	color: $skyBlue;
 	@extend %fs-14;

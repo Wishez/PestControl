@@ -1,6 +1,15 @@
 .ordering__paragraph {
 	color: $lightGray;
 	margin: -275px 0 0 275px;
+	@include breakpoint($xs) {
+		width: span(6);
+		margin: -315px 0 0;
+	}
+	@include breakpoint($xxs) {
+		width: span(12);
+		margin-top: 1em;
+		float: left;
+	}
 }
 
 

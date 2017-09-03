@@ -1,8 +1,5 @@
 .main  {
 	color: $darkGray;
-	@include breakpoint($xs) {
-		padding: 15% 0;
-	}
 } 
 
 @import '__makeOrderFormContainer.scss';

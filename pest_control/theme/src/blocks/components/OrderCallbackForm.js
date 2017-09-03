@@ -38,7 +38,7 @@ const OrderCallbackForm = ({
 					block='orderCallbackFormController'
 					component={RenderController}
 					label='Ф.И.О:'
-					placeholder='Джон Галт Артурович'
+					placeholder='Дженкинс Спок Спокович'
 					maxLength='150'
 					validate={[ required ]}
 

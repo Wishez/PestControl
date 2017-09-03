@@ -2,6 +2,21 @@
 	@extend %elementButtonContainer;
 	@extend %asideButtonsProportions;
 	@extend %largeTopMargin;
+	@extend %wideElementButton;
+	@include breakpoint($lg) {
+		margin-left: 13%;
+		
+	}
+	@include breakpoint($md-less) {
+		margin-left: 8%;	
+	}
+	@include breakpoint($xs) {
+		margin-top: 15%;	
+	}
+	@include breakpoint($xxs) {
+		margin-left: 0;
+	}
+	
 }
 
 .callbackButtonContainer {
@@ -19,4 +34,5 @@
 .callbackButtonContainer__name {
 	@extend %elementButton__name;
 	@extend %largeTopMargin;
+	@extend %fs-16;
 }

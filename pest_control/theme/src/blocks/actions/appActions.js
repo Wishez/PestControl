@@ -32,7 +32,7 @@ const actionHandler = (
 	data,
 	url,
 	action
-) => {
+) => dispatch => {
 	customAjaxRequest({
 		url,
 		data,
@@ -52,7 +52,7 @@ const actionHandler = (
 };
 
 export const tryToMakeOrder = data => dispatch => {
-	return actionHandler(data, '/make_order/', makeOrder);
+	dispatch(actionHandler(data, '/make_order/', makeOrder));
 	// customAjaxRequest({
 	// 	url: '/make_order/',
 	// 	data,
@@ -89,7 +89,7 @@ const orderCallback = (
 });
 
 export const tryOrderCallback = data => dispatch => {
-	return actionHandler(data, '/order_callback/', orderCallback);
+	dispatch(actionHandler(data, '/order_callback/', orderCallback));
 	// customAjaxRequest({
 	// 	url: '/order_callback/',
 	// 	data,
@@ -123,7 +123,7 @@ const askQuestion = (
 });
 
 export const tryAskQuestion = data => dispatch => {
-	return actionHandler(data, '/ask_question/', askQuestion);
+	dispatch(actionHandler(data, '/ask_question/', askQuestion));
 	// customAjaxRequest({
 	// 	url: '/ask_question/',
 	// 	data,

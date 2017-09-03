@@ -1,7 +1,14 @@
 .ordering {
 	@extend %relative;
 	@extend %darkPurpleBg;
+	@extend %clearfix;
 	padding-top: 485px;
+	@include breakpoint($xs) {
+		margin-left: 0;
+	}
+	@include breakpoint($xxs) {
+		padding-top: 10%;
+	}
 }
 
 @import '__figure.scss';

@@ -1,3 +1,19 @@
 .callback__paragraph {
+	@extend %floatRight;
+	@extend %halfWidth;
+	margin-top: 7.5%;
+	@include breakpoint($md-less) {
+		width: span(5)
+	}
+	@include breakpoint($sm) {
+		margin-top: -1.5%;	
+	}
+	@include breakpoint($xs) {
+		width: span(12);
+		margin-top: 3.5%;
+	}
+}
 
+.callback__paragraph--color_darkGray {
+	color: $darkGray $i;
 }
