@@ -1,5 +1,6 @@
 .upButtonRefer {
 	@extend %elementButton;
+	@extend %block;
 }
 
 .upButtonRefer__name {

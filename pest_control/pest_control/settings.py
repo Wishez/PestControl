@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'present.apps.PresentConfig',
+    'forms.apps.FormsConfig',
     'app.apps.AppConfig',
     'api_v0.apps.ApiV0Config',
     'rest_framework',
@@ -125,6 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+    
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

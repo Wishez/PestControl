@@ -47,7 +47,7 @@ scssPathes = ['node_modules/susy/sass',
               'node_modules/breakpoint-sass/stylesheets',
              'node_modules/bootstrap-sass/assets/stylesheets',
              'node_modules/font-awesome-sass/assets/stylesheets/',
-             'node_modules/semantic-ui-sass/',];
+             'node_modules/semantic-ui-sass/semantic-ui.scss'];
 
 
 
@@ -207,7 +207,7 @@ gulp.task('media', ['fonts', 'images']);
 /* ----------------- */
 
 gulp.task('clean', () => {
-    return gulp.src(settings.build, { read: false })
+    return gulp.src(settings.build)
       .pipe(clean());
 });
 /* ----------------- */

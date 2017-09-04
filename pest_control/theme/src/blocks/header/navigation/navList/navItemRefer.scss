@@ -1,5 +1,6 @@
 .navItemRefer {
   @extend %elementButton;
+  @extend %block;
 }
 
 .navItemRefer__number {
