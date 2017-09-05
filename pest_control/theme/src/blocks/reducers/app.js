@@ -6,7 +6,9 @@ import {
 	OPEN_ORDER_CALLBACK_FORM,
 	CLOSE_ORDER_CALLBACK_FORM,
 	ASK_AGAIN,
-	ASK_QUESTION
+	ASK_QUESTION,
+	GET_SERVICES,
+	GET_ADVICE
 }  from './../constants/actionTypes.js';
 
 const initState = {
@@ -17,7 +19,9 @@ const initState = {
 	isCallbackOrdered: false,
 	orderCallbackFormMessage: '',
 	isQuestionAsked: false,
-	askQuestionsFormMessage: ''	
+	askQuestionsFormMessage: '',
+	services: {},
+	advice: {}
 }
 
 const app = (
@@ -69,6 +73,16 @@ const app = (
 				...state,
 				isQuestionAsked: action.isQuestionAsked,
 				askQuestionsFormMessage: action.message	
+			};
+		case GET_SERVICES:
+			return {
+				...state,
+				services: action.data
+			};
+		case GET_ADVICE:
+			return {
+				...state,
+				advice: action.data
 			};
 		default:
 			return state;

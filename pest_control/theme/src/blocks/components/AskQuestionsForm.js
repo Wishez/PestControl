@@ -30,7 +30,7 @@ const AskQuestionsForm = ({
 				<Title block='askQuestionsForm'
 					text='У вас есть вопрос?' />
 				<Field 
-					name='name'
+					name='author_name'
 					type='text'
 					block='askQuestionsFormController'
 					component={RenderController}

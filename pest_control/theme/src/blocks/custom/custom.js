@@ -28,8 +28,6 @@ $(window).scroll(function() {
 });
 $(function() {
   $(document).on('click', '.not-follow', openUrlInNewWindow);
-
-  $(':input[type="tel"]').mask('+7 (000) 000-00-00');
   
   $(document).on('click', '.smoothRise', e => {
     const element = $(e.target).attr('href');

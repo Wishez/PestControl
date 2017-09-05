@@ -33,7 +33,7 @@ const OrderCallbackForm = ({
 					text='Обратный вызов' />
 				<Field 
 					autoFocus="true"
-					name='name'
+					name='full_name'
 					type='text'
 					block='orderCallbackFormController'
 					component={RenderController}

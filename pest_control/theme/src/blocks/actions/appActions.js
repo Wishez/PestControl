@@ -6,7 +6,9 @@ import {
 	OPEN_ORDER_CALLBACK_FORM,
 	CLOSE_ORDER_CALLBACK_FORM,
 	ASK_AGAIN,
-	ASK_QUESTION
+	ASK_QUESTION,
+	GET_SERVICES,
+	GET_ADVICE
 }  from './../constants/actionTypes.js';
 import customAjaxRequest from './../constants/ajax.js'
 
@@ -51,24 +53,9 @@ const actionHandler = (
 	});	
 };
 
-export const tryToMakeOrder = data => dispatch => {
+export const tryMakeOrder = data => dispatch => {
+	console.log(data);
 	dispatch(actionHandler(data, '/make_order/', makeOrder));
-	// customAjaxRequest({
-	// 	url: '/make_order/',
-	// 	data,
-	// 	type: 'POST',
-	// 	processData: true,
-	// 	cache: true
-	// });
-
-	// return $.ajax({
-	// 	success: respond => {
-	// 		dispatch(makeOrder(true, respond));
-	// 	},
-	// 	error: (xhr, errmsg, err) => {
-	// 		dispatch(makeOrder(false, 'Внутренняя ошибка сервера'));
-	// 	}
-	// });
 }
 
 export const openOrderCallbackForm = () => ({
@@ -89,23 +76,8 @@ const orderCallback = (
 });
 
 export const tryOrderCallback = data => dispatch => {
+	console.log(data);
 	dispatch(actionHandler(data, '/order_callback/', orderCallback));
-	// customAjaxRequest({
-	// 	url: '/order_callback/',
-	// 	data,
-	// 	type: 'POST',
-	// 	processData: true,
-	// 	cache: true
-	// });
-
-	// return $.ajax({
-	// 	success: respond => {
-	// 		dispatch(orderCallback(true, respond));
-	// 	},
-	// 	error: (xhr, errmsg, err) => {
-	// 		dispatch(orderCallback(false, 'Внутренняя ошибка сервера'));
-	// 	}
-	// });
 };
 
 
@@ -123,21 +95,47 @@ const askQuestion = (
 });
 
 export const tryAskQuestion = data => dispatch => {
+	console.log(data);
 	dispatch(actionHandler(data, '/ask_question/', askQuestion));
-	// customAjaxRequest({
-	// 	url: '/ask_question/',
-	// 	data,
-	// 	type: 'POST',
-	// 	processData: true,
-	// 	cache: true
-	// });
-
-	// return $.ajax({
-	// 	success: respond => {
-	// 		dispatch(askQuestion(true, respond));
-	// 	},
-	// 	error: (xhr, errmsg, err) => {
-	// 		dispatch(askQuestion(false, 'Внутренняя ошибка сервера'));
-	// 	}
-	// });
 }
+
+
+
+const fetchData = (url, actionCreater) => dispatch => (
+	fetch(url)
+		.then(resp => (
+			resp.json()
+		))
+		.then(data => {
+			dispatch(actionCreater(data));
+		})
+		.catch(err => {
+			console.log('Didn\'t get data');
+		});
+);
+
+const accumulateData = array => (
+	array.reduce((accumulatedData, element) => (
+		{	
+			...acumulatedData,
+			[element.id]: element
+		}
+	), {})
+);
+
+const getServices = data => ({
+	type: GET_SERVICES,
+	data: accumulateData(data)
+});
+
+export const tryGetServices = () => dispatch => {
+	dispatch('/api/v0/services/', getServices);
+};
+
+const getAdvice = data => ({
+	type: GET_ADVICE,
+	data: accumulateData(data)
+})
+export const tryGetAdvice = () => dispatch => {
+	dispatch('/api/v0/advice/', getServices);
+};

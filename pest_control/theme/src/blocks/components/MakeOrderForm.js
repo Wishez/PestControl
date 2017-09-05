@@ -39,7 +39,7 @@ const MakeOrderForm = ({
 						text='Заказ' />
 					<Field 
 						autoFocus="true"
-						name='name'
+						name='full_name'
 						type='text'
 						block='makeOrderFormController'
 						component={RenderController}

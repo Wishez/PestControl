@@ -101891,7 +101891,7 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryToMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = undefined;
+exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = undefined;
 
 var _actionTypes = require('./../constants/actionTypes.js');
 
@@ -101942,8 +101942,9 @@ var actionHandler = function actionHandler(data, url, action) {
 	};
 };
 
-var tryToMakeOrder = exports.tryToMakeOrder = function tryToMakeOrder(data) {
+var tryMakeOrder = exports.tryMakeOrder = function tryMakeOrder(data) {
 	return function (dispatch) {
+		console.log(data);
 		dispatch(actionHandler(data, '/make_order/', makeOrder));
 		// customAjaxRequest({
 		// 	url: '/make_order/',
@@ -101986,6 +101987,7 @@ var orderCallback = function orderCallback(message, isOrdered) {
 
 var tryOrderCallback = exports.tryOrderCallback = function tryOrderCallback(data) {
 	return function (dispatch) {
+		console.log(data);
 		dispatch(actionHandler(data, '/order_callback/', orderCallback));
 		// customAjaxRequest({
 		// 	url: '/order_callback/',
@@ -102022,6 +102024,7 @@ var askQuestion = function askQuestion(isQestionAsked, message) {
 
 var tryAskQuestion = exports.tryAskQuestion = function tryAskQuestion(data) {
 	return function (dispatch) {
+		console.log(data);
 		dispatch(actionHandler(data, '/ask_question/', askQuestion));
 		// customAjaxRequest({
 		// 	url: '/ask_question/',
@@ -102133,7 +102136,7 @@ var AskQuestionsForm = function AskQuestionsForm(_ref) {
 			_react2.default.createElement(_Title2.default, { block: 'askQuestionsForm',
 				text: '\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u0432\u043E\u043F\u0440\u043E\u0441?' }),
 			_react2.default.createElement(_reduxForm.Field, {
-				name: 'name',
+				name: 'author_name',
 				type: 'text',
 				block: 'askQuestionsFormController',
 				component: _RenderController2.default,
@@ -102709,7 +102712,7 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				text: '\u0417\u0430\u043A\u0430\u0437' }),
 			_react2.default.createElement(_reduxForm.Field, {
 				autoFocus: 'true',
-				name: 'name',
+				name: 'full_name',
 				type: 'text',
 				block: 'makeOrderFormController',
 				component: _RenderController2.default,
@@ -103079,7 +103082,7 @@ var OrderCallbackForm = function OrderCallbackForm(_ref) {
 				text: '\u041E\u0431\u0440\u0430\u0442\u043D\u044B\u0439 \u0432\u044B\u0437\u043E\u0432' }),
 			_react2.default.createElement(_reduxForm.Field, {
 				autoFocus: 'true',
-				name: 'name',
+				name: 'full_name',
 				type: 'text',
 				block: 'orderCallbackFormController',
 				component: _RenderController2.default,
@@ -104026,15 +104029,25 @@ var MakeOrderContainer = function (_Component) {
 		value: function onSubmitMakeOrderForm(values, dispatch) {
 			dispatch((0, _appActions.tryMakeOrder)(values));
 		}
+
+		// componentDidMount() {
+
+		// }
+
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+			if (this.props.isOpened) $(':input[type="tel"]').mask('+7 (000) 000-00-00');
+		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var isOpen = this.props.isOpen;
+			var isOpened = this.props.isOpened;
 
 			return _react2.default.createElement(
 				_semanticUiReact.Container,
 				{ className: 'main__makeOrderFormContainer' },
-				isOpen ? _react2.default.createElement(_MakeOrderForm2.default, _extends({}, this.props, {
+				isOpened ? _react2.default.createElement(_MakeOrderForm2.default, _extends({}, this.props, {
 					onSubmitMakeOrderForm: this.onSubmitMakeOrderForm,
 					getClasses: this.getClasses,
 					closeMakeOrderForm: this.closeOrderForm })) : ''
@@ -104046,7 +104059,7 @@ var MakeOrderContainer = function (_Component) {
 }(_react.Component);
 
 MakeOrderContainer.PropTypes = {
-	isOpen: _propTypes2.default.bool.isRequired,
+	isOpened: _propTypes2.default.bool.isRequired,
 	isOrdered: _propTypes2.default.bool.isRequired,
 	message: _propTypes2.default.string.isRequired,
 	dispatch: _propTypes2.default.func.isRequired
@@ -104062,7 +104075,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 	return {
 		message: makeOrderFormMessage,
-		isOpen: isMakeOrderFormOpened,
+		isOpened: isMakeOrderFormOpened,
 		isOrdered: isOrderOrdered
 	};
 };
@@ -104598,8 +104611,6 @@ $(window).scroll(function () {
 });
 $(function () {
   $(document).on('click', '.not-follow', openUrlInNewWindow);
-
-  $(':input[type="tel"]').mask('+7 (000) 000-00-00');
 
   $(document).on('click', '.smoothRise', function (e) {
     var element = $(e.target).attr('href');

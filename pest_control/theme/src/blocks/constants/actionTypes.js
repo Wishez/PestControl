@@ -16,3 +16,6 @@ export const CLOSE_ORDER_CALLBACK_FORM = 'CLOSE_ORDER_CALLBACK_FORM';
 
 export const ASK_QUESTION = 'ASK_QUESTION';
 export const ASK_AGAIN = 'ASK_AGAIN';
+
+export const GET_SERVICES = 'GET_SERVICES';
+export const GET_ADVICE = 'GET_ADVICES';

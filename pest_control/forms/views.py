@@ -9,7 +9,9 @@ from django.http import HttpResponse
 def order_callback(request):
     if request.method == 'POST':
         data = request['POST']
+
         callback = Callback.objects.create(data)
+        print(callback)
         callback.save()
 
         return HttpResponse('Пожалуйста, ожидайте звонка')
@@ -20,6 +22,7 @@ def make_order(request):
     if request.method == 'POST':
         data = request['POST']
         order = Order.objects.create(data)
+        print(order)
         order.save()
 
         return HttpResponse('Наш оператор позвонит вам, чтобы сверить данные и уточнить детали. Пожалуйста, ожидайте звонка.')
@@ -30,6 +33,7 @@ def ask_question(request):
     if request.method == 'POST':
         data = request['POST']
         question = Question.objects.create(data)
+        print(question)
         question.save()
 
         return HttpResponse('Ваш вопрос не останется без ответа!')
