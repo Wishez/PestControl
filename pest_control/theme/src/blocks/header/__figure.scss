@@ -14,7 +14,7 @@
 	
 	&_man {
 		top: (50% / 614 * 100);
-		right: (85% / 1400 * 100);
+		right: (150% / 1400 * 100);
 		max-width: 415px $i;
 		float: right;
 		@include breakpoint($md) { 

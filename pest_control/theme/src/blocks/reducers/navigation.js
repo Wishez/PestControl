@@ -27,18 +27,18 @@ export const initNavigationState = {
 	},
 	fourthNavItem: {
 		active: false,
-		name: navigationItems.isistutions,
-		index: 'fourthNavItem',
-		icon: 'users',
-		pathTo: '/isistutions'
-	},
-	fifthNavItem: {
-		active: false,
 		name: navigationItems.advice,
-		index: 'fifthNavItem',
+		index: 'fourthNavItem',
 		icon: 'hand peace',
 		pathTo: '/advice'
 	}
+	// fifthNavItem: {
+	// 	active: false,
+	// 	name: navigationItems.isistutions,
+	// 	index: 'fifthNavItem',
+	// 	icon: 'users',
+	// 	pathTo: '/isistutions'
+	// }
 };
 
 const navigation = (

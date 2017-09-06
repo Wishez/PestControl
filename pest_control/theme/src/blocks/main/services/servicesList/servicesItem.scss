@@ -1,0 +1,7 @@
+.servicesItem {
+	@extend %defaultTopMargin;
+	@extend %bottomBorder;
+	@extend %overflowHidden;
+}
+
+@import '__refer.scss';

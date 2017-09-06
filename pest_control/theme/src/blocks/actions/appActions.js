@@ -107,15 +107,16 @@ const fetchData = (url, actionCreater) => dispatch => (
 			resp.json()
 		))
 		.then(data => {
+			console.log(accumulateData(data));
 			dispatch(actionCreater(data));
 		})
 		.catch(err => {
-			console.log('Didn\'t get data');
-		});
+			console.log('Didn\'t get data', err);
+		})
 );
 
 const accumulateData = array => (
-	array.reduce((accumulatedData, element) => (
+	array.reduce((acumulatedData, element) => (
 		{	
 			...acumulatedData,
 			[element.id]: element
@@ -128,14 +129,47 @@ const getServices = data => ({
 	data: accumulateData(data)
 });
 
-export const tryGetServices = () => dispatch => {
-	dispatch('/api/v0/services/', getServices);
+const checkServicesDataState = state => {
+	const {
+		app
+	} = state;
+
+	const {
+		services
+	} = app;
+
+	if (services)
+		return true;
+	else
+		return false;
+}
+
+export const tryGetServicesIfNeeded = () => (dispatch, getState) => {
+	if (checkServicesDataState(getState()))
+		dispatch(fetchData('/api/v0/services/', getServices));
 };
 
 const getAdvice = data => ({
 	type: GET_ADVICE,
 	data: accumulateData(data)
-})
-export const tryGetAdvice = () => dispatch => {
-	dispatch('/api/v0/advice/', getServices);
+});
+
+const checkAdviceDataState = state => {
+	const {
+		app
+	} = state;
+
+	const {
+		advice
+	} = app;
+
+	if (advice)
+		return true;
+	else
+		return false;
+};
+
+export const tryGetAdviceIfNeeded = () => dispatch => {
+	if (checkAdviceDataState(getState()))
+		dispatch(fetchData('/api/v0/advice/', getServices));
 };

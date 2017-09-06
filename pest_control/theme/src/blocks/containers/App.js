@@ -17,7 +17,6 @@ class App extends Component {
     isMakeOrderFormOpened: PropTypes.bool.isRequired
   }
 
-	
   getVisibilitySwitchButtonClasses = isActive => (
     classNames({
       "header__figure": true,
@@ -25,6 +24,7 @@ class App extends Component {
       "header__figure--state_active": isActive
     })
   );
+
 
   openOrderForm = () => {
     const { dispatch } = this.props;
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
   const {
     isMakeOrderFormOpened
   } = app;
-
+  // console.log('app state ===>', app);
   return {
     isMakeOrderFormOpened
   };

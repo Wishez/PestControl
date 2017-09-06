@@ -12,13 +12,19 @@ import { tryOrderCallback, closeOrderCallbackForm } from './../actions/appAction
 class OrderCallbackContainer extends Component  {
 
 	static PropTypes = {
-		isOpen: PropTypes.bool.isRequired,
+		isOpened: PropTypes.bool.isRequired,
 		isOrdered: PropTypes.bool.isRequired,
 		message: PropTypes.string.isRequired,
 		dispatch: PropTypes.func.isRequired
 	}
+	
 
-	onSubmitOrderCallbackForm(values, dispatch) {
+	componentDidUpdate() {
+		if (this.props.isOpened)
+			$(':input[type="tel"]').mask('+7 (000) 000-00-00');		
+	}
+
+	onSubmitOrderCallbackForm = (values, dispatch) => {
 		dispatch(tryOrderCallback(values));
 	}
 
@@ -37,10 +43,10 @@ class OrderCallbackContainer extends Component  {
   
 
 	render() {	
-		const { isOpen } = this.props;
+		const { isOpened } = this.props;
 		return (
 			<div>
-			{isOpen ?
+			{isOpened ?
 				<OrderCallbackForm {...this.props}
 					getClasses={this.getClasses}
 					onSubmitOrderCallbackForm={this.onSubmitOrderCallbackForm}
@@ -65,7 +71,7 @@ const mapStateToProps = state => {
 
 	return {
 		message: orderCallbackMessage,
-		isOpen: isOrderCallbackFormOpened,
+		isOpened: isOrderCallbackFormOpened,
 		isOrdered: isCallbackOrdered
 	};
 };

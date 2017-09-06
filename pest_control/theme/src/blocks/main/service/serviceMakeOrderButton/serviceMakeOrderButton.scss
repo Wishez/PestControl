@@ -1,0 +1,23 @@
+.serviceMakeOrderButton {
+	@extend %elementButtonContainer;
+	@extend %asideButtonsProportions;
+	@extend %largeTopMargin;
+	// @extend %floatLeft;
+}
+
+.serviceMakeOrderButtonContainer {
+	@extend %elementButton;
+}
+
+.serviceMakeOrderButtonContainer__name {
+	@extend %elementButton__icon;
+}
+
+.serviceMakeOrderButtonContainer__number {
+	@extend %elementButton__name;
+	@extend %largeTopMargin;
+}
+
+.serviceMakeOrderButtonContainer__icon {
+	@extend %elementButton__number;
+}

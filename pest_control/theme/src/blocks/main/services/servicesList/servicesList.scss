@@ -1,0 +1,6 @@
+.servicesList {
+	@extend %largeTopMargin;
+	@extend %halfWidth;
+}
+
+@import 'servicesItem.scss';

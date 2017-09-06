@@ -1,0 +1,9 @@
+.services {
+	background-color: $yellow;
+	@extend %clearfix;
+	padding-top: 80px;
+}
+@import '__paragraph.scss';
+@import '__figure.scss';
+@import '__title.scss';
+@import 'servicesList/servicesList.scss';

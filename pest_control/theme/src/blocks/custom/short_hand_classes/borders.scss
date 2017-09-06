@@ -9,3 +9,10 @@
 %widthBorder4 {
 	border-width: 4px;
 }
+
+%bottomBorder {
+	border-bottom-width: 1px;
+	@extend %solidBorder;
+	@extend %extraSmalltBottomPadding;
+	border-color: #636363;
+}

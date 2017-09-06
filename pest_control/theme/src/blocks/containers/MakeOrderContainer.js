@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
 import MakeOrderForm from './../components/MakeOrderForm';
-import { tryMakeOrder, closeMakeOrderForm, getServices } from './../actions/appActions.js';
+import { tryMakeOrder, closeMakeOrderForm, tryGetServicesIfNeeded } from './../actions/appActions.js';
 
 
 class MakeOrderContainer extends Component  {
@@ -19,14 +19,14 @@ class MakeOrderContainer extends Component  {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(getServices());
+		this.props.dispatch(tryGetServicesIfNeeded());
 	}
 
 	componentDidUpdate() {
 		if (this.props.isOpened)
-			$(':input[type="tel"]').mask('+7 (000) 000-00-00');
-			
+			$(':input[type="tel"]').mask('+7 (000) 000-00-00');	
 	}
+	
 	onSubmitMakeOrderForm =(values, dispatch) => {
 		dispatch(tryMakeOrder(values));
 	}
