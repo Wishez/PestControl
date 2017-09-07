@@ -2,4 +2,15 @@
 	@extend %floatRight;
 	max-width: 305px $i;
 	margin-top: 210px;
+	@include breakpoint($sm) {
+		margin-top: 140px;
+	}
+	@include breakpoint($xs) {
+		position: relative;
+		top: 135.5px;
+		margin-top: 0;
+	}
+	@include breakpoint($xxs) {
+		top: 0;
+	}
 }

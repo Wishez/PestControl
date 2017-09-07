@@ -1,6 +1,9 @@
 .servicesList {
 	@extend %largeTopMargin;
 	@extend %halfWidth;
+	@include breakpoint($xs) {
+		width: span(12);
+	}
 }
 
 @import 'servicesItem.scss';

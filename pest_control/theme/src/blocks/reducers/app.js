@@ -8,7 +8,8 @@ import {
 	ASK_AGAIN,
 	ASK_QUESTION,
 	GET_SERVICES,
-	GET_ADVICE
+	GET_ADVICE,
+	CHOOSE_OPTION
 }  from './../constants/actionTypes.js';
 
 const initState = {
@@ -21,7 +22,8 @@ const initState = {
 	isQuestionAsked: false,
 	askQuestionsFormMessage: '',
 	services: {},
-	advice: {}
+	advice: {},
+	optionId: 0
 }
 
 const app = (
@@ -83,6 +85,11 @@ const app = (
 			return {
 				...state,
 				advice: action.data
+			};
+		case CHOOSE_OPTION:
+			return {
+				...state,
+				optionId: action.index	
 			};
 		default:
 			return state;

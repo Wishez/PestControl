@@ -92,6 +92,15 @@ ul {
 img {
   display: inline-block $i;
 }
+
+th, td {
+  font-weight: normal;
+}
+
+th {
+  @extend %text-left;
+}
+
 p {
  @extend %defaultTopMargin;
  max-width: 500px;

@@ -4,16 +4,20 @@ import Section from './Section';
 import Title from './Title';
 import { Link } from 'react-router-dom';
 import ElementButton from './ElementButton';
+import Tabs from './Tabs';
 
 const Service = ({ 
 	service,
-	openMakeOrderForm
+	openMakeOrderForm,
+	...rest
 }) => (	
 	<Section 
 		block='service'
 		paragraphText={service.service_description}>
 		<Title block='services'
 			text={service.service_name} />
+		<Tabs options={service.options}
+			{...rest} />
 		<ElementButton 
 			block='serviceMakeOrderButton'
 			iconName='setting'

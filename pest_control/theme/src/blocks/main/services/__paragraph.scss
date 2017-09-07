@@ -3,4 +3,21 @@
 	@extend %relative;
 	top: 70px;
 	left: 35%;
+	@include breakpoint($md) {
+		left: 45%;		
+	}
+	@include breakpoint($sm-less) {
+		left: 0;
+		top: 0;
+		padding-bottom: 1em;		
+		float: none;
+	}
+	@include breakpoint($xs) {
+		width: 50%;
+		float: left;
+	}
+	@include breakpoint($xxs) {
+		float: rigth;
+		width: 100%;
+	}
 }

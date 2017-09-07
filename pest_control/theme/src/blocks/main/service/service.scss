@@ -1,5 +1,14 @@
 .service {
-
+	@extend %darkGrayBg;
+	color: $lightGray;
+	@extend %flex;
+	@extend %defaultColumnFlow;
+	@extend %alignCenter;
+	@extend %alignCenter;
+	@extend %justifyBetween;
 }
 
+@import '__paragraph.scss';
+@import '__referToAllServices.scss';
+@import 'serviceTabs/serviceTabs.scss';
 @import 'serviceMakeOrderButton/serviceMakeOrderButton.scss';

@@ -12,7 +12,7 @@ class SpaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Space
-        fields = ('space_name', 'price', 'ensure',)
+        fields = ('id', 'space_name', 'price', 'ensure',)
 
 class OptionSerializer(serializers.ModelSerializer):
     spaces = SpaceSerializer(
@@ -22,7 +22,7 @@ class OptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Option
-        fields = ('option_name', 'spaces',)
+        fields = ('id', 'option_name', 'spaces',)
 
 class SingleServiceSerializer(serializers.ModelSerializer):
     options = OptionSerializer(

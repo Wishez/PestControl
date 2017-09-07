@@ -101891,7 +101891,9 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = undefined;
+exports.tryGetAdviceIfNeeded = exports.tryGetServicesIfNeeded = exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = exports.chooseOption = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _actionTypes = require('./../constants/actionTypes.js');
 
@@ -101900,6 +101902,15 @@ var _ajax = require('./../constants/ajax.js');
 var _ajax2 = _interopRequireDefault(_ajax);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var chooseOption = exports.chooseOption = function chooseOption(index) {
+	return {
+		type: _actionTypes.CHOOSE_OPTION,
+		index: index
+	};
+};
 
 var openMakeOrderForm = exports.openMakeOrderForm = function openMakeOrderForm() {
 	return {
@@ -101946,22 +101957,6 @@ var tryMakeOrder = exports.tryMakeOrder = function tryMakeOrder(data) {
 	return function (dispatch) {
 		console.log(data);
 		dispatch(actionHandler(data, '/make_order/', makeOrder));
-		// customAjaxRequest({
-		// 	url: '/make_order/',
-		// 	data,
-		// 	type: 'POST',
-		// 	processData: true,
-		// 	cache: true
-		// });
-
-		// return $.ajax({
-		// 	success: respond => {
-		// 		dispatch(makeOrder(true, respond));
-		// 	},
-		// 	error: (xhr, errmsg, err) => {
-		// 		dispatch(makeOrder(false, 'Внутренняя ошибка сервера'));
-		// 	}
-		// });
 	};
 };
 
@@ -101989,22 +101984,6 @@ var tryOrderCallback = exports.tryOrderCallback = function tryOrderCallback(data
 	return function (dispatch) {
 		console.log(data);
 		dispatch(actionHandler(data, '/order_callback/', orderCallback));
-		// customAjaxRequest({
-		// 	url: '/order_callback/',
-		// 	data,
-		// 	type: 'POST',
-		// 	processData: true,
-		// 	cache: true
-		// });
-
-		// return $.ajax({
-		// 	success: respond => {
-		// 		dispatch(orderCallback(true, respond));
-		// 	},
-		// 	error: (xhr, errmsg, err) => {
-		// 		dispatch(orderCallback(false, 'Внутренняя ошибка сервера'));
-		// 	}
-		// });
 	};
 };
 
@@ -102026,26 +102005,70 @@ var tryAskQuestion = exports.tryAskQuestion = function tryAskQuestion(data) {
 	return function (dispatch) {
 		console.log(data);
 		dispatch(actionHandler(data, '/ask_question/', askQuestion));
-		// customAjaxRequest({
-		// 	url: '/ask_question/',
-		// 	data,
-		// 	type: 'POST',
-		// 	processData: true,
-		// 	cache: true
-		// });
-
-		// return $.ajax({
-		// 	success: respond => {
-		// 		dispatch(askQuestion(true, respond));
-		// 	},
-		// 	error: (xhr, errmsg, err) => {
-		// 		dispatch(askQuestion(false, 'Внутренняя ошибка сервера'));
-		// 	}
-		// });
 	};
 };
 
-},{"./../constants/actionTypes.js":1437,"./../constants/ajax.js":1438}],1416:[function(require,module,exports){
+var fetchData = function fetchData(url, actionCreater) {
+	return function (dispatch) {
+		return fetch(url).then(function (resp) {
+			return resp.json();
+		}).then(function (data) {
+			dispatch(actionCreater(data));
+		}).catch(function (err) {
+			console.log('Didn\'t get data', err);
+		});
+	};
+};
+
+var accumulateData = function accumulateData(array) {
+	return array.reduce(function (acumulatedData, element) {
+		return _extends({}, acumulatedData, _defineProperty({}, element.id, element));
+	}, {});
+};
+
+var getServices = function getServices(data) {
+	return {
+		type: _actionTypes.GET_SERVICES,
+		data: accumulateData(data)
+	};
+};
+
+var checkServicesDataState = function checkServicesDataState(state) {
+	var app = state.app;
+	var services = app.services;
+
+
+	if (services) return true;else return false;
+};
+
+var tryGetServicesIfNeeded = exports.tryGetServicesIfNeeded = function tryGetServicesIfNeeded() {
+	return function (dispatch, getState) {
+		if (checkServicesDataState(getState())) dispatch(fetchData('/api/v0/services/', getServices));
+	};
+};
+
+var getAdvice = function getAdvice(data) {
+	return {
+		type: _actionTypes.GET_ADVICE,
+		data: accumulateData(data)
+	};
+};
+
+var checkAdviceDataState = function checkAdviceDataState(state) {
+	var app = state.app;
+	var advice = app.advice;
+
+
+	if (advice) return true;else return false;
+};
+
+var tryGetAdviceIfNeeded = exports.tryGetAdviceIfNeeded = function tryGetAdviceIfNeeded() {
+	return function (dispatch) {
+		if (checkAdviceDataState(getState())) dispatch(fetchData('/api/v0/advice/', getServices));
+	};
+};
+
+},{"./../constants/actionTypes.js":1440,"./../constants/ajax.js":1441}],1416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102078,7 +102101,7 @@ var closeFormsAndSelectNavigationItem = exports.closeFormsAndSelectNavigationIte
 	};
 };
 
-},{"./../actions/appActions.js":1415,"./../constants/navigationTypes.js":1439}],1417:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../constants/navigationTypes.js":1442}],1417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102200,7 +102223,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'askQuestionsForm'
 })(AskQuestionsForm);
 
-},{"./../constants/validation.js":1443,"./ElementButton":1419,"./Paragraph":1431,"./RenderController":1432,"./TextareaController":1434,"./Title":1435,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1418:[function(require,module,exports){
+},{"./../constants/validation.js":1446,"./ElementButton":1419,"./Paragraph":1431,"./RenderController":1432,"./TextareaController":1437,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1418:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102435,7 +102458,7 @@ var Footer = function Footer(_ref) {
 
 exports.default = Footer;
 
-},{"./Title":1435,"react":1089,"semantic-ui-react":1298}],1421:[function(require,module,exports){
+},{"./Title":1438,"react":1089,"semantic-ui-react":1298}],1421:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102488,7 +102511,7 @@ var Header = function Header(_ref) {
 
 exports.default = Header;
 
-},{"./../containers/NavContainer.js":1449,"./Logo":1422,"./Paragraph":1431,"react":1089,"semantic-ui-react":1298}],1422:[function(require,module,exports){
+},{"./../containers/NavContainer.js":1452,"./Logo":1422,"./Paragraph":1431,"react":1089,"semantic-ui-react":1298}],1422:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102573,6 +102596,10 @@ var _SingleAdviceContainer = require('./../containers/SingleAdviceContainer');
 
 var _SingleAdviceContainer2 = _interopRequireDefault(_SingleAdviceContainer);
 
+var _SingleServiceContainer = require('./../containers/SingleServiceContainer');
+
+var _SingleServiceContainer2 = _interopRequireDefault(_SingleServiceContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
@@ -102598,6 +102625,7 @@ var Main = function Main(_ref) {
                     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render(props) {
                             return _react2.default.createElement(_PresentContainer2.default, props);
                         } }),
+                    _react2.default.createElement(_MyRoute2.default, { path: '/services/:serviceId', component: _SingleServiceContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/services', component: _ServicesContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/contacts', component: _ContactsContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/isistutions', component: _IsistutionsContainer2.default }),
@@ -102614,7 +102642,7 @@ var Main = function Main(_ref) {
 
 exports.default = Main;
 
-},{"./../components/MyRoute":1426,"./../components/NotFound":1429,"./../containers/AdviceContainer":1444,"./../containers/ContactsContainer":1446,"./../containers/IsistutionsContainer":1447,"./../containers/PresentContainer":1451,"./../containers/ServicesContainer":1452,"./../containers/SingleAdviceContainer":1453,"react":1089,"react-router-dom":1050,"react-router-transition":1053}],1424:[function(require,module,exports){
+},{"./../components/MyRoute":1426,"./../components/NotFound":1429,"./../containers/AdviceContainer":1447,"./../containers/ContactsContainer":1449,"./../containers/IsistutionsContainer":1450,"./../containers/PresentContainer":1454,"./../containers/ServicesContainer":1455,"./../containers/SingleAdviceContainer":1456,"./../containers/SingleServiceContainer":1457,"react":1089,"react-router-dom":1050,"react-router-transition":1053}],1424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102651,7 +102679,7 @@ var MainContentContainer = function MainContentContainer(_ref) {
 
 exports.default = MainContentContainer;
 
-},{"./../containers/MakeOrderContainer":1448,"./../containers/OrderCallbackContainer":1450,"react":1089,"semantic-ui-react":1298}],1425:[function(require,module,exports){
+},{"./../containers/MakeOrderContainer":1451,"./../containers/OrderCallbackContainer":1453,"react":1089,"semantic-ui-react":1298}],1425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102790,7 +102818,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'makeOrderForm'
 })(MakeOrderForm);
 
-},{"./../constants/options.js":1440,"./../constants/validation.js":1443,"./DropdownController":1418,"./ElementButton":1419,"./RenderController":1432,"./Title":1435,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1426:[function(require,module,exports){
+},{"./../constants/options.js":1443,"./../constants/validation.js":1446,"./DropdownController":1418,"./ElementButton":1419,"./RenderController":1432,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1426:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103132,7 +103160,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'orderCallbackForm'
 })(OrderCallbackForm);
 
-},{"./../constants/validation.js":1443,"./ElementButton":1419,"./RenderController":1432,"./Title":1435,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1431:[function(require,module,exports){
+},{"./../constants/validation.js":1446,"./ElementButton":1419,"./RenderController":1432,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1431:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103287,6 +103315,240 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Section = require('./Section');
+
+var _Section2 = _interopRequireDefault(_Section);
+
+var _Title = require('./Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _ElementButton = require('./ElementButton');
+
+var _ElementButton2 = _interopRequireDefault(_ElementButton);
+
+var _Tabs = require('./Tabs');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var Service = function Service(_ref) {
+	var service = _ref.service,
+	    openMakeOrderForm = _ref.openMakeOrderForm,
+	    rest = _objectWithoutProperties(_ref, ['service', 'openMakeOrderForm']);
+
+	return _react2.default.createElement(
+		_Section2.default,
+		{
+			block: 'service',
+			paragraphText: service.service_description },
+		_react2.default.createElement(_Title2.default, { block: 'services',
+			text: service.service_name }),
+		_react2.default.createElement(_Tabs2.default, _extends({ options: service.options
+		}, rest)),
+		_react2.default.createElement(_ElementButton2.default, {
+			block: 'serviceMakeOrderButton',
+			iconName: 'setting',
+			name: '\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C',
+			number: '8',
+			onClick: openMakeOrderForm
+		}),
+		_react2.default.createElement(
+			_reactRouterDom.Link,
+			{ to: '/services',
+				className: 'service__referToAllServices' },
+			'\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u043A\u043E \u0432\u0441\u0435\u043C \u0443\u0441\u043B\u0443\u0433\u0430\u043C'
+		)
+	);
+};
+
+exports.default = Service;
+
+},{"./ElementButton":1419,"./Section":1433,"./Tabs":1436,"./Title":1438,"react":1089,"react-router-dom":1050}],1435:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Section = require('./Section');
+
+var _Section2 = _interopRequireDefault(_Section);
+
+var _Title = require('./Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Services = function Services(_ref) {
+	var services = _ref.services;
+	return _react2.default.createElement(
+		_Section2.default,
+		{ image: 'service.png',
+			block: 'services',
+			paragraphText: '\u0411\u043E\u043B\u044C\u0448\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0435\u0439 \u043E\u0431 \u0438\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0449\u0435\u0439 \r \u0432\u0430\u0441 \u0443\u0441\u043B\u0443\u0433\u0435 \u043C\u043E\u0436\u043D\u043E \u0443\u0437\u043D\u0430\u0442\u044C <strong>\u043A\u043B\u0438\u043A\u043D\u0443\u0432</strong> \u043D\u0430 \u043E\u0434\u043D\u0443\r \u0438\u0437 \u0443\u0441\u043B\u0443\u0433.' },
+		_react2.default.createElement(_Title2.default, { block: 'services',
+			text: '\u041F\u0435\u0440\u0435\u0447\u0435\u043D\u044C \u0443\u0441\u043B\u0443\u0433' }),
+		_react2.default.createElement(
+			'ul',
+			{ className: 'servicesList' },
+			services.map(function (service, index) {
+				return _react2.default.createElement(
+					'li',
+					{ key: index,
+						className: 'servicesItem' },
+					_react2.default.createElement(
+						_reactRouterDom.Link,
+						{ to: '/services/' + service.id,
+							className: 'servicesItem__refer' },
+						service.service_name
+					)
+				);
+			})
+		)
+	);
+};
+
+exports.default = Services;
+
+},{"./Section":1433,"./Title":1438,"react":1089,"react-router-dom":1050}],1436:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Paragraph = require('./Paragraph');
+
+var _Paragraph2 = _interopRequireDefault(_Paragraph);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Tabs = function Tabs(_ref) {
+  var options = _ref.options,
+      spaces = _ref.spaces,
+      chooseOption = _ref.chooseOption,
+      optionId = _ref.optionId;
+
+  var getActiveClasses = function getActiveClasses(block, isActive) {
+    var _classNames;
+
+    return (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, block, true), _defineProperty(_classNames, block + '--active', isActive), _classNames));
+  };
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'serviceTabs' },
+    _react2.default.createElement(
+      'nav',
+      { className: 'serviceTabs__navigation' },
+      _react2.default.createElement(
+        'ul',
+        { className: 'serviceTabsNavigationList' },
+        options.map(function (option, index) {
+          return _react2.default.createElement(
+            'li',
+            { key: option.id,
+              className: getActiveClasses('serviceTabsNavigationList__item', index === optionId),
+              onClick: chooseOption(index) },
+            option.option_name
+          );
+        })
+      )
+    ),
+    _react2.default.createElement(
+      'table',
+      { className: 'serviceTabs__table' },
+      _react2.default.createElement(
+        'thead',
+        null,
+        _react2.default.createElement(
+          'tr',
+          { className: 'serviceTabsTableHeader' },
+          _react2.default.createElement(
+            'th',
+            { className: 'serviceTabsTableHeader__cell' },
+            '\u041F\u043B\u043E\u0449\u0430\u0434\u044C'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'serviceTabsTableHeader__cell' },
+            '\u0426\u0435\u043D\u0430'
+          ),
+          _react2.default.createElement(
+            'th',
+            { className: 'serviceTabsTableHeader__cell' },
+            '\u0413\u0430\u0440\u0430\u043D\u0442\u0438\u044F'
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        spaces.map(function (space) {
+          return _react2.default.createElement(
+            'tr',
+            { key: space.id,
+              className: 'serviceTabsTableData' },
+            _react2.default.createElement(
+              'th',
+              { className: 'serviceTabsTableData__cell' },
+              space.space_name
+            ),
+            _react2.default.createElement(
+              'th',
+              { className: 'serviceTabsTableData__cell serviceTabsTableData__cell--name_price' },
+              space.price + '\u20BD'
+            ),
+            _react2.default.createElement(
+              'th',
+              { className: 'serviceTabsTableData__cell' },
+              space.ensure
+            )
+          );
+        })
+      )
+    )
+  );
+};
+
+exports.default = Tabs;
+
+},{"./Paragraph":1431,"classnames":27,"react":1089}],1437:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -103329,7 +103591,7 @@ var TextareaController = function TextareaController(_ref) {
 
 exports.default = TextareaController;
 
-},{"react":1089}],1435:[function(require,module,exports){
+},{"react":1089}],1438:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103358,7 +103620,7 @@ var Title = function Title(_ref) {
 
 exports.default = Title;
 
-},{"react":1089,"react-html-parser":1005}],1436:[function(require,module,exports){
+},{"react":1089,"react-html-parser":1005}],1439:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103374,7 +103636,7 @@ var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
 var CHANGE_USER_AVATAR = exports.CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
 
-},{}],1437:[function(require,module,exports){
+},{}],1440:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103398,7 +103660,12 @@ var CLOSE_ORDER_CALLBACK_FORM = exports.CLOSE_ORDER_CALLBACK_FORM = 'CLOSE_ORDER
 var ASK_QUESTION = exports.ASK_QUESTION = 'ASK_QUESTION';
 var ASK_AGAIN = exports.ASK_AGAIN = 'ASK_AGAIN';
 
-},{}],1438:[function(require,module,exports){
+var GET_SERVICES = exports.GET_SERVICES = 'GET_SERVICES';
+var GET_ADVICE = exports.GET_ADVICE = 'GET_ADVICES';
+
+var CHOOSE_OPTION = exports.CHOOSE_OPTION = 'CHOOSE_OPTION';
+
+},{}],1441:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103450,7 +103717,7 @@ var customAjaxRequest = function customAjaxRequest(_ref) {
 
 exports.default = customAjaxRequest;
 
-},{"js-cookie":511}],1439:[function(require,module,exports){
+},{"js-cookie":511}],1442:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103466,7 +103733,7 @@ var navigationItems = exports.navigationItems = {
 	advice: 'Советы'
 };
 
-},{}],1440:[function(require,module,exports){
+},{}],1443:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103476,7 +103743,7 @@ var serviceOptions = exports.serviceOptions = [{ key: '1', value: 'Утилиз�
 
 var spaceOptions = exports.spaceOptions = [{ key: '1', value: '1-оком-ая квартира', text: '1-оком-ая квартира' }, { key: '2', value: '2х ком-ая квартира', text: '2х ком-ая квартира' }, { key: '3', value: '3х ком-ая квартира', text: '3х ком-ая квартира' }, { key: '4', value: '4х ком-ая квартира', text: '4х ком-ая квартира' }, { key: '5', value: 'Другое', text: 'Другое(уточнение у оператора)' }];
 
-},{}],1441:[function(require,module,exports){
+},{}],1444:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103512,7 +103779,7 @@ var convertDate = exports.convertDate = function convertDate(date) {
 	});
 };
 
-},{}],1442:[function(require,module,exports){
+},{}],1445:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103521,7 +103788,7 @@ Object.defineProperty(exports, "__esModule", {
 var REGISTER = exports.REGISTER = 'REGISTER';
 var REQUEST_REGISTER = exports.REQUEST_REGISTER = 'REQUEST_REGISTER';
 
-},{}],1443:[function(require,module,exports){
+},{}],1446:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103558,7 +103825,7 @@ var nameLength = exports.nameLength = function nameLength(value) {
 	return value && !(value.length < 2) ? undefined : 'Имя должно быть не меньше 2символов и не больше 20.';
 };
 
-},{}],1444:[function(require,module,exports){
+},{}],1447:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103630,7 +103897,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(AdviceContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1445:[function(require,module,exports){
+},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1448:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103736,7 +104003,7 @@ App.PropTypes = {
 var mapStateToProps = function mapStateToProps(state) {
   var app = state.app;
   var isMakeOrderFormOpened = app.isMakeOrderFormOpened;
-
+  // console.log('app state ===>', app);
 
   return {
     isMakeOrderFormOpened: isMakeOrderFormOpened
@@ -103745,7 +104012,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
 
-},{"./../actions/appActions.js":1415,"./../components/Footer":1420,"./../components/Header":1421,"./../components/Main":1423,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1446:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/Footer":1420,"./../components/Header":1421,"./../components/Main":1423,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1449:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103878,7 +104145,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(ContactsContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/AskQuestionsForm":1417,"./../components/ElementButton":1419,"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1447:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/AskQuestionsForm":1417,"./../components/ElementButton":1419,"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1450:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103953,7 +104220,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(IsistutionsContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1448:[function(require,module,exports){
+},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1451:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104012,7 +104279,9 @@ var MakeOrderContainer = function (_Component) {
 			args[_key] = arguments[_key];
 		}
 
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MakeOrderContainer.__proto__ || Object.getPrototypeOf(MakeOrderContainer)).call.apply(_ref, [this].concat(args))), _this), _this.getClasses = function (name, modifier) {
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MakeOrderContainer.__proto__ || Object.getPrototypeOf(MakeOrderContainer)).call.apply(_ref, [this].concat(args))), _this), _this.onSubmitMakeOrderForm = function (values, dispatch) {
+			dispatch((0, _appActions.tryMakeOrder)(values));
+		}, _this.getClasses = function (name, modifier) {
 			var _classNames;
 
 			return (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, name, true), _defineProperty(_classNames, name + '--' + modifier, !!modifier), _classNames));
@@ -104025,15 +104294,10 @@ var MakeOrderContainer = function (_Component) {
 	}
 
 	_createClass(MakeOrderContainer, [{
-		key: 'onSubmitMakeOrderForm',
-		value: function onSubmitMakeOrderForm(values, dispatch) {
-			dispatch((0, _appActions.tryMakeOrder)(values));
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.props.dispatch((0, _appActions.tryGetServicesIfNeeded)());
 		}
-
-		// componentDidMount() {
-
-		// }
-
 	}, {
 		key: 'componentDidUpdate',
 		value: function componentDidUpdate() {
@@ -104070,19 +104334,21 @@ var mapStateToProps = function mapStateToProps(state) {
 	var app = state.app;
 	var isMakeOrderFormOpened = app.isMakeOrderFormOpened,
 	    makeOrderFormMessage = app.makeOrderFormMessage,
-	    isOrderOrdered = app.isOrderOrdered;
+	    isOrderOrdered = app.isOrderOrdered,
+	    services = app.services;
 
 
 	return {
 		message: makeOrderFormMessage,
 		isOpened: isMakeOrderFormOpened,
-		isOrdered: isOrderOrdered
+		isOrdered: isOrderOrdered,
+		services: services
 	};
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(MakeOrderContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/MakeOrderForm":1425,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1449:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/MakeOrderForm":1425,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1452:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104240,7 +104506,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(NavContainer));
 
-},{"./../actions/appActions.js":1415,"./../actions/navigationActions.js":1416,"./../components/Navigation":1428,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1450:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../actions/navigationActions.js":1416,"./../components/Navigation":1428,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1453:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104299,7 +104565,9 @@ var OrderCallbackContainer = function (_Component) {
 			args[_key] = arguments[_key];
 		}
 
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = OrderCallbackContainer.__proto__ || Object.getPrototypeOf(OrderCallbackContainer)).call.apply(_ref, [this].concat(args))), _this), _this.getClasses = function (name, modifier) {
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = OrderCallbackContainer.__proto__ || Object.getPrototypeOf(OrderCallbackContainer)).call.apply(_ref, [this].concat(args))), _this), _this.onSubmitOrderCallbackForm = function (values, dispatch) {
+			dispatch((0, _appActions.tryOrderCallback)(values));
+		}, _this.getClasses = function (name, modifier) {
 			var _classNames;
 
 			return (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, name, true), _defineProperty(_classNames, name + '--' + modifier, !!modifier), _classNames));
@@ -104312,19 +104580,19 @@ var OrderCallbackContainer = function (_Component) {
 	}
 
 	_createClass(OrderCallbackContainer, [{
-		key: 'onSubmitOrderCallbackForm',
-		value: function onSubmitOrderCallbackForm(values, dispatch) {
-			dispatch((0, _appActions.tryOrderCallback)(values));
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+			if (this.props.isOpened) $(':input[type="tel"]').mask('+7 (000) 000-00-00');
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var isOpen = this.props.isOpen;
+			var isOpened = this.props.isOpened;
 
 			return _react2.default.createElement(
 				'div',
 				null,
-				isOpen ? _react2.default.createElement(_OrderCallbackForm2.default, _extends({}, this.props, {
+				isOpened ? _react2.default.createElement(_OrderCallbackForm2.default, _extends({}, this.props, {
 					getClasses: this.getClasses,
 					onSubmitOrderCallbackForm: this.onSubmitOrderCallbackForm,
 					closeOrderCallbackForm: this.closeCallbackForm })) : ''
@@ -104336,7 +104604,7 @@ var OrderCallbackContainer = function (_Component) {
 }(_react.Component);
 
 OrderCallbackContainer.PropTypes = {
-	isOpen: _propTypes2.default.bool.isRequired,
+	isOpened: _propTypes2.default.bool.isRequired,
 	isOrdered: _propTypes2.default.bool.isRequired,
 	message: _propTypes2.default.string.isRequired,
 	dispatch: _propTypes2.default.func.isRequired
@@ -104352,14 +104620,14 @@ var mapStateToProps = function mapStateToProps(state) {
 
 	return {
 		message: orderCallbackMessage,
-		isOpen: isOrderCallbackFormOpened,
+		isOpened: isOrderCallbackFormOpened,
 		isOrdered: isCallbackOrdered
 	};
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(OrderCallbackContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/OrderCallbackForm":1430,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1451:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/OrderCallbackForm":1430,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1454:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104440,7 +104708,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(PresentContainer);
 
-},{"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1452:[function(require,module,exports){
+},{"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1455:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104465,6 +104733,12 @@ var _MainContentContainer = require('./../components/MainContentContainer');
 
 var _MainContentContainer2 = _interopRequireDefault(_MainContentContainer);
 
+var _Services = require('./../components/Services');
+
+var _Services2 = _interopRequireDefault(_Services);
+
+var _appActions = require('./../actions/appActions.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104484,18 +104758,16 @@ var ServicesContainer = function (_Component) {
 
   _createClass(ServicesContainer, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.props.dispatch((0, _appActions.tryGetServicesIfNeeded)());
+    }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         _MainContentContainer2.default,
         null,
-        _react2.default.createElement(
-          'section',
-          null,
-          'It is second section!'
-        )
+        _react2.default.createElement(_Services2.default, this.props)
       );
     }
   }]);
@@ -104505,17 +104777,24 @@ var ServicesContainer = function (_Component) {
 
 ServicesContainer.PropTypes = {
   match: _propTypes2.default.object.isRequired,
-  dispatch: _propTypes2.default.func.isRequired
+  dispatch: _propTypes2.default.func.isRequired,
+  services: _propTypes2.default.array.isRequired
 };
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  var app = state.app;
+  var services = app.services;
+
+
+  return {
+    services: Object.assign([], services)
+  };
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(ServicesContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1453:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1424,"./../components/Services":1435,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1456:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104590,7 +104869,110 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(SingleAdviceContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1454:[function(require,module,exports){
+},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1457:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = require('react-redux');
+
+var _reactRouterDom = require('react-router-dom');
+
+var _Service = require('./../components/Service');
+
+var _Service2 = _interopRequireDefault(_Service);
+
+var _MainContentContainer = require('./../components/MainContentContainer');
+
+var _MainContentContainer2 = _interopRequireDefault(_MainContentContainer);
+
+var _appActions = require('./../actions/appActions.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SingleServiceContainer = function (_Component) {
+  _inherits(SingleServiceContainer, _Component);
+
+  function SingleServiceContainer() {
+    _classCallCheck(this, SingleServiceContainer);
+
+    return _possibleConstructorReturn(this, (SingleServiceContainer.__proto__ || Object.getPrototypeOf(SingleServiceContainer)).apply(this, arguments));
+  }
+
+  _createClass(SingleServiceContainer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      var serviceId = this.props.match.params.serviceId;
+      var _props = this.props,
+          services = _props.services,
+          dispatch = _props.dispatch,
+          optionId = _props.optionId;
+
+      var spaces = services[serviceId].options[optionId].spaces;
+
+      return _react2.default.createElement(
+        _MainContentContainer2.default,
+        null,
+        _react2.default.createElement(_Service2.default, {
+          chooseOption: function chooseOption(index) {
+            return function () {
+              dispatch((0, _appActions.chooseOption)(index));
+            };
+          },
+          service: services[serviceId],
+          spaces: spaces,
+          optionId: optionId })
+      );
+    }
+  }]);
+
+  return SingleServiceContainer;
+}(_react.Component);
+
+SingleServiceContainer.PropTypes = {
+  match: _propTypes2.default.object.isRequired,
+  dispatch: _propTypes2.default.func.isRequired,
+  services: _propTypes2.default.object.isRequired,
+  optionId: _propTypes2.default.number.idRequired
+};
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  var app = state.app;
+  var services = app.services,
+      optionId = app.optionId;
+
+
+  return {
+    services: services,
+    optionId: optionId
+  };
+};
+
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(SingleServiceContainer));
+
+},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1424,"./../components/Service":1434,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1458:[function(require,module,exports){
 'use strict';
 
 $(window).resize(function () {
@@ -104633,7 +105015,7 @@ $(function () {
   } // end openUrlInNewWindow
 }); // end ready
 
-},{}],1455:[function(require,module,exports){
+},{}],1459:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -104668,7 +105050,7 @@ var store = (0, _configureStore2.default)();
   )
 ), document.getElementById('root'));
 
-},{"./containers/App":1445,"./store/configureStore.js":1462,"react":1089,"react-dom":868,"react-redux":1033,"react-router-dom":1050}],1456:[function(require,module,exports){
+},{"./containers/App":1448,"./store/configureStore.js":1466,"react":1089,"react-dom":868,"react-redux":1033,"react-router-dom":1050}],1460:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104793,7 +105175,7 @@ case CHANGE_USER_AVATAR:
 };
  */
 
-},{"./../constants/accountTypes.js":1436,"./../constants/pureFunctions.js":1441}],1457:[function(require,module,exports){
+},{"./../constants/accountTypes.js":1439,"./../constants/pureFunctions.js":1444}],1461:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104812,7 +105194,10 @@ var initState = {
 	isCallbackOrdered: false,
 	orderCallbackFormMessage: '',
 	isQuestionAsked: false,
-	askQuestionsFormMessage: ''
+	askQuestionsFormMessage: '',
+	services: {},
+	advice: {},
+	optionId: 0
 };
 
 var app = function app() {
@@ -104857,6 +105242,18 @@ var app = function app() {
 				isQuestionAsked: action.isQuestionAsked,
 				askQuestionsFormMessage: action.message
 			});
+		case _actionTypes.GET_SERVICES:
+			return _extends({}, state, {
+				services: action.data
+			});
+		case _actionTypes.GET_ADVICE:
+			return _extends({}, state, {
+				advice: action.data
+			});
+		case _actionTypes.CHOOSE_OPTION:
+			return _extends({}, state, {
+				optionId: action.index
+			});
 		default:
 			return state;
 	}
@@ -104864,7 +105261,7 @@ var app = function app() {
 
 exports.default = app;
 
-},{"./../constants/actionTypes.js":1437}],1458:[function(require,module,exports){
+},{"./../constants/actionTypes.js":1440}],1462:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104906,7 +105303,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./account.js":1456,"./app":1457,"./navigation.js":1459,"./registration.js":1460,"./visibilityFilter.js":1461,"redux":1192,"redux-form":1148}],1459:[function(require,module,exports){
+},{"./account.js":1460,"./app":1461,"./navigation.js":1463,"./registration.js":1464,"./visibilityFilter.js":1465,"redux":1192,"redux-form":1148}],1463:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104946,19 +105343,18 @@ var initNavigationState = exports.initNavigationState = {
 	},
 	fourthNavItem: {
 		active: false,
-		name: _navigationTypes.navigationItems.isistutions,
-		index: 'fourthNavItem',
-		icon: 'users',
-		pathTo: '/isistutions'
-	},
-	fifthNavItem: {
-		active: false,
 		name: _navigationTypes.navigationItems.advice,
-		index: 'fifthNavItem',
+		index: 'fourthNavItem',
 		icon: 'hand peace',
 		pathTo: '/advice'
-	}
-};
+		// fifthNavItem: {
+		// 	active: false,
+		// 	name: navigationItems.isistutions,
+		// 	index: 'fifthNavItem',
+		// 	icon: 'users',
+		// 	pathTo: '/isistutions'
+		// }
+	} };
 
 var navigation = function navigation() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initNavigationState;
@@ -104976,7 +105372,7 @@ var navigation = function navigation() {
 
 exports.default = navigation;
 
-},{"./../constants/navigationTypes.js":1439}],1460:[function(require,module,exports){
+},{"./../constants/navigationTypes.js":1442}],1464:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105017,7 +105413,7 @@ var registration = function registration() {
 
 exports.default = registration;
 
-},{"./../constants/registrationTypes.js":1442}],1461:[function(require,module,exports){
+},{"./../constants/registrationTypes.js":1445}],1465:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105040,7 +105436,7 @@ var visibilityFilter = function visibilityFilter() {
 
 exports.default = visibilityFilter;
 
-},{"./../constants/actionTypes.js":1437}],1462:[function(require,module,exports){
+},{"./../constants/actionTypes.js":1440}],1466:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105068,7 +105464,7 @@ function configureStore(initialState) {
   return store;
 }
 
-},{"../reducers/index.js":1458,"redux":1192,"redux-thunk":1186}],1463:[function(require,module,exports){
+},{"../reducers/index.js":1462,"redux":1192,"redux-thunk":1186}],1467:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -105268,7 +105664,7 @@ $jscomp.polyfill("Array.prototype.find", function (a) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":510}],1464:[function(require,module,exports){
+},{"jquery":510}],1468:[function(require,module,exports){
 'use strict';
 
 require('jquery');
@@ -105285,6 +105681,6 @@ require('./../blocks/custom/custom.js');
 
 require('./../blocks/index.js');
 
-},{"./../blocks/custom/custom.js":1454,"./../blocks/index.js":1455,"./jquery.mask.min.js":1463,"babel-polyfill":1,"bootstrap-sass":24,"jquery":510,"whatwg-fetch":1414}]},{},[1464])
+},{"./../blocks/custom/custom.js":1458,"./../blocks/index.js":1459,"./jquery.mask.min.js":1467,"babel-polyfill":1,"bootstrap-sass":24,"jquery":510,"whatwg-fetch":1414}]},{},[1468])
 
 //# sourceMappingURL=main.js.map

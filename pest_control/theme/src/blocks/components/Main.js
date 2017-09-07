@@ -10,6 +10,8 @@ import AdviceContainer from './../containers/AdviceContainer';
 import ContactsContainer from './../containers/ContactsContainer';
 import ServicesContainer from './../containers/ServicesContainer';
 import SingleAdviceContainer from './../containers/SingleAdviceContainer';
+import SingleServiceContainer from './../containers/SingleServiceContainer';
+
 
 const Main = ({
 
@@ -27,12 +29,12 @@ const Main = ({
                 <Route exact path='/' render={props => (
                     <PresentContainer {...props} />  
                 )} />
+                <MyRoute path='/services/:serviceId' component={SingleServiceContainer} /> 
                 <MyRoute path='/services' component={ServicesContainer} />
                 <MyRoute path='/contacts' component={ContactsContainer} />
                 <MyRoute path='/isistutions' component={IsistutionsContainer} />   
                 <MyRoute path='/advice' component={AdviceContainer} /> 
                 <Route render={() => (
-
                     <Redirect to="/not_found" />
                 )}  />
                 <MyRoute path='/not_found'

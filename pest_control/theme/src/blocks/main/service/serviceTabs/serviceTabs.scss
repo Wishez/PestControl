@@ -1,0 +1,10 @@
+.serviceTabs {
+	@extend %purpleBg;
+	@extend %innerShadow;
+	@extend %roundBorder4;
+	padding: 65px 10% 75px;
+	max-width: 825px;
+}
+
+@import '__navigation.scss';
+@import '__table.scss';

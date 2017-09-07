@@ -8,10 +8,16 @@ import {
 	ASK_AGAIN,
 	ASK_QUESTION,
 	GET_SERVICES,
-	GET_ADVICE
+	GET_ADVICE,
+	CHOOSE_OPTION
 }  from './../constants/actionTypes.js';
 import customAjaxRequest from './../constants/ajax.js'
 
+
+export const chooseOption = (index) => ({
+	type: CHOOSE_OPTION,
+	index
+});
 
 export const openMakeOrderForm = () => ({
 	type: OPEN_MAKE_ORDER_FORM
@@ -107,7 +113,6 @@ const fetchData = (url, actionCreater) => dispatch => (
 			resp.json()
 		))
 		.then(data => {
-			console.log(accumulateData(data));
 			dispatch(actionCreater(data));
 		})
 		.catch(err => {
