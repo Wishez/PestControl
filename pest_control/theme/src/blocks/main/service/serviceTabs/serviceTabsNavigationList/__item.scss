@@ -1,3 +1,9 @@
 .serviceTabsNavigationList__item {
-	
+	@extend %inline-block;
+	@extend %extraLargeRightMargin;
+	@extend %pointIt;
+}
+
+.serviceTabsNavigationList__item--active {
+	color: $yellow;
 }

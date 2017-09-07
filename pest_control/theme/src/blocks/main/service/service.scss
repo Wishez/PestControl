@@ -1,13 +1,25 @@
 .service {
 	@extend %darkGrayBg;
 	color: $lightGray;
-	@extend %flex;
-	@extend %defaultColumnFlow;
-	@extend %alignCenter;
-	@extend %alignCenter;
-	@extend %justifyBetween;
+	padding: 75px 0 85px;
+	& > .ui.container {
+		@extend %flex;
+		@extend %defaultColumnFlow;
+		@extend %alignStart;
+		@extend %justifyBetween;
+	}
 }
 
+.service__paragraph, .serviceMakeOrderButton {
+	@include breakpoint($lg) {
+		margin-left: 13.5%;
+	}
+	@include breakpoint($md) {
+		margin-left: 6%;
+	}
+}
+
+@import '__title.scss';
 @import '__paragraph.scss';
 @import '__referToAllServices.scss';
 @import 'serviceTabs/serviceTabs.scss';

@@ -1,7 +1,18 @@
 .serviceTabsTableData__cell {
-
+	@extend %cellHeight;
+	@extend %vertical-middle;
 }
 
 .serviceTabsTableData__cell--name_price {
-	
+	@extend %three;
+	@extend %text-center;
+}
+
+.serviceTabsTableData__cell--name_space {
+	@extend %halfWidth;	
+}
+
+.serviceTabsTableData__cell--name_ensure {
+	@extend %three;
+	@extend %text-right;
 }

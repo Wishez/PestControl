@@ -1,4 +1,6 @@
 .serviceTabsTableData {
+	@extend %defaultTopMargin;
+	@extend %bottomBorder;
 	
 }
 

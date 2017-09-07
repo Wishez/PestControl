@@ -2,8 +2,12 @@
 	@extend %purpleBg;
 	@extend %innerShadow;
 	@extend %roundBorder4;
-	padding: 65px 10% 75px;
+	padding: 40px 10% 60px;
 	max-width: 825px;
+	@extend %center-block;
+	@extend %largeTopMargin;
+	@extend %fullWidth;
+	order: 2;
 }
 
 @import '__navigation.scss';

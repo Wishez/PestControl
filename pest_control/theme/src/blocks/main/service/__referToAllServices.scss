@@ -1,3 +1,10 @@
 .service__referToAllServices {
-	@extend %floatRight;
+	// @extend %floatRight;
+	order: 5;
+	align-self: center;
+	@extend %relative;
+	bottom: 100px;
+	@include breakpoint($xs) {
+		align-self: flex-end;
+	}
 }

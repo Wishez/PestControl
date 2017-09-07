@@ -1,5 +1,5 @@
 .serviceTabsTableHeader {
-	
+	@extend %bottomBorder;
 }
 
 @import '__cell.scss';

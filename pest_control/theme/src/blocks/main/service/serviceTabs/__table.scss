@@ -1,3 +1,7 @@
 .serviceTabs__table {
-	
+	@extend %defaultTopMargin;
+	@extend %fullWidth;
 }
+
+@import 'serviceTabsTableData/serviceTabsTableData.scss';
+@import 'serviceTabsTableHeader/serviceTabsTableHeader.scss';

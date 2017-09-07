@@ -1,7 +1,17 @@
 .serviceTabsTableHeader__cell {
 	color: $gray;
+	@extend %cellHeight;
+	@extend %vertical-middle;
 }
 
-.serviceTabsTableHeader__cell--active {
-	color: $yellow;
+.serviceTabsTableHeader__cell--name_price {
+	@extend %three;
+}
+
+.serviceTabsTableHeader__cell--name_space {
+	@extend %halfWidth;	
+}
+
+.serviceTabsTableHeader__cell--name_ensure {
+	@extend %three;	
 }
