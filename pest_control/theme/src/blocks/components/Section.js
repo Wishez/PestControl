@@ -11,12 +11,13 @@ const Section = ({
 }) => (
 	<section className={block}>
 		<Container>
-			<Image className={`${block}__figure`} 
-			 src={`/static/pest_control/img/${image}`}
-			 />
+			{image ?
+				<Image className={`${block}__figure`} 
+			 		src={`/static/pest_control/img/${image}`}
+			 	/> : "" }
 			{paragraphText ? 
 			 	<Paragraph block={block}
-		 		text={paragraphText} />: 
+		 		text={paragraphText} /> : 
 		 	""} 
 		 	{children}
 		</Container>

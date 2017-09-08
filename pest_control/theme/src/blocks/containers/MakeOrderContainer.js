@@ -92,7 +92,7 @@ class MakeOrderContainer extends Component  {
 			services
 		} = this.props;
 		
-		console.log(serviceId, '<=== serviceId');
+		// console.log(serviceId, '<=== serviceId');
 		
 		return (
 			<Container className='main__makeOrderFormContainer'>

@@ -1,0 +1,5 @@
+.adviceList {
+	@extend %defaultTopMargin;
+}
+
+@import 'adviceListItem.scss';

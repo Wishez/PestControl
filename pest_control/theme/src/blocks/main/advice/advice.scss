@@ -1,0 +1,14 @@
+.advice {
+	@extend %clearfix;
+	padding: 65px 0 75px;
+	@extend %darkPurpleBg;
+	color: $lightGray;
+	& > .ui.container {
+		@include breakpoint($sm-up) {
+			padding: 0 15%;
+		}
+	}
+}
+
+@import '__title.scss';
+@import 'adviceList/adviceList.scss';

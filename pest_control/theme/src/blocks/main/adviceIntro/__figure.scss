@@ -1,0 +1,14 @@
+.adviceIntro__figure {
+	@extend %floatRight;
+	@extend %halfWidth;
+	max-width: 232px $i;
+	@include breakpoint($lg) {
+		margin-right: 15%;
+	}
+	@include breakpoint($xs) {
+		width: span(12);
+		margin: 0 auto;
+		float: none;
+		display: block $i;
+	}
+}

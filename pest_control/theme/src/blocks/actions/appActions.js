@@ -121,6 +121,7 @@ const fetchData = (url, actionCreater) => dispatch => (
 			resp.json()
 		))
 		.then(data => {
+			console.log(data, '<==== data from server');
 			dispatch(actionCreater(data));
 		})
 		.catch(err => {
@@ -182,7 +183,7 @@ const checkAdviceDataState = state => {
 		return false;
 };
 
-export const tryGetAdviceIfNeeded = () => dispatch => {
+export const tryGetAdviceIfNeeded = () => (dispatch, getState) => {
 	if (checkAdviceDataState(getState()))
 		dispatch(fetchData('/api/v0/advice/', getServices));
 };

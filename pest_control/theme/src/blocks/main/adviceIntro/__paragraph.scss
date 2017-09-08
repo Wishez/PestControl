@@ -1,0 +1,13 @@
+.adviceIntro__paragraph {
+	@extend %floatLeft;
+	@extend %halfWidth;
+	// @extend %largeTopMargin;
+	margin-top: 200px;
+	@include breakpoint($lg) {
+		margin-left: 10%;
+	}
+	@include breakpoint($xs) {
+		width: span(12);
+		margin-top: 1em;
+	}
+}

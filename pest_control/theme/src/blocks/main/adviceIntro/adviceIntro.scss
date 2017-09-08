@@ -1,0 +1,12 @@
+.adviceIntro {
+	@extend %clearfix;
+	padding-top: 100px;
+	@include breakpoint($xs) {
+		padding-bottom: 65px;
+		padding-top: 50px;
+
+	}
+}
+
+@import '__figure.scss';
+@import '__paragraph.scss';
