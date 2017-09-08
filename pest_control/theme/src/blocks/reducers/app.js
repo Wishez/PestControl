@@ -9,7 +9,8 @@ import {
 	ASK_QUESTION,
 	GET_SERVICES,
 	GET_ADVICE,
-	CHOOSE_OPTION
+	CHOOSE_OPTION,
+	CHOOSE_SERVICE
 }  from './../constants/actionTypes.js';
 
 const initState = {
@@ -23,7 +24,8 @@ const initState = {
 	askQuestionsFormMessage: '',
 	services: {},
 	advice: {},
-	optionId: 0
+	optionId: 0,
+	serviceId: 0
 }
 
 const app = (
@@ -91,6 +93,11 @@ const app = (
 				...state,
 				optionId: action.index	
 			};
+		case CHOOSE_SERVICE:
+			return {
+				...state,
+				serviceId: action.index
+			}
 		default:
 			return state;
 	}

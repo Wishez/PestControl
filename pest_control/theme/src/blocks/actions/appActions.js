@@ -9,15 +9,23 @@ import {
 	ASK_QUESTION,
 	GET_SERVICES,
 	GET_ADVICE,
-	CHOOSE_OPTION
+	CHOOSE_OPTION,
+	CHOOSE_SERVICE
 }  from './../constants/actionTypes.js';
 import customAjaxRequest from './../constants/ajax.js'
 
 
-export const chooseOption = (index) => ({
+export const chooseService = index => ({
+	type: CHOOSE_SERVICE,
+	index
+})
+
+export const chooseOption = index => ({
 	type: CHOOSE_OPTION,
 	index
 });
+
+
 
 export const openMakeOrderForm = () => ({
 	type: OPEN_MAKE_ORDER_FORM
@@ -178,3 +186,5 @@ export const tryGetAdviceIfNeeded = () => dispatch => {
 	if (checkAdviceDataState(getState()))
 		dispatch(fetchData('/api/v0/advice/', getServices));
 };
+
+

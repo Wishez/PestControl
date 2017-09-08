@@ -10,7 +10,7 @@
 	}
 }
 
-.service__paragraph, .serviceMakeOrderButton {
+.service__paragraph, .serviceMakeOrderButton, .service__title {
 	@include breakpoint($lg) {
 		margin-left: 13.5%;
 	}

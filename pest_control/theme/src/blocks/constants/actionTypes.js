@@ -21,3 +21,4 @@ export const GET_SERVICES = 'GET_SERVICES';
 export const GET_ADVICE = 'GET_ADVICES';
 
 export const CHOOSE_OPTION = 'CHOOSE_OPTION';
+export const CHOOSE_SERVICE = 'CHOOSE_SERVICE';

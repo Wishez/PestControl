@@ -10,7 +10,6 @@ import {
 	email
 } from './../constants/validation.js';
 import { 
-	serviceOptions,
 	spaceOptions
 } from './../constants/options.js';
 
@@ -22,7 +21,12 @@ const MakeOrderForm = ({
 	onSubmitMakeOrderForm,
 	message,
 	isOrdered,
-	closeMakeOrderForm
+	closeMakeOrderForm,
+	servicesList,
+	serviceSpacesList,
+	serviceId,
+	onChangeChoosenService,
+	chooseValue
 }) => (
 	<div className='makeOrderFormWrapper'>
 		<Image className='makeOrderFormWrapper__closeButton' 
@@ -47,7 +51,6 @@ const MakeOrderForm = ({
 						placeholder='Реарден Хэнк Васильевич'
 						maxLength='150'
 						validate={[ required ]}
-
 					/>
 					<Field 
 						component={RenderController}
@@ -58,7 +61,6 @@ const MakeOrderForm = ({
 						placeholder='8 (926) 370-78-12'
 						maxLength='24'
 						validate={[ required ]}
-						icon='fa-phone'
 					/>
 					<Field 
 						name='email'
@@ -69,7 +71,6 @@ const MakeOrderForm = ({
 						maxLength='70'
 						placeholder='bloody@commandos.com'
 						validate={[ required, email ]}
-						icon='fa-envelope'
 					/>
 					<Field 
 						name='service'
@@ -77,8 +78,10 @@ const MakeOrderForm = ({
 						component={DropdownController}
 						label='Услуга:'
 						placeholder='Выбирите услугу'
-						options={serviceOptions}
+						options={servicesList}
 						validate={[ required ]}
+						serviceId={serviceId}
+						onChangeChoosenService={onChangeChoosenService}
 					/>
 					<Field 
 						name='space'
@@ -86,7 +89,7 @@ const MakeOrderForm = ({
 						component={DropdownController}
 						label='Помещение:'
 						placeholder='Выбирите помещение'
-						options={spaceOptions}
+						options={serviceSpacesList}
 						validate={[ required ]}
 					/>
 					{message ? 

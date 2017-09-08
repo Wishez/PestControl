@@ -14,7 +14,7 @@ const Service = ({
 	<Section 
 		block='service'
 		paragraphText={service.service_description}>
-		<Title block='services'
+		<Title block='service'
 			text={service.service_name} />
 		<Tabs options={service.options}
 			{...rest} />

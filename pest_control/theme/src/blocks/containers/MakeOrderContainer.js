@@ -6,7 +6,12 @@ import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
 import MakeOrderForm from './../components/MakeOrderForm';
-import { tryMakeOrder, closeMakeOrderForm, tryGetServicesIfNeeded } from './../actions/appActions.js';
+import { 
+	tryMakeOrder,
+	closeMakeOrderForm, 
+	tryGetServicesIfNeeded,
+	chooseService 
+} from './../actions/appActions.js';
 
 
 class MakeOrderContainer extends Component  {
@@ -15,7 +20,9 @@ class MakeOrderContainer extends Component  {
 		isOpened: PropTypes.bool.isRequired,
 		isOrdered: PropTypes.bool.isRequired,
 		message: PropTypes.string.isRequired,
-		dispatch: PropTypes.func.isRequired
+		dispatch: PropTypes.func.isRequired,
+		serviceId: PropTypes.number.isRequired,
+		services: PropTypes.object.isRequired
 	}
 
 	componentDidMount() {
@@ -38,21 +45,65 @@ class MakeOrderContainer extends Component  {
 	      	[`${name}--${modifier}`]: !!modifier
     	})
   	)
+
   	closeOrderForm = () => {
     	const { dispatch } = this.props;
 
     	dispatch(closeMakeOrderForm());
   	}
+  	// Возвращает список площадок, которые обрабатываются конкретной услугой.
+  	getServiceSpacesList = (services, serviceId) => (
+  		services[serviceId].options.reduce((bunchSpaces, option) => (
+  			[	
+  				...bunchSpaces,
+  				...option.spaces.map(space => (
+  					{
+  						key: space.id,
+  						value: space.id,
+  						text: space.space_name
+  					}
+  				))
+  			]
+  		), [])
+  	)
+  	// Возвращает список услуг для низпадающего списка.
+  	getServicesList = services => (
+  		services.reduce((bunchServices, service) => (
+  			[
+  				...bunchServices,
+  				{
+  					key: service.id,
+  					value: service.id,
+  					text: service.service_name
+  				}
+  			]
+  		), [])
+  	)
+
+  	chooseService = index => {
+  		this.props.dispatch(chooseService(index));
+  	}
+
 
 	render() {	
-		const { isOpened } = this.props;
+		const { 
+			isOpened,
+			serviceId,
+			services
+		} = this.props;
+		
+		console.log(serviceId, '<=== serviceId');
+		
 		return (
 			<Container className='main__makeOrderFormContainer'>
 				{isOpened ?
 					<MakeOrderForm {...this.props}
 						onSubmitMakeOrderForm={this.onSubmitMakeOrderForm}
 						getClasses={this.getClasses}
-						closeMakeOrderForm={this.closeOrderForm} /> :
+						closeMakeOrderForm={this.closeOrderForm}
+						servicesList={this.getServicesList(Object.assign([], services))}
+						serviceSpacesList={serviceId ? this.getServiceSpacesList(services, serviceId) : []} 
+						onChangeChoosenService={this.chooseService} /> :
 					''
 				}	
 			</Container>
@@ -69,14 +120,16 @@ const mapStateToProps = state => {
 		isMakeOrderFormOpened,
 		makeOrderFormMessage,
 		isOrderOrdered,
-		services
+		services,
+		serviceId
 	} = app;
 
 	return {
 		message: makeOrderFormMessage,
 		isOpened: isMakeOrderFormOpened,
 		isOrdered: isOrderOrdered,
-		services
+		services,
+		serviceId
 	};
 };
 

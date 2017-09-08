@@ -5,7 +5,12 @@ import { withRouter } from 'react-router-dom'
 
 import Servcie from './../components/Service';
 import MainContentContainer from './../components/MainContentContainer'; 
-import { chooseOption } from './../actions/appActions.js';
+import { 
+  chooseOption,
+  openMakeOrderForm,
+  tryGetServicesIfNeeded,
+  chooseService
+} from './../actions/appActions.js';
 
 class SingleServiceContainer extends Component {
 
@@ -17,15 +22,34 @@ class SingleServiceContainer extends Component {
   }
   
 	componentDidMount() {
-		
+    const { dispatch } = this.props;
+    const { serviceId } = this.props.match.params;
+
+	  dispatch(tryGetServicesIfNeeded());
+    console.log('a single service component did mount');
+    dispatch(chooseService(serviceId));
 	}
 
+  componentDidUpdate() {
+    const { dispatch } = this.props;
+    const { serviceId } = this.props.match.params;
+    console.log('a single service component did update');
+    dispatch(chooseService(serviceId)); 
+  }
+
+
+  openOrderForm = () => {
+    const { serviceId } = this.props.match.params;
+    const { dispatch } = this.props;
+    dispatch(openMakeOrderForm()); 
+  }
 
   render() {
     const { serviceId } = this.props.match.params;
     const { services, dispatch, optionId } = this.props;
+
     const spaces = services[serviceId].options[optionId].spaces;
-    
+    // chooseOption ー　выбор конкретной опции услуги в меню вариантов выполнения услуг.
     return (
       <MainContentContainer>
         <Servcie 
@@ -36,7 +60,9 @@ class SingleServiceContainer extends Component {
           }}
           service={services[serviceId]}
           spaces={spaces}
-          optionId={optionId} />
+          optionId={optionId}
+          openMakeOrderForm={this.openOrderForm}
+        />
         
       </MainContentContainer>
     );

@@ -10,6 +10,8 @@ const DropdownController = ({
 	},
 	block,
 	label,
+	onChangeChoosenService,
+	serviceId,
 	...rest
 }) => (
 	<div className={block}>
@@ -18,9 +20,11 @@ const DropdownController = ({
 		</label>
 		<Dropdown className={`${block}__dropdown`}
 			selection {...input}
-			value={input.value}
+			value={serviceId ? serviceId : input.value}
 			onChange={(param, data) => { 
-				input.onChange(data.value)
+				input.onChange(data.value);
+				if (onChangeChoosenService)
+					onChangeChoosenService(data.value);
 			}}
 			{...rest}
 		/>

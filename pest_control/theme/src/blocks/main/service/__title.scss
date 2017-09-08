@@ -1,3 +1,10 @@
 .service__title {
 	order: 1;
+	@extend %fs-26;
+	@extend %halfWidth;
+	@extend %bottomBorder;
+	@extend %overflowHidden;
+	@include breakpoint($xs) {
+		width: 100%;
+	}
 }
