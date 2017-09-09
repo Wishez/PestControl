@@ -1,6 +1,7 @@
 .adviceListItem {
 	@extend %bottomBorder;
 	@extend %defaultTopMargin;
+	@extend %clearfix;
 }
 
 @import '__refer.scss';

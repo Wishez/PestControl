@@ -2,7 +2,7 @@
 	@extend %floatLeft;
 	@extend %halfWidth;
 	// @extend %largeTopMargin;
-	margin-top: 200px;
+	margin-top: 130px;
 	@include breakpoint($lg) {
 		margin-left: 10%;
 	}

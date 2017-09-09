@@ -1,12 +1,6 @@
 from rest_framework import serializers
 from present.models import *
 
-# class EnsureSerializer(serializers.ModelSerializer):
-#
-#     class Meta:
-#         model = Ensure
-#         fields = ('ensure_name',)
-
 class SpaceSerializer(serializers.ModelSerializer):
     ensure = serializers.StringRelatedField()
 

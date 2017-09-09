@@ -50,7 +50,7 @@ class Space(models.Model):
 
     ensure = models.ForeignKey(
         Ensure,
-        verbose_name=_('Название площади')
+        verbose_name=_('Срок гарантии')
     )
 
     def __str__(self):

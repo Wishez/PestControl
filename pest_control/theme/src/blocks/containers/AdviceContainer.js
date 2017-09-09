@@ -46,7 +46,7 @@ class AdviceContainer extends Component {
 const mapStateToProps = state => {
   const { app } = state;
   const { advice } = app;
-  console.log(advice);
+  
   return {
     advice: Object.assign([], advice)  
   };

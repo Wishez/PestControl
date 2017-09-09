@@ -13,7 +13,9 @@ const AdviceList = ({
 				<Title block='adviceListItem' 
 					text={advice.advice_title} />
 				<Link to={`/advice/${advice.id}`}
-					className='adviceListItem__refer' />	
+					className='adviceListItem__refer'>
+					Читать
+				</Link>	
 			</li>
 		))}
 	</ul>

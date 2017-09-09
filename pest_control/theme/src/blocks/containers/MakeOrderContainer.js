@@ -89,11 +89,10 @@ class MakeOrderContainer extends Component  {
 		const { 
 			isOpened,
 			serviceId,
-			services
+			services,
+			message
 		} = this.props;
-		
-		// console.log(serviceId, '<=== serviceId');
-		
+
 		return (
 			<Container className='main__makeOrderFormContainer'>
 				{isOpened ?

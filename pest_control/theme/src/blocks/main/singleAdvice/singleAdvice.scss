@@ -1,0 +1,6 @@
+.singleAdvice {
+	@extend %clearfix;
+	@extend %defaultTopBottomPaddings;
+}
+
+@import 'adviceArticle/adviceArticle.scss';

@@ -20,7 +20,7 @@ class ContactsContainer extends Component {
     dispatch: PropTypes.func.isRequired,
     message: PropTypes.string.isRequired,
     isQuestionAsked: PropTypes.bool.isRequired
-  }
+  } 
   
   onSubmitAskQuestionsForm = (values, dispatch) => {
     dispatch(tryAskQuestion(values));
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
     askQuestionsFormMessage,
     isQuestionAsked
   } = app;
-
+  
   return {
     message: askQuestionsFormMessage,
     isQuestionAsked 

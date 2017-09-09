@@ -36,8 +36,8 @@ export const closeMakeOrderForm = () => ({
 });
 
 const makeOrder = (
-	message,
-	isOrdered
+	isOrdered,
+	message
 ) => ({
 	type: MAKE_ORDER,
 	message,
@@ -68,7 +68,6 @@ const actionHandler = (
 };
 
 export const tryMakeOrder = data => dispatch => {
-	console.log(data);
 	dispatch(actionHandler(data, '/make_order/', makeOrder));
 }
 
@@ -81,8 +80,8 @@ export const closeOrderCallbackForm = () => ({
 });
 
 const orderCallback = (
-	message,
-	isOrdered
+	isOrdered,
+	message
 ) => ({
 	type: ORDER_CALLBACK,
 	message,
@@ -90,7 +89,6 @@ const orderCallback = (
 });
 
 export const tryOrderCallback = data => dispatch => {
-	console.log(data);
 	dispatch(actionHandler(data, '/order_callback/', orderCallback));
 };
 
@@ -100,16 +98,15 @@ export const askQuestionAgain = () => ({
 });
 
 const askQuestion = (
-	isQestionAsked,
+	isQuestionAsked,
 	message
 ) => ({
 	type: ASK_QUESTION,
 	message,
-	isQestionAsked
+	isQuestionAsked
 });
 
 export const tryAskQuestion = data => dispatch => {
-	console.log(data);
 	dispatch(actionHandler(data, '/ask_question/', askQuestion));
 }
 
@@ -121,7 +118,6 @@ const fetchData = (url, actionCreater) => dispatch => (
 			resp.json()
 		))
 		.then(data => {
-			console.log(data, '<==== data from server');
 			dispatch(actionCreater(data));
 		})
 		.catch(err => {
@@ -185,7 +181,7 @@ const checkAdviceDataState = state => {
 
 export const tryGetAdviceIfNeeded = () => (dispatch, getState) => {
 	if (checkAdviceDataState(getState()))
-		dispatch(fetchData('/api/v0/advice/', getServices));
+		dispatch(fetchData('/api/v0/advice/', getAdvice));
 };
 
 

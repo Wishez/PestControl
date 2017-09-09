@@ -33,6 +33,7 @@ const Main = ({
                 <MyRoute path='/services' component={ServicesContainer} />
                 <MyRoute path='/contacts' component={ContactsContainer} />
                 <MyRoute path='/isistutions' component={IsistutionsContainer} />   
+                <MyRoute path='/advice/:adviceId' component={SingleAdviceContainer} /> 
                 <MyRoute path='/advice' component={AdviceContainer} /> 
                 <Route render={() => (
                     <Redirect to="/not_found" />

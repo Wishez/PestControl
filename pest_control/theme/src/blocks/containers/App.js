@@ -54,7 +54,7 @@ const mapStateToProps = state => {
   const {
     isMakeOrderFormOpened
   } = app;
-  // console.log('app state ===>', app);
+  
   return {
     isMakeOrderFormOpened
   };

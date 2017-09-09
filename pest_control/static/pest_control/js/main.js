@@ -101891,7 +101891,7 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.tryGetAdviceIfNeeded = exports.tryGetServicesIfNeeded = exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = exports.chooseOption = undefined;
+exports.tryGetAdviceIfNeeded = exports.tryGetServicesIfNeeded = exports.tryAskQuestion = exports.askQuestionAgain = exports.tryOrderCallback = exports.closeOrderCallbackForm = exports.openOrderCallbackForm = exports.tryMakeOrder = exports.closeMakeOrderForm = exports.openMakeOrderForm = exports.chooseOption = exports.chooseService = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -101904,6 +101904,13 @@ var _ajax2 = _interopRequireDefault(_ajax);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var chooseService = exports.chooseService = function chooseService(index) {
+	return {
+		type: _actionTypes.CHOOSE_SERVICE,
+		index: index
+	};
+};
 
 var chooseOption = exports.chooseOption = function chooseOption(index) {
 	return {
@@ -101924,7 +101931,7 @@ var closeMakeOrderForm = exports.closeMakeOrderForm = function closeMakeOrderFor
 	};
 };
 
-var makeOrder = function makeOrder(message, isOrdered) {
+var makeOrder = function makeOrder(isOrdered, message) {
 	return {
 		type: _actionTypes.MAKE_ORDER,
 		message: message,
@@ -101944,6 +101951,7 @@ var actionHandler = function actionHandler(data, url, action) {
 
 		return $.ajax({
 			success: function success(respond) {
+				console.log(respond);
 				dispatch(action(true, respond));
 			},
 			error: function error(xhr, errmsg, err) {
@@ -101993,11 +102001,11 @@ var askQuestionAgain = exports.askQuestionAgain = function askQuestionAgain() {
 	};
 };
 
-var askQuestion = function askQuestion(isQestionAsked, message) {
+var askQuestion = function askQuestion(isQuestionAsked, message) {
 	return {
 		type: _actionTypes.ASK_QUESTION,
 		message: message,
-		isQestionAsked: isQestionAsked
+		isQuestionAsked: isQuestionAsked
 	};
 };
 
@@ -102063,12 +102071,12 @@ var checkAdviceDataState = function checkAdviceDataState(state) {
 };
 
 var tryGetAdviceIfNeeded = exports.tryGetAdviceIfNeeded = function tryGetAdviceIfNeeded() {
-	return function (dispatch) {
-		if (checkAdviceDataState(getState())) dispatch(fetchData('/api/v0/advice/', getServices));
+	return function (dispatch, getState) {
+		if (checkAdviceDataState(getState())) dispatch(fetchData('/api/v0/advice/', getAdvice));
 	};
 };
 
-},{"./../constants/actionTypes.js":1440,"./../constants/ajax.js":1441}],1416:[function(require,module,exports){
+},{"./../constants/actionTypes.js":1442,"./../constants/ajax.js":1443}],1416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102101,7 +102109,104 @@ var closeFormsAndSelectNavigationItem = exports.closeFormsAndSelectNavigationIte
 	};
 };
 
-},{"./../actions/appActions.js":1415,"./../constants/navigationTypes.js":1442}],1417:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../constants/navigationTypes.js":1444}],1417:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _reactHtmlParser = require('react-html-parser');
+
+var _reactHtmlParser2 = _interopRequireDefault(_reactHtmlParser);
+
+var _Title = require('./Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
+var _Paragraph = require('./Paragraph');
+
+var _Paragraph2 = _interopRequireDefault(_Paragraph);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Advice = function Advice(_ref) {
+  var advice = _ref.advice;
+  return _react2.default.createElement(
+    'article',
+    { className: 'adviceArticle' },
+    _react2.default.createElement(_Title2.default, { block: 'adviceArticle',
+      text: advice.advice_title }),
+    _react2.default.createElement(
+      'div',
+      { className: 'adviceArticle__text' },
+      (0, _reactHtmlParser2.default)(advice.advice_text),
+      '>',
+      _react2.default.createElement('br', null),
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { className: 'adviceArticle__referToAllAdvice',
+          to: '/advice'
+        },
+        '\u041A\u043E \u0432\u0441\u0435\u043C \u0441\u0442\u0430\u0442\u044C\u044F\u043C'
+      )
+    )
+  );
+};
+
+exports.default = Advice;
+
+},{"./Paragraph":1433,"./Title":1440,"react":1089,"react-html-parser":1005,"react-router-dom":1050}],1418:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _Title = require('./Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var AdviceList = function AdviceList(_ref) {
+	var adviceList = _ref.adviceList;
+	return _react2.default.createElement(
+		'ul',
+		{ className: 'adviceList' },
+		adviceList.map(function (advice) {
+			return _react2.default.createElement(
+				'li',
+				{ key: advice.id,
+					className: 'adviceListItem' },
+				_react2.default.createElement(_Title2.default, { block: 'adviceListItem',
+					text: advice.advice_title }),
+				_react2.default.createElement(
+					_reactRouterDom.Link,
+					{ to: '/advice/' + advice.id,
+						className: 'adviceListItem__refer' },
+					'\u0427\u0438\u0442\u0430\u0442\u044C'
+				)
+			);
+		})
+	);
+};
+
+exports.default = AdviceList;
+
+},{"./Title":1440,"react":1089,"react-router-dom":1050}],1419:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102223,7 +102328,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'askQuestionsForm'
 })(AskQuestionsForm);
 
-},{"./../constants/validation.js":1446,"./ElementButton":1419,"./Paragraph":1431,"./RenderController":1432,"./TextareaController":1437,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1418:[function(require,module,exports){
+},{"./../constants/validation.js":1448,"./ElementButton":1421,"./Paragraph":1433,"./RenderController":1434,"./TextareaController":1439,"./Title":1440,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1420:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102250,7 +102355,9 @@ var DropdownController = function DropdownController(_ref) {
 	    warning = _ref$meta.warning,
 	    block = _ref.block,
 	    label = _ref.label,
-	    rest = _objectWithoutProperties(_ref, ['input', 'meta', 'block', 'label']);
+	    onChangeChoosenService = _ref.onChangeChoosenService,
+	    serviceId = _ref.serviceId,
+	    rest = _objectWithoutProperties(_ref, ['input', 'meta', 'block', 'label', 'onChangeChoosenService', 'serviceId']);
 
 	return _react2.default.createElement(
 		'div',
@@ -102262,9 +102369,10 @@ var DropdownController = function DropdownController(_ref) {
 		),
 		_react2.default.createElement(_semanticUiReact.Dropdown, _extends({ className: block + '__dropdown',
 			selection: true }, input, {
-			value: input.value,
+			value: serviceId ? serviceId : input.value,
 			onChange: function onChange(param, data) {
 				input.onChange(data.value);
+				if (onChangeChoosenService) onChangeChoosenService(data.value);
 			}
 		}, rest)),
 		touched && (error && _react2.default.createElement(
@@ -102285,7 +102393,7 @@ var DropdownController = function DropdownController(_ref) {
 
 exports.default = DropdownController;
 
-},{"react":1089,"semantic-ui-react":1298}],1419:[function(require,module,exports){
+},{"react":1089,"semantic-ui-react":1298}],1421:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102374,7 +102482,7 @@ var ElementButton = function ElementButton(_ref) {
 
 exports.default = ElementButton;
 
-},{"classnames":27,"react":1089,"semantic-ui-react":1298}],1420:[function(require,module,exports){
+},{"classnames":27,"react":1089,"semantic-ui-react":1298}],1422:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102458,7 +102566,7 @@ var Footer = function Footer(_ref) {
 
 exports.default = Footer;
 
-},{"./Title":1438,"react":1089,"semantic-ui-react":1298}],1421:[function(require,module,exports){
+},{"./Title":1440,"react":1089,"semantic-ui-react":1298}],1423:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102511,7 +102619,7 @@ var Header = function Header(_ref) {
 
 exports.default = Header;
 
-},{"./../containers/NavContainer.js":1452,"./Logo":1422,"./Paragraph":1431,"react":1089,"semantic-ui-react":1298}],1422:[function(require,module,exports){
+},{"./../containers/NavContainer.js":1454,"./Logo":1424,"./Paragraph":1433,"react":1089,"semantic-ui-react":1298}],1424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102549,7 +102657,7 @@ var Logo = function Logo(_ref) {
 
 exports.default = Logo;
 
-},{"react":1089,"react-router-dom":1050}],1423:[function(require,module,exports){
+},{"react":1089,"react-router-dom":1050}],1425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102629,6 +102737,7 @@ var Main = function Main(_ref) {
                     _react2.default.createElement(_MyRoute2.default, { path: '/services', component: _ServicesContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/contacts', component: _ContactsContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/isistutions', component: _IsistutionsContainer2.default }),
+                    _react2.default.createElement(_MyRoute2.default, { path: '/advice/:adviceId', component: _SingleAdviceContainer2.default }),
                     _react2.default.createElement(_MyRoute2.default, { path: '/advice', component: _AdviceContainer2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
                             return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/not_found' });
@@ -102642,7 +102751,7 @@ var Main = function Main(_ref) {
 
 exports.default = Main;
 
-},{"./../components/MyRoute":1426,"./../components/NotFound":1429,"./../containers/AdviceContainer":1447,"./../containers/ContactsContainer":1449,"./../containers/IsistutionsContainer":1450,"./../containers/PresentContainer":1454,"./../containers/ServicesContainer":1455,"./../containers/SingleAdviceContainer":1456,"./../containers/SingleServiceContainer":1457,"react":1089,"react-router-dom":1050,"react-router-transition":1053}],1424:[function(require,module,exports){
+},{"./../components/MyRoute":1428,"./../components/NotFound":1431,"./../containers/AdviceContainer":1449,"./../containers/ContactsContainer":1451,"./../containers/IsistutionsContainer":1452,"./../containers/PresentContainer":1456,"./../containers/ServicesContainer":1457,"./../containers/SingleAdviceContainer":1458,"./../containers/SingleServiceContainer":1459,"react":1089,"react-router-dom":1050,"react-router-transition":1053}],1426:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102679,7 +102788,7 @@ var MainContentContainer = function MainContentContainer(_ref) {
 
 exports.default = MainContentContainer;
 
-},{"./../containers/MakeOrderContainer":1451,"./../containers/OrderCallbackContainer":1453,"react":1089,"semantic-ui-react":1298}],1425:[function(require,module,exports){
+},{"./../containers/MakeOrderContainer":1453,"./../containers/OrderCallbackContainer":1455,"react":1089,"semantic-ui-react":1298}],1427:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102721,7 +102830,12 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 	    onSubmitMakeOrderForm = _ref.onSubmitMakeOrderForm,
 	    message = _ref.message,
 	    isOrdered = _ref.isOrdered,
-	    closeMakeOrderForm = _ref.closeMakeOrderForm;
+	    closeMakeOrderForm = _ref.closeMakeOrderForm,
+	    servicesList = _ref.servicesList,
+	    serviceSpacesList = _ref.serviceSpacesList,
+	    serviceId = _ref.serviceId,
+	    onChangeChoosenService = _ref.onChangeChoosenService,
+	    chooseValue = _ref.chooseValue;
 	return _react2.default.createElement(
 		'div',
 		{ className: 'makeOrderFormWrapper' },
@@ -102748,7 +102862,6 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				placeholder: '\u0420\u0435\u0430\u0440\u0434\u0435\u043D \u0425\u044D\u043D\u043A \u0412\u0430\u0441\u0438\u043B\u044C\u0435\u0432\u0438\u0447',
 				maxLength: '150',
 				validate: [_validation.required]
-
 			}),
 			_react2.default.createElement(_reduxForm.Field, {
 				component: _RenderController2.default,
@@ -102758,8 +102871,7 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				block: 'makeOrderFormController',
 				placeholder: '8 (926) 370-78-12',
 				maxLength: '24',
-				validate: [_validation.required],
-				icon: 'fa-phone'
+				validate: [_validation.required]
 			}),
 			_react2.default.createElement(_reduxForm.Field, {
 				name: 'email',
@@ -102769,8 +102881,7 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				label: 'E-mail:',
 				maxLength: '70',
 				placeholder: 'bloody@commandos.com',
-				validate: [_validation.required, _validation.email],
-				icon: 'fa-envelope'
+				validate: [_validation.required, _validation.email]
 			}),
 			_react2.default.createElement(_reduxForm.Field, {
 				name: 'service',
@@ -102778,8 +102889,10 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				component: _DropdownController2.default,
 				label: '\u0423\u0441\u043B\u0443\u0433\u0430:',
 				placeholder: '\u0412\u044B\u0431\u0438\u0440\u0438\u0442\u0435 \u0443\u0441\u043B\u0443\u0433\u0443',
-				options: _options.serviceOptions,
-				validate: [_validation.required]
+				options: servicesList,
+				validate: [_validation.required],
+				serviceId: serviceId,
+				onChangeChoosenService: onChangeChoosenService
 			}),
 			_react2.default.createElement(_reduxForm.Field, {
 				name: 'space',
@@ -102787,7 +102900,7 @@ var MakeOrderForm = function MakeOrderForm(_ref) {
 				component: _DropdownController2.default,
 				label: '\u041F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u0435:',
 				placeholder: '\u0412\u044B\u0431\u0438\u0440\u0438\u0442\u0435 \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u0435',
-				options: _options.spaceOptions,
+				options: serviceSpacesList,
 				validate: [_validation.required]
 			}),
 			message ? _react2.default.createElement(
@@ -102818,7 +102931,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'makeOrderForm'
 })(MakeOrderForm);
 
-},{"./../constants/options.js":1443,"./../constants/validation.js":1446,"./DropdownController":1418,"./ElementButton":1419,"./RenderController":1432,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1426:[function(require,module,exports){
+},{"./../constants/options.js":1445,"./../constants/validation.js":1448,"./DropdownController":1420,"./ElementButton":1421,"./RenderController":1434,"./Title":1440,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1428:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102847,7 +102960,7 @@ var MyRoute = function MyRoute(_ref) {
 };
 exports.default = MyRoute;
 
-},{"react":1089,"react-router-dom":1050}],1427:[function(require,module,exports){
+},{"react":1089,"react-router-dom":1050}],1429:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -102910,7 +103023,7 @@ var NavItem = function NavItem(_ref) {
 
 exports.default = NavItem;
 
-},{"classnames":27,"react":1089,"react-router-dom":1050,"semantic-ui-react":1298}],1428:[function(require,module,exports){
+},{"classnames":27,"react":1089,"react-router-dom":1050,"semantic-ui-react":1298}],1430:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103020,7 +103133,7 @@ var Navigation = function Navigation(_ref) {
 
 exports.default = Navigation;
 
-},{"./ElementButton":1419,"./NavItem":1427,"prop-types":866,"react":1089,"react-router-dom":1050,"semantic-ui-react":1298}],1429:[function(require,module,exports){
+},{"./ElementButton":1421,"./NavItem":1429,"prop-types":866,"react":1089,"react-router-dom":1050,"semantic-ui-react":1298}],1431:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103055,7 +103168,7 @@ var NotFound = function NotFound(_ref) {
 
 exports.default = NotFound;
 
-},{"react":1089,"react-router-dom":1050}],1430:[function(require,module,exports){
+},{"react":1089,"react-router-dom":1050}],1432:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103160,7 +103273,7 @@ exports.default = (0, _reduxForm.reduxForm)({
 	form: 'orderCallbackForm'
 })(OrderCallbackForm);
 
-},{"./../constants/validation.js":1446,"./ElementButton":1419,"./RenderController":1432,"./Title":1438,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1431:[function(require,module,exports){
+},{"./../constants/validation.js":1448,"./ElementButton":1421,"./RenderController":1434,"./Title":1440,"react":1089,"redux-form":1148,"semantic-ui-react":1298}],1433:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103205,7 +103318,7 @@ var Paragraph = function Paragraph(_ref) {
 
 exports.default = Paragraph;
 
-},{"classnames":27,"react":1089,"react-html-parser":1005}],1432:[function(require,module,exports){
+},{"classnames":27,"react":1089,"react-html-parser":1005}],1434:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103260,7 +103373,7 @@ var RenderController = function RenderController(_ref) {
 
 exports.default = RenderController;
 
-},{"react":1089}],1433:[function(require,module,exports){
+},{"react":1089}],1435:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103290,9 +103403,9 @@ var Section = function Section(_ref) {
 		_react2.default.createElement(
 			_semanticUiReact.Container,
 			null,
-			_react2.default.createElement(_semanticUiReact.Image, { className: block + '__figure',
+			image ? _react2.default.createElement(_semanticUiReact.Image, { className: block + '__figure',
 				src: '/static/pest_control/img/' + image
-			}),
+			}) : "",
 			paragraphText ? _react2.default.createElement(_Paragraph2.default, { block: block,
 				text: paragraphText }) : "",
 			children
@@ -103302,7 +103415,7 @@ var Section = function Section(_ref) {
 
 exports.default = Section;
 
-},{"./Paragraph":1431,"react":1089,"semantic-ui-react":1298}],1434:[function(require,module,exports){
+},{"./Paragraph":1433,"react":1089,"semantic-ui-react":1298}],1436:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103347,7 +103460,7 @@ var Service = function Service(_ref) {
 		{
 			block: 'service',
 			paragraphText: service.service_description },
-		_react2.default.createElement(_Title2.default, { block: 'services',
+		_react2.default.createElement(_Title2.default, { block: 'service',
 			text: service.service_name }),
 		_react2.default.createElement(_Tabs2.default, _extends({ options: service.options
 		}, rest)),
@@ -103369,7 +103482,7 @@ var Service = function Service(_ref) {
 
 exports.default = Service;
 
-},{"./ElementButton":1419,"./Section":1433,"./Tabs":1436,"./Title":1438,"react":1089,"react-router-dom":1050}],1435:[function(require,module,exports){
+},{"./ElementButton":1421,"./Section":1435,"./Tabs":1438,"./Title":1440,"react":1089,"react-router-dom":1050}],1437:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103423,7 +103536,7 @@ var Services = function Services(_ref) {
 
 exports.default = Services;
 
-},{"./Section":1433,"./Title":1438,"react":1089,"react-router-dom":1050}],1436:[function(require,module,exports){
+},{"./Section":1435,"./Title":1440,"react":1089,"react-router-dom":1050}],1438:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103457,6 +103570,11 @@ var Tabs = function Tabs(_ref) {
 
     return (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, block, true), _defineProperty(_classNames, block + '--active', isActive), _classNames));
   };
+  var getClasses = function getClasses(block, modifier) {
+    var _classNames2;
+
+    return (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, block, true), _defineProperty(_classNames2, block + '--' + modifier, !!modifier), _classNames2));
+  };
 
   return _react2.default.createElement(
     'div',
@@ -103489,17 +103607,17 @@ var Tabs = function Tabs(_ref) {
           { className: 'serviceTabsTableHeader' },
           _react2.default.createElement(
             'th',
-            { className: 'serviceTabsTableHeader__cell' },
+            { className: getClasses('serviceTabsTableHeader__cell', 'name_space') },
             '\u041F\u043B\u043E\u0449\u0430\u0434\u044C'
           ),
           _react2.default.createElement(
             'th',
-            { className: 'serviceTabsTableHeader__cell' },
+            { className: getClasses('serviceTabsTableHeader__cell', 'name_price') },
             '\u0426\u0435\u043D\u0430'
           ),
           _react2.default.createElement(
             'th',
-            { className: 'serviceTabsTableHeader__cell' },
+            { className: getClasses('serviceTabsTableHeader__cell', 'name_ensure') },
             '\u0413\u0430\u0440\u0430\u043D\u0442\u0438\u044F'
           )
         )
@@ -103514,17 +103632,17 @@ var Tabs = function Tabs(_ref) {
               className: 'serviceTabsTableData' },
             _react2.default.createElement(
               'th',
-              { className: 'serviceTabsTableData__cell' },
+              { className: getClasses('serviceTabsTableData__cell', 'name_space') },
               space.space_name
             ),
             _react2.default.createElement(
               'th',
-              { className: 'serviceTabsTableData__cell serviceTabsTableData__cell--name_price' },
+              { className: getClasses('serviceTabsTableData__cell', 'name_price') },
               space.price + '\u20BD'
             ),
             _react2.default.createElement(
               'th',
-              { className: 'serviceTabsTableData__cell' },
+              { className: getClasses('serviceTabsTableData__cell', 'name_ensure') },
               space.ensure
             )
           );
@@ -103536,7 +103654,7 @@ var Tabs = function Tabs(_ref) {
 
 exports.default = Tabs;
 
-},{"./Paragraph":1431,"classnames":27,"react":1089}],1437:[function(require,module,exports){
+},{"./Paragraph":1433,"classnames":27,"react":1089}],1439:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103591,7 +103709,7 @@ var TextareaController = function TextareaController(_ref) {
 
 exports.default = TextareaController;
 
-},{"react":1089}],1438:[function(require,module,exports){
+},{"react":1089}],1440:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103620,7 +103738,7 @@ var Title = function Title(_ref) {
 
 exports.default = Title;
 
-},{"react":1089,"react-html-parser":1005}],1439:[function(require,module,exports){
+},{"react":1089,"react-html-parser":1005}],1441:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103636,7 +103754,7 @@ var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
 var CHANGE_USER_AVATAR = exports.CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
 
-},{}],1440:[function(require,module,exports){
+},{}],1442:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103664,8 +103782,9 @@ var GET_SERVICES = exports.GET_SERVICES = 'GET_SERVICES';
 var GET_ADVICE = exports.GET_ADVICE = 'GET_ADVICES';
 
 var CHOOSE_OPTION = exports.CHOOSE_OPTION = 'CHOOSE_OPTION';
+var CHOOSE_SERVICE = exports.CHOOSE_SERVICE = 'CHOOSE_SERVICE';
 
-},{}],1441:[function(require,module,exports){
+},{}],1443:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103717,7 +103836,7 @@ var customAjaxRequest = function customAjaxRequest(_ref) {
 
 exports.default = customAjaxRequest;
 
-},{"js-cookie":511}],1442:[function(require,module,exports){
+},{"js-cookie":511}],1444:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103733,7 +103852,7 @@ var navigationItems = exports.navigationItems = {
 	advice: 'Советы'
 };
 
-},{}],1443:[function(require,module,exports){
+},{}],1445:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103743,7 +103862,7 @@ var serviceOptions = exports.serviceOptions = [{ key: '1', value: 'Утилиз�
 
 var spaceOptions = exports.spaceOptions = [{ key: '1', value: '1-оком-ая квартира', text: '1-оком-ая квартира' }, { key: '2', value: '2х ком-ая квартира', text: '2х ком-ая квартира' }, { key: '3', value: '3х ком-ая квартира', text: '3х ком-ая квартира' }, { key: '4', value: '4х ком-ая квартира', text: '4х ком-ая квартира' }, { key: '5', value: 'Другое', text: 'Другое(уточнение у оператора)' }];
 
-},{}],1444:[function(require,module,exports){
+},{}],1446:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103779,7 +103898,7 @@ var convertDate = exports.convertDate = function convertDate(date) {
 	});
 };
 
-},{}],1445:[function(require,module,exports){
+},{}],1447:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103788,7 +103907,7 @@ Object.defineProperty(exports, "__esModule", {
 var REGISTER = exports.REGISTER = 'REGISTER';
 var REQUEST_REGISTER = exports.REQUEST_REGISTER = 'REQUEST_REGISTER';
 
-},{}],1446:[function(require,module,exports){
+},{}],1448:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103825,7 +103944,7 @@ var nameLength = exports.nameLength = function nameLength(value) {
 	return value && !(value.length < 2) ? undefined : 'Имя должно быть не меньше 2символов и не больше 20.';
 };
 
-},{}],1447:[function(require,module,exports){
+},{}],1449:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -103850,6 +103969,20 @@ var _MainContentContainer = require('./../components/MainContentContainer');
 
 var _MainContentContainer2 = _interopRequireDefault(_MainContentContainer);
 
+var _Section = require('./../components/Section');
+
+var _Section2 = _interopRequireDefault(_Section);
+
+var _AdviceList = require('./../components/AdviceList');
+
+var _AdviceList2 = _interopRequireDefault(_AdviceList);
+
+var _Title = require('./../components/Title');
+
+var _Title2 = _interopRequireDefault(_Title);
+
+var _appActions = require('./../actions/appActions.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -103869,17 +104002,29 @@ var AdviceContainer = function (_Component) {
 
   _createClass(AdviceContainer, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.props.dispatch((0, _appActions.tryGetAdviceIfNeeded)());
+    }
   }, {
     key: 'render',
     value: function render() {
+      var advice = this.props.advice;
+
+
       return _react2.default.createElement(
         _MainContentContainer2.default,
         null,
+        _react2.default.createElement(_Section2.default, {
+          block: 'adviceIntro',
+          image: 'advice_man.png',
+          paragraphText: '\u041C\u044B \u0445\u043E\u0442\u0438\u043C \u0440\u0430\u0441\u0441\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u0430\u043C \u043E \u0445\u043E\u0440\u043E\u0448\u0435\u0439 \u043F\u0440\u0430\u043A\u0442\u0438\u043A\u0435\r \u0434\u043B\u044F \u043F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u044F \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0432 \u0432\u0430\u0448\u0435\u043C\r \u0434\u043E\u043C\u0435 \u0440\u0430\u0437\u043D\u044B\u0445 \u043F\u0430\u0440\u0430\u0437\u0438\u0442\u043E\u0432.' }),
         _react2.default.createElement(
-          'section',
-          null,
-          'It is fifth section!'
+          _Section2.default,
+          { block: 'advice' },
+          _react2.default.createElement(_Title2.default, { block: 'advice',
+            text: '\u0421\u043E\u0432\u0435\u0442\u044B' }),
+          _react2.default.createElement(_AdviceList2.default, {
+            adviceList: advice })
         )
       );
     }
@@ -103888,16 +104033,25 @@ var AdviceContainer = function (_Component) {
   return AdviceContainer;
 }(_react.Component);
 
-AdviceContainer.PropTypes = {};
+AdviceContainer.PropTypes = {
+  dispatch: _propTypes2.default.func.isRequired,
+  advice: _propTypes2.default.array.isRequired
+};
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  var app = state.app;
+  var advice = app.advice;
+
+
+  return {
+    advice: Object.assign([], advice)
+  };
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(AdviceContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1448:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/AdviceList":1418,"./../components/MainContentContainer":1426,"./../components/Section":1435,"./../components/Title":1440,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1450:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104003,7 +104157,7 @@ App.PropTypes = {
 var mapStateToProps = function mapStateToProps(state) {
   var app = state.app;
   var isMakeOrderFormOpened = app.isMakeOrderFormOpened;
-  // console.log('app state ===>', app);
+
 
   return {
     isMakeOrderFormOpened: isMakeOrderFormOpened
@@ -104012,7 +104166,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(App));
 
-},{"./../actions/appActions.js":1415,"./../components/Footer":1420,"./../components/Header":1421,"./../components/Main":1423,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1449:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/Footer":1422,"./../components/Header":1423,"./../components/Main":1425,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1451:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104145,7 +104299,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(ContactsContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/AskQuestionsForm":1417,"./../components/ElementButton":1419,"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1450:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/AskQuestionsForm":1419,"./../components/ElementButton":1421,"./../components/MainContentContainer":1426,"./../components/Section":1435,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1452:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104220,7 +104374,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(IsistutionsContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1451:[function(require,module,exports){
+},{"./../components/MainContentContainer":1426,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1453:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104257,6 +104411,8 @@ var _appActions = require('./../actions/appActions.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104290,6 +104446,26 @@ var MakeOrderContainer = function (_Component) {
 
 
 			dispatch((0, _appActions.closeMakeOrderForm)());
+		}, _this.getServiceSpacesList = function (services, serviceId) {
+			return services[serviceId].options.reduce(function (bunchSpaces, option) {
+				return [].concat(_toConsumableArray(bunchSpaces), _toConsumableArray(option.spaces.map(function (space) {
+					return {
+						key: space.id,
+						value: space.id,
+						text: space.space_name
+					};
+				})));
+			}, []);
+		}, _this.getServicesList = function (services) {
+			return services.reduce(function (bunchServices, service) {
+				return [].concat(_toConsumableArray(bunchServices), [{
+					key: service.id,
+					value: service.id,
+					text: service.service_name
+				}]);
+			}, []);
+		}, _this.chooseService = function (index) {
+			_this.props.dispatch((0, _appActions.chooseService)(index));
 		}, _temp), _possibleConstructorReturn(_this, _ret);
 	}
 
@@ -104303,10 +104479,19 @@ var MakeOrderContainer = function (_Component) {
 		value: function componentDidUpdate() {
 			if (this.props.isOpened) $(':input[type="tel"]').mask('+7 (000) 000-00-00');
 		}
+		// Возвращает список площадок, которые обрабатываются конкретной услугой.
+
+		// Возвращает список услуг для низпадающего списка.
+
 	}, {
 		key: 'render',
 		value: function render() {
-			var isOpened = this.props.isOpened;
+			var _props = this.props,
+			    isOpened = _props.isOpened,
+			    serviceId = _props.serviceId,
+			    services = _props.services,
+			    message = _props.message;
+
 
 			return _react2.default.createElement(
 				_semanticUiReact.Container,
@@ -104314,7 +104499,10 @@ var MakeOrderContainer = function (_Component) {
 				isOpened ? _react2.default.createElement(_MakeOrderForm2.default, _extends({}, this.props, {
 					onSubmitMakeOrderForm: this.onSubmitMakeOrderForm,
 					getClasses: this.getClasses,
-					closeMakeOrderForm: this.closeOrderForm })) : ''
+					closeMakeOrderForm: this.closeOrderForm,
+					servicesList: this.getServicesList(Object.assign([], services)),
+					serviceSpacesList: serviceId ? this.getServiceSpacesList(services, serviceId) : [],
+					onChangeChoosenService: this.chooseService })) : ''
 			);
 		}
 	}]);
@@ -104326,7 +104514,9 @@ MakeOrderContainer.PropTypes = {
 	isOpened: _propTypes2.default.bool.isRequired,
 	isOrdered: _propTypes2.default.bool.isRequired,
 	message: _propTypes2.default.string.isRequired,
-	dispatch: _propTypes2.default.func.isRequired
+	dispatch: _propTypes2.default.func.isRequired,
+	serviceId: _propTypes2.default.number.isRequired,
+	services: _propTypes2.default.object.isRequired
 };
 
 
@@ -104335,20 +104525,24 @@ var mapStateToProps = function mapStateToProps(state) {
 	var isMakeOrderFormOpened = app.isMakeOrderFormOpened,
 	    makeOrderFormMessage = app.makeOrderFormMessage,
 	    isOrderOrdered = app.isOrderOrdered,
-	    services = app.services;
+	    services = app.services,
+	    serviceId = app.serviceId;
 
+	console.log(makeOrderFormMessage, '<=== message');
+	console.log(isOrderOrdered, '<=== isOrderOrdered');
 
 	return {
 		message: makeOrderFormMessage,
 		isOpened: isMakeOrderFormOpened,
 		isOrdered: isOrderOrdered,
-		services: services
+		services: services,
+		serviceId: serviceId
 	};
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(MakeOrderContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/MakeOrderForm":1425,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1452:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/MakeOrderForm":1427,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1454:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104506,7 +104700,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(NavContainer));
 
-},{"./../actions/appActions.js":1415,"./../actions/navigationActions.js":1416,"./../components/Navigation":1428,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1453:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../actions/navigationActions.js":1416,"./../components/Navigation":1430,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1455:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104627,7 +104821,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(OrderCallbackContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/OrderCallbackForm":1430,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1454:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/OrderCallbackForm":1432,"classnames":27,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050,"semantic-ui-react":1298}],1456:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104708,7 +104902,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(PresentContainer);
 
-},{"./../components/MainContentContainer":1424,"./../components/Section":1433,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1455:[function(require,module,exports){
+},{"./../components/MainContentContainer":1426,"./../components/Section":1435,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1457:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104794,7 +104988,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(ServicesContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1424,"./../components/Services":1435,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1456:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1426,"./../components/Services":1437,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1458:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104819,6 +105013,16 @@ var _MainContentContainer = require('./../components/MainContentContainer');
 
 var _MainContentContainer2 = _interopRequireDefault(_MainContentContainer);
 
+var _Section = require('./../components/Section');
+
+var _Section2 = _interopRequireDefault(_Section);
+
+var _Advice = require('./../components/Advice');
+
+var _Advice2 = _interopRequireDefault(_Advice);
+
+var _appActions = require('./../actions/appActions.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104838,17 +105042,25 @@ var SingleAdviceContainer = function (_Component) {
 
   _createClass(SingleAdviceContainer, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.props.dispatch((0, _appActions.tryGetAdviceIfNeeded)());
+    }
   }, {
     key: 'render',
     value: function render() {
+      var adviceId = this.props.match.params.adviceId;
+      var advice = this.props.advice;
+
+
       return _react2.default.createElement(
         _MainContentContainer2.default,
         null,
         _react2.default.createElement(
-          'section',
-          null,
-          'Here will be a single advice!'
+          _Section2.default,
+          { block: 'singleAdvice' },
+          _react2.default.createElement(_Advice2.default, {
+            advice: advice[adviceId]
+          })
         )
       );
     }
@@ -104859,17 +105071,24 @@ var SingleAdviceContainer = function (_Component) {
 
 SingleAdviceContainer.PropTypes = {
   match: _propTypes2.default.object.isRequired,
-  dispatch: _propTypes2.default.func.isRequired
+  dispatch: _propTypes2.default.func.isRequired,
+  advice: _propTypes2.default.object.isRequired
 };
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  var app = state.app;
+  var advice = app.advice;
+
+
+  return {
+    advice: advice
+  };
 };
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(SingleAdviceContainer));
 
-},{"./../components/MainContentContainer":1424,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1457:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/Advice":1417,"./../components/MainContentContainer":1426,"./../components/Section":1435,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1459:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -104912,14 +105131,44 @@ var SingleServiceContainer = function (_Component) {
   _inherits(SingleServiceContainer, _Component);
 
   function SingleServiceContainer() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, SingleServiceContainer);
 
-    return _possibleConstructorReturn(this, (SingleServiceContainer.__proto__ || Object.getPrototypeOf(SingleServiceContainer)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SingleServiceContainer.__proto__ || Object.getPrototypeOf(SingleServiceContainer)).call.apply(_ref, [this].concat(args))), _this), _this.openOrderForm = function () {
+      var serviceId = _this.props.match.params.serviceId;
+      var dispatch = _this.props.dispatch;
+
+      dispatch((0, _appActions.openMakeOrderForm)());
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(SingleServiceContainer, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var dispatch = this.props.dispatch;
+      var serviceId = this.props.match.params.serviceId;
+
+
+      dispatch((0, _appActions.tryGetServicesIfNeeded)());
+      console.log('a single service component did mount');
+      dispatch((0, _appActions.chooseService)(serviceId));
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var dispatch = this.props.dispatch;
+      var serviceId = this.props.match.params.serviceId;
+
+      console.log('a single service component did update');
+      dispatch((0, _appActions.chooseService)(serviceId));
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -104929,8 +105178,9 @@ var SingleServiceContainer = function (_Component) {
           dispatch = _props.dispatch,
           optionId = _props.optionId;
 
-      var spaces = services[serviceId].options[optionId].spaces;
 
+      var spaces = services[serviceId].options[optionId].spaces;
+      // chooseOption ー　выбор конкретной опции услуги в меню вариантов выполнения услуг.
       return _react2.default.createElement(
         _MainContentContainer2.default,
         null,
@@ -104942,7 +105192,9 @@ var SingleServiceContainer = function (_Component) {
           },
           service: services[serviceId],
           spaces: spaces,
-          optionId: optionId })
+          optionId: optionId,
+          openMakeOrderForm: this.openOrderForm
+        })
       );
     }
   }]);
@@ -104972,7 +105224,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(SingleServiceContainer));
 
-},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1424,"./../components/Service":1434,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1458:[function(require,module,exports){
+},{"./../actions/appActions.js":1415,"./../components/MainContentContainer":1426,"./../components/Service":1436,"prop-types":866,"react":1089,"react-redux":1033,"react-router-dom":1050}],1460:[function(require,module,exports){
 'use strict';
 
 $(window).resize(function () {
@@ -105015,7 +105267,7 @@ $(function () {
   } // end openUrlInNewWindow
 }); // end ready
 
-},{}],1459:[function(require,module,exports){
+},{}],1461:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -105050,7 +105302,7 @@ var store = (0, _configureStore2.default)();
   )
 ), document.getElementById('root'));
 
-},{"./containers/App":1448,"./store/configureStore.js":1466,"react":1089,"react-dom":868,"react-redux":1033,"react-router-dom":1050}],1460:[function(require,module,exports){
+},{"./containers/App":1450,"./store/configureStore.js":1468,"react":1089,"react-dom":868,"react-redux":1033,"react-router-dom":1050}],1462:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105175,7 +105427,7 @@ case CHANGE_USER_AVATAR:
 };
  */
 
-},{"./../constants/accountTypes.js":1439,"./../constants/pureFunctions.js":1444}],1461:[function(require,module,exports){
+},{"./../constants/accountTypes.js":1441,"./../constants/pureFunctions.js":1446}],1463:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105197,7 +105449,8 @@ var initState = {
 	askQuestionsFormMessage: '',
 	services: {},
 	advice: {},
-	optionId: 0
+	optionId: 0,
+	serviceId: 0
 };
 
 var app = function app() {
@@ -105254,6 +105507,10 @@ var app = function app() {
 			return _extends({}, state, {
 				optionId: action.index
 			});
+		case _actionTypes.CHOOSE_SERVICE:
+			return _extends({}, state, {
+				serviceId: action.index
+			});
 		default:
 			return state;
 	}
@@ -105261,7 +105518,7 @@ var app = function app() {
 
 exports.default = app;
 
-},{"./../constants/actionTypes.js":1440}],1462:[function(require,module,exports){
+},{"./../constants/actionTypes.js":1442}],1464:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105303,7 +105560,7 @@ var rootReducer = (0, _redux.combineReducers)({
 
 exports.default = rootReducer;
 
-},{"./account.js":1460,"./app":1461,"./navigation.js":1463,"./registration.js":1464,"./visibilityFilter.js":1465,"redux":1192,"redux-form":1148}],1463:[function(require,module,exports){
+},{"./account.js":1462,"./app":1463,"./navigation.js":1465,"./registration.js":1466,"./visibilityFilter.js":1467,"redux":1192,"redux-form":1148}],1465:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105372,7 +105629,7 @@ var navigation = function navigation() {
 
 exports.default = navigation;
 
-},{"./../constants/navigationTypes.js":1442}],1464:[function(require,module,exports){
+},{"./../constants/navigationTypes.js":1444}],1466:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105413,7 +105670,7 @@ var registration = function registration() {
 
 exports.default = registration;
 
-},{"./../constants/registrationTypes.js":1445}],1465:[function(require,module,exports){
+},{"./../constants/registrationTypes.js":1447}],1467:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105436,7 +105693,7 @@ var visibilityFilter = function visibilityFilter() {
 
 exports.default = visibilityFilter;
 
-},{"./../constants/actionTypes.js":1440}],1466:[function(require,module,exports){
+},{"./../constants/actionTypes.js":1442}],1468:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -105464,7 +105721,7 @@ function configureStore(initialState) {
   return store;
 }
 
-},{"../reducers/index.js":1462,"redux":1192,"redux-thunk":1186}],1467:[function(require,module,exports){
+},{"../reducers/index.js":1464,"redux":1192,"redux-thunk":1186}],1469:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -105664,7 +105921,7 @@ $jscomp.polyfill("Array.prototype.find", function (a) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":510}],1468:[function(require,module,exports){
+},{"jquery":510}],1470:[function(require,module,exports){
 'use strict';
 
 require('jquery');
@@ -105681,6 +105938,6 @@ require('./../blocks/custom/custom.js');
 
 require('./../blocks/index.js');
 
-},{"./../blocks/custom/custom.js":1458,"./../blocks/index.js":1459,"./jquery.mask.min.js":1467,"babel-polyfill":1,"bootstrap-sass":24,"jquery":510,"whatwg-fetch":1414}]},{},[1468])
+},{"./../blocks/custom/custom.js":1460,"./../blocks/index.js":1461,"./jquery.mask.min.js":1469,"babel-polyfill":1,"bootstrap-sass":24,"jquery":510,"whatwg-fetch":1414}]},{},[1470])
 
 //# sourceMappingURL=main.js.map

@@ -4,6 +4,6 @@ from .views import *
 router = DefaultRouter()
 
 router.register(r'services', SingleServiceViewset)
-router.register(r'advices', AdviceViewset)
+router.register(r'advice', AdviceViewset)
 
 urlpatterns = router.urls

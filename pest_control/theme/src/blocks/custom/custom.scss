@@ -8,27 +8,6 @@ $i: !important;
 @import 'config/flex.scss';
 @import 'config/mixins.scss';
 
-@import 'short_hand_classes/indexes.scss';
-@import 'short_hand_classes/margins.scss';
-@import 'short_hand_classes/visible.scss';
-@import 'short_hand_classes/aligned.scss';
-@import 'short_hand_classes/links.scss';
-@import 'short_hand_classes/buttons.scss';
-@import 'short_hand_classes/float.scss';
-@import 'short_hand_classes/paddings.scss';
-@import 'short_hand_classes/form.scss';
-@import 'short_hand_classes/shadows.scss';
-@import 'short_hand_classes/perspective.scss';
-@import 'short_hand_classes/display.scss';
-@import 'short_hand_classes/position.scss';
-@import 'short_hand_classes/image.scss';
-@import 'short_hand_classes/sizes.scss';
-@import 'short_hand_classes/proportion.scss';
-@import 'short_hand_classes/cursores.scss';
-@import 'short_hand_classes/backgrounds.scss';
-@import 'short_hand_classes/borders.scss';
-@import 'short_hand_classes/offsets.scss';
-@import 'short_hand_classes/overflow.scss';
 
 
 // Custom styles
@@ -74,6 +53,28 @@ body {
   background-color: $lightGray;
 }
 
+@import 'short_hand_classes/indexes.scss';
+@import 'short_hand_classes/margins.scss';
+@import 'short_hand_classes/visible.scss';
+@import 'short_hand_classes/aligned.scss';
+@import 'short_hand_classes/links.scss';
+@import 'short_hand_classes/buttons.scss';
+@import 'short_hand_classes/float.scss';
+@import 'short_hand_classes/paddings.scss';
+@import 'short_hand_classes/form.scss';
+@import 'short_hand_classes/shadows.scss';
+@import 'short_hand_classes/perspective.scss';
+@import 'short_hand_classes/display.scss';
+@import 'short_hand_classes/position.scss';
+@import 'short_hand_classes/image.scss';
+@import 'short_hand_classes/sizes.scss';
+@import 'short_hand_classes/proportion.scss';
+@import 'short_hand_classes/cursores.scss';
+@import 'short_hand_classes/backgrounds.scss';
+@import 'short_hand_classes/borders.scss';
+@import 'short_hand_classes/offsets.scss';
+@import 'short_hand_classes/overflow.scss';
+
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
   font-weight: normal;
@@ -116,6 +117,10 @@ section {
   }
 }
 
+ol {
+  @extend %defaultTopMargin;
+  padding-left: #{$baseSizeFont}px;
+}
 a {
   
   @include smooth-transition-link;
