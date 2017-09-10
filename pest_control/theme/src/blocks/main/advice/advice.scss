@@ -5,7 +5,10 @@
 	@extend %defaultTopBottomPaddings;
 }
 .advice > .ui.container, .adviceArticle {
-	@include breakpoint($md-up) {
+		@include breakpoint(1400px) {
+			padding: 0 15%;
+		}
+		@include breakpoint($md-up) {
 			padding: 0 25%;
 		}
 		@include breakpoint($sm-less) {

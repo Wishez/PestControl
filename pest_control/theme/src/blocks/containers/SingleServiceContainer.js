@@ -11,6 +11,9 @@ import {
   tryGetServicesIfNeeded,
   chooseService
 } from './../actions/appActions.js';
+import { selectNavigationItem } from './../actions/navigationActions.js';
+import { initNavigationState } from './../reducers/navigation.js';
+
 
 class SingleServiceContainer extends Component {
 
@@ -25,15 +28,14 @@ class SingleServiceContainer extends Component {
     const { dispatch } = this.props;
     const { serviceId } = this.props.match.params;
 
-	  dispatch(tryGetServicesIfNeeded());
-    console.log('a single service component did mount');
+    dispatch(tryGetServicesIfNeeded());
     dispatch(chooseService(serviceId));
+    dispatch(selectNavigationItem(initNavigationState.fourthNavItem.index));
 	}
 
   componentDidUpdate() {
     const { dispatch } = this.props;
     const { serviceId } = this.props.match.params;
-    console.log('a single service component did update');
     dispatch(chooseService(serviceId)); 
   }
 

@@ -9,7 +9,7 @@
   @extend %fullWidth;
   @extend %fullHeight;
   @extend %text-right;
-  @extend %block;
+  display: block $i;
   @extend %solidBorder;
   @extend %roundBorder4;
   @extend %greenBg;
@@ -24,7 +24,9 @@
 %elementButton__name {
   display: inherit;
   word-break: initial;
+  hyphens: none;
   @extend %fs-18;
+
 }
 
 %elementButton__icon {

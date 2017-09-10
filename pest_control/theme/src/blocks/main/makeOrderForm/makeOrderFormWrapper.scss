@@ -14,5 +14,9 @@
 		padding: 33px 65px 44px;
 	}
 }
+
+.makeOrderFormWrapper__successMessage {
+	@extend %defaultTopPadding;
+}
 @import '__closeButton.scss';
 @import 'makeOrderForm.scss';

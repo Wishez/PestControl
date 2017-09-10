@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom'
 
 import MainContentContainer from './../components/MainContentContainer'; 
 import Section from './../components/Section';
+import { selectNavigationItem } from './../actions/navigationActions.js';
+import { initNavigationState } from './../reducers/navigation.js';
 
 class PresentContainer extends Component {
 
@@ -14,7 +16,8 @@ class PresentContainer extends Component {
   }
   
 	componentDidMount() {
-		
+		const { dispatch } = this.props;
+    dispatch(selectNavigationItem(initNavigationState.firstNavItem.index));
 	}
 
   render() {

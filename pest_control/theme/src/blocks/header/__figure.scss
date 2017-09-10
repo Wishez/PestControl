@@ -16,7 +16,7 @@
 		top: (50% / 614 * 100);
 		right: (150% / 1400 * 100);
 		max-width: 415px $i;
-		float: right;
+		@extend %floatRight;
 		@include breakpoint($md) { 
 			left: 5%;
 			margin-top: 3em;
@@ -55,6 +55,8 @@
 	}
 
 	&_button, &_man {
+		@extend %halfWidht;
+		height: auto;
 		@include breakpoint($xs) {
 			margin-top: 2em $i;
 		}

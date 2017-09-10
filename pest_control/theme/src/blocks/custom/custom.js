@@ -29,7 +29,7 @@ $(window).scroll(function() {
 $(function() {
   $(document).on('click', '.not-follow', openUrlInNewWindow);
   
-  $(document).on('click', '.smoothRise', e => {
+  $(document).on('click', '.upButtonsRefer', e => {
     const element = $(e.target).attr('href');
     const pathTo = $(element).offset().top;
     

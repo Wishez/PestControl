@@ -17,13 +17,15 @@ const Header = ({
         <Paragraph block='header' 
         	text='Дизенсекция против постояльцев, поселившихся в вашем доме без вашего согласия. 
         	Мы предлагаем вам <span class="header__paragraph--color_skyBlue">чистокристаллическую, 
-        	качественную</span> зачистку, вместе с гарантией на 1 год.'/>
+        	 качественную</span> зачистку, вместе с гарантией на 1 год.'
+        />
         <Image className='header__figure header__figure--name_man'
-           src='/static/pest_control/img/man.png' />
-          
+           src='/static/pest_control/img/man.png'
+        />
         <Image className={getVisibilitySwitchButtonClasses(isOpen)}
           onClick={openMakeOrderForm }
-          src='/static/pest_control/img/order_button.png' />
+          src='/static/pest_control/img/order_button.png' 
+        />
       </Container>
   </header>
 );

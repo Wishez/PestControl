@@ -20,13 +20,6 @@ class NavContainer extends Component {
       isOpen: false
   };
 
-  // getClasses = (name, modifier) => (
-  //   classNames({
-  //     [name]: true,
-  //     [`${name}--${modifier}`]: !!modifier
-  //   })
-  // )
-
   openMenu = () => {
     let $navList = $('#navList');
     let $closeButton = $('#closeMenuButton');
@@ -43,12 +36,12 @@ class NavContainer extends Component {
   };
 
   smoothRise = e => {
+    // console.log(e.target, '<=== is scroll button');
     let element = $(e.target).attr('href');
     if (!element)
       element = $(e.target).parent().attr('href');
-
     const pathTo = $(element).offset().top;
-    
+    // console.log(element, '<=== element from href');
     $('body, html')
       .stop()
       .animate({
@@ -92,7 +85,7 @@ class NavContainer extends Component {
 
   openCallbackForm = () => {
     const { dispatch } = this.props;
-
+    console.log(openOrderCallbackForm(), 'action');
     dispatch(openOrderCallbackForm());
   }
 

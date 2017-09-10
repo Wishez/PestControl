@@ -12,6 +12,8 @@ import {
   askQuestionAgain,
   openOrderCallbackForm
 } from './../actions/appActions.js'
+import { selectNavigationItem } from './../actions/navigationActions.js';
+import { initNavigationState } from './../reducers/navigation.js';
 
 class ContactsContainer extends Component {
 
@@ -21,6 +23,11 @@ class ContactsContainer extends Component {
     message: PropTypes.string.isRequired,
     isQuestionAsked: PropTypes.bool.isRequired
   } 
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(selectNavigationItem(initNavigationState.thirdNavItem.index));
+  }
   
   onSubmitAskQuestionsForm = (values, dispatch) => {
     dispatch(tryAskQuestion(values));
@@ -28,6 +35,7 @@ class ContactsContainer extends Component {
   askAgain = () => {
     this.props.dispatch(askQuestionAgain())
   }
+
 
   render() {
 

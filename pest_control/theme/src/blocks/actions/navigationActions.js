@@ -5,7 +5,7 @@ import {
 } from './../actions/appActions.js';
 
 
-const selectNavigationItem = navigationItem => ({
+export const selectNavigationItem = navigationItem => ({
 	type: SELECT_NAVIGATION_ITEM,
 	navigationItem
 });

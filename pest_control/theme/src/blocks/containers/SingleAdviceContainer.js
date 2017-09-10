@@ -7,6 +7,8 @@ import MainContentContainer from './../components/MainContentContainer';
 import Section from './../components/Section';
 import Advice from './../components/Advice';
 import { tryGetAdviceIfNeeded } from './../actions/appActions.js';
+import { selectNavigationItem } from './../actions/navigationActions.js';
+import { initNavigationState } from './../reducers/navigation.js';
 
 class SingleAdviceContainer extends Component {
 
@@ -17,7 +19,9 @@ class SingleAdviceContainer extends Component {
   }
   
 	componentDidMount() {
-		this.props.dispatch(tryGetAdviceIfNeeded());
+    const { dispatch } = this.props;
+		dispatch(tryGetAdviceIfNeeded());
+    dispatch(selectNavigationItem(initNavigationState.fourthNavItem.index));
 	}
 
   render() {

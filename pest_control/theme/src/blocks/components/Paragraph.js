@@ -6,7 +6,8 @@ const Paragraph = ({
 	text,
 	block,
 	children,
-	modifier 
+	modifier,
+	...rest 
 }) => {
 	const getClasses = (block, modifier) => (
 		classNames({
@@ -16,7 +17,8 @@ const Paragraph = ({
 	);
 	
 	return (	
-		<p className={getClasses(block, modifier)}>
+		<p className={getClasses(block, modifier)}
+			{...rest}>
 			{ ReactHtmlParser(text) }
 			{children}
 		</p>

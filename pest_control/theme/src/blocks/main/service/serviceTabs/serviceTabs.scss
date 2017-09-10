@@ -8,6 +8,7 @@
 	@extend %largeTopMargin;
 	@extend %fullWidth;
 	order: 2;
+	@extend %largeBottomMargin;
 }
 
 @import '__navigation.scss';

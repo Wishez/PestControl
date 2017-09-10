@@ -9,7 +9,7 @@ const Services = ({
 	<Section image='service.png'
 		block='services'
 		paragraphText='Больше подробностей об интересующей 
-			вас услуге можно узнать <strong>кликнув</strong> на одну
+			вас услуге можно узнать <strong>кликнув</strong> на одну 
 			из услуг.'>
 		<Title block='services'
 			text='Перечень услуг' />

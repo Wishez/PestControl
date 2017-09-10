@@ -60,17 +60,17 @@ class OrderCallbackContainer extends Component  {
 
 const mapStateToProps = state => {
 	const {
-		app
+		app 
 	} = state;
 	
 	const {
 		isOrderCallbackFormOpened,
-		orderCallbackMessage,
+		orderCallbackFormMessage,
 		isCallbackOrdered
 	} = app;
 
 	return {
-		message: orderCallbackMessage,
+		message: orderCallbackFormMessage,
 		isOpened: isOrderCallbackFormOpened,
 		isOrdered: isCallbackOrdered
 	};

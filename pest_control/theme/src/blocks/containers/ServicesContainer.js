@@ -7,7 +7,8 @@ import { withRouter } from 'react-router-dom'
 import MainContentContainer from './../components/MainContentContainer'; 
 import Services from './../components/Services';
 import { tryGetServicesIfNeeded } from './../actions/appActions.js';
-
+import { selectNavigationItem } from './../actions/navigationActions.js';
+import { initNavigationState } from './../reducers/navigation.js';
 
 class ServicesContainer extends Component {
 
@@ -18,7 +19,9 @@ class ServicesContainer extends Component {
   }
   
 	componentDidMount() {
-		  this.props.dispatch(tryGetServicesIfNeeded());
+      const { dispatch } = this.props;
+      dispatch(selectNavigationItem(initNavigationState.secondNavItem.index));
+      dispatch(tryGetServicesIfNeeded());
 	}
 
   render() {
