@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -21,7 +22,7 @@ def order_callback(request):
 
         callback.save()
 
-        return HttpResponse('Пожалуйста, ожидайте звонка')
+        return HttpResponse('Пожалуйста, ожидайте звонка. Скоро оператор позвонит вам.')
     return HttpResponse('Внутренняя ошибка сервера')
 
 @csrf_exempt

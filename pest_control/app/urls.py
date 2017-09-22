@@ -1,6 +1,8 @@
+# -*- encoding: utf-8 -*-
 from . import views
 from django.conf.urls import url
 from forms.views import *
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^order_callback/$', order_callback, name='order_callback'),
