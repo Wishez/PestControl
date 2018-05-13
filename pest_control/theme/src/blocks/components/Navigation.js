@@ -61,8 +61,6 @@ const Navigation = ({
             >  
               <NavItem
                 block='navItem'
-                iconName={item.icon}
-                number={index + 1}
                 href={item.pathTo}
                 name={item.name}
                 isActive={item.active}
@@ -70,7 +68,6 @@ const Navigation = ({
               />
             </li>
           ))}
-
       </ul>
     </nav>
   );

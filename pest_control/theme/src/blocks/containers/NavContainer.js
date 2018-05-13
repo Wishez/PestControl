@@ -36,18 +36,16 @@ class NavContainer extends Component {
   };
 
   smoothRise = e => {
-    // console.log(e.target, '<=== is scroll button');
     let element = $(e.target).attr('href');
     if (!element)
       element = $(e.target).parent().attr('href');
     const pathTo = $(element).offset().top;
-    // console.log(element, '<=== element from href');
+    
     $('body, html')
       .stop()
       .animate({
         scrollTop: pathTo
       }, 800);
-
   }
 
   changeActiveNavigationItem = navigationItem => {
@@ -71,23 +69,7 @@ class NavContainer extends Component {
   }
 
 
-  closeCallbackForm = () => {
-    const { dispatch } = this.props;
 
-    dispatch(closeOrderCallbackForm());
-  }
-
-  closeOrderForm = () => {
-    const { dispatch } = this.props;
-
-    dispatch(closeMakeOrderForm());
-  }
-
-  openCallbackForm = () => {
-    const { dispatch } = this.props;
-    console.log(openOrderCallbackForm(), 'action');
-    dispatch(openOrderCallbackForm());
-  }
 
 
   render() {
@@ -99,7 +81,6 @@ class NavContainer extends Component {
             closeMenu={this.closeMenu}
             changeActiveNavigationItem={this.changeActiveNavigationItem}
             smoothRise={this.smoothRise}
-            openOrderCallbackForm={this.openCallbackForm}
         />
     );
   }
